@@ -25,3 +25,10 @@ i++;
 다 끝난 후엔 readLine[ (i-1)%4 ]가 마지막줄
 readLine[ (i-2)%4 ]가 마지막에서 두번째
 readLine[ (i-3)%4 ]가 마지막에서 세번째 줄이 될겁니다.
+
+
+
+
+RandomAccessFile read_file = new RandomAccessFile(filename, "r"); 
+long str_length = read_file.length(); 
+read_file.seek(start_point);
