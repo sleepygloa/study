@@ -1,4 +1,4 @@
-# fullcalender 사용하기
+﻿# fullcalender 사용하기
 ## 세팅
 <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
 <script src='lib/jquery.min.js'></script>
@@ -374,3 +374,221 @@ borderColor
 
 textColor
 달력 전체의 eventTextColor 옵션과 마찬가지로 이벤트의 텍스트 색상을 설정합니다.
+
+
+#### 이벤트를 표현하는 방법
+1. 일반적인 JS로 저장하는 방법
+ events: [
+        {
+            title: 'Event1',
+            start: '2011-04-04'
+        },
+        {
+            title: 'Event2',
+            start: '2011-05-05'
+        }
+        // etc...
+    ],
+    color: 'yellow',   // an option!
+    textColor: 'black' // an option!
+2. form 에서 데이터를 주고받는 방법
+events: function(start, end, callback) {
+        // ...
+    },
+    color: 'yellow',   // an option!
+    textColor: 'black' // an option!
+3.JSON 으로 주고받는방법
+    url: '/myfeed.php',
+    color: 'yellow',   // an option!
+    textColor: 'black' // an option!
+4. 구글에서 주고받는 방법
+    googleCalendarId: 'abcd1234@group.calendar.google.com',
+    color: 'yellow',   // an option!
+    textColor: 'black' // an option!
+
+#### 이벤트를 JSON 으로 처리하는 방법 상세
+$('#calendar').fullCalendar({
+    events: '/myfeed.php'
+});
+이방법을 사용하면 JSON 파일을 GET 방식으로 가져오게 됩니다.
+예시 : /myfeed.php?start=2013-12-01&end=2014-01-12&_=1386054751381
+
+확장되는 방법으로는 좀전에 공부했던 방법
+    eventSources: [
+
+        // your event source
+        {
+            url: '/myfeed.php', // use the `url` property
+            color: 'yellow',    // an option!
+            textColor: 'black'  // an option!
+        }
+
+        // any other sources...
+
+    ]
+으로 처리하고
+
+AJAX로 처리하는 방법
+    eventSources: [
+
+        // your event source
+        {
+            url: '/myfeed.php',
+            type: 'POST',
+            data: {
+                custom_param1: 'something',
+                custom_param2: 'somethingelse'
+            },
+            error: function() {
+                alert('there was an error while fetching events!');
+            },
+            color: 'yellow',   // a non-ajax option
+            textColor: 'black' // a non-ajax option
+        }
+
+        // any other sources...
+
+    ]
+
+
+캐싱을 막는 방법
+cache: true
+
+
+이벤트함수
+function( start, end, timezone, callback ) { }
+$('#calendar').fullCalendar({
+    events: function(start, end, timezone, callback) {
+        $.ajax({
+            url: 'myxmlfeed.php',
+            dataType: 'xml',
+            data: {
+                // our hypothetical feed requires UNIX timestamps
+                start: start.unix(),
+                end: end.unix()
+            },
+            success: function(doc) {
+                var events = [];
+                $(doc).find('event').each(function() {
+                    events.push({
+                        title: $(this).attr('title'),
+                        start: $(this).attr('start') // will be parsed
+                    });
+                });
+                callback(events);
+            }
+        });
+    }
+});
+
+확장 폼
+    eventSources: [
+
+        // your event source
+        {
+            events: function(start, end, timezone, callback) {
+                // ...
+            },
+            color: 'yellow',   // an option!
+            textColor: 'black' // an option!
+        }
+
+        // any other sources...
+
+    ]
+
+두개이상의 JSON FEED를 가져오는 방법이다
+ eventSources: [
+        '/feed1.php',
+        '/feed2.php'
+    ]
+
+
+allDayDefault : NONE (allDaydefault는 기본적으로 정의되어있지않고 allDay속성의 기본값을 설정한다. boolean)
+startParam : 'start' (이 이름의 매개 변수는 각 JSON 이벤트 피드로 전송됩니다. 이는 가져 오는 간격의 시작을 설명합니다.)
+endParam : 'end'
+timezoneParam : 'timezone' (startParam, endParam 사이의 시간대와 반환된 이벤트의 원하는 시간대를 설명
+lazyFetching : true (AJAX가 아닌 이벤트가져오기를 진행할 시간 빈도를 정함)
+defaultTimedEventDuration : 02:00:00 (end 값을 지정하지않았을때 기본으로 지정될 시간)
+defaultAllDayEventDuration : 1day (allDay를 눌렀을때 기본으로 지정되는 시간)
+forceEventDuration : false (default가 지정되지 않았을때 발동하는 강제로 종료시키는 그런것)
+
+
+eventDataTransform : function( eventData ) {}
+loading : function( isLoading, view ) (이벤트가겨오기 시작/중지될때 트리거된다, 로딩인디게이터를 숨길때)
+updateEvent : 이벤트 변경사항을 저장하고 달력에 렌더링
+클릭후 이벤트를 업데이트하는 방법
+eventClick: function(event, element) {
+
+        event.title = "CLICKED!";
+
+        $('#calendar').fullCalendar('updateEvent', event);
+
+    }
+updateEvents  : .fullCalendar( 'updateEvents', events )
+
+clientEvents : fullcalender 메모리가 가지고 있는 이벤트를 검색
+.fullCalendar( 'clientEvents' [, idOrFilter ] ) -> Array
+idOrFilter 가 생략되면 모든 이벤트가 리턴됨
+
+
+removeEvents : 달력에서 이벤트를 제거
+.fullCalendar( 'removeEvents' [, idOrFilter ] )
+idOrFilter가 true 일수도있다 이벤트가 하나일때
+refetchEvents : .fullCalendar( 'refetchEvents' ) (모든 이벤트를 다시가져와 화면에 표시)
+refetchEventSources : .fullCalendar( 'refetchEventSources', sources ) (하나이상의 특정이벤트를 다시가져와 표시)
+addEventSource : .fullCalendar( 'addEventSource', source ) (동적으로 이벤트를 추가함)
+removeEventSource : .fullCalendar( 'removeEventSource', source ) (동적으로 이벤트를 제거함)
+removeEventSources : .fullCalendar( 'removeEventSources', optionalSourcesArray )
+getEventSources : .fullCalendar( 'getEventSources' )
+getEventSourceById  : .fullCalendar( 'getEventSourceById', id ) (특정 이벤트 소스객체를 검색)
+
+#### 이벤트 렌더링
+eventColor: '#378006' (색지정)
+Background Events :
+defaultDate: '2014-11-10',
+    defaultView: 'agendaWeek',
+    events: [
+        {
+            start: '2014-11-10T10:00:00',
+            end: '2014-11-10T16:00:00',
+            rendering: 'background'
+        }
+    ]
+eventBorderColor : String
+eventTextColor : String
+nextDayThreshold : "09:00:00" (기본값임, 요일에 표시되는 시간 초과 이벤트에만 영향을줌)
+eventOrder : 기본적으로 FullCalendar는 기간이 길고 시작 시간이 이전 인 이벤트가 다른 이벤트보다 먼저 정렬되도록 결정합니다. 그러나 이벤트의 시작 시간과 지속 시간은 항상 동일하므로 종일 이벤트의 경우 특히 그렇습니다. 기본적으로이 경우 이벤트는 제목별로 사전 순으로 정렬됩니다. eventOrder는이 동작을 재정의하는 기능을 제공합니다.
+eventRenderWait  : Integer / null (이벤트를 렌더링하기전, 조작 후 대기시간)
+
+eventRender : function( event, element, view ) { }
+(이요소의 기본값으로 시간과 제목으로 정해져있고 색상과같은 CSS를 지정할 수 있다)
+  events: [
+        {
+            title: 'My Event',
+            start: '2010-01-01',
+            description: 'This is a cool event'
+        }
+        // more events here
+    ],
+    eventRender: function(event, element) {
+        element.qtip({
+            content: event.description
+        });
+    }
+eventAfterRender : function( event, element, view ) { }(이벤트가 최종 위치의 달력에 배치 된 후에 트리거된다.)
+eventAfterAllRender : function( view ) { } (모든이벤트가 최종위치의 달력에 배치된 후에 트리거됨)
+eventDestroy : function( event, element, view ) { } () (이벤트요소가 DOM에서 제거되기전에 호출)
+(객체, JQ, 콜백)
+
+renderEvent : .fullCalendar( 'renderEvent', event [, stick ] ) (달력에서 새이벤트를 렌더링함)
+renderEvents : .fullCalendar( 'renderEvents', events [, stick ] )
+rerenderEvents : .fullCalendar( 'rerenderEvents' ) (모든 이벤트를 리렌더링한다)
+
+
+
+
+
+
+
+
