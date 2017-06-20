@@ -18,9 +18,9 @@ $(document).ready(function() {
 <div id='calendar'></div>
 
 ### 간단한코드들
-#### 주말(토일)을 없앤다. 
-  weekends: false 
-#### 클릭 시 알람을 띄운다. 
+#### 주말(토일)을 없앤다.
+  weekends: false
+#### 클릭 시 알람을 띄운다.
   dayClick: function() {
 	alert('a day has been clicked!');
   }
@@ -38,15 +38,15 @@ $(document).ready(function() {
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
     }
-img 링크 
+img 링크
 
 #### 전월로가기, 다음월로가기 및 전년으로가기, 앞년으로가기
-header : { left : 
+header : { left :
 'prev, next, prevYear, nextYear'  //이부분에 추가하면된다.
 }
 
 ####
-firstDay (월의 첫뻔째날) : Integer, default : 0 (sun), 1(mon).... 
+firstDay (월의 첫뻔째날) : Integer, default : 0 (sun), 1(mon)....
 isRTL : Boelean, default :  false; (달력을 왼쪽에서 오른쪽으로 읽기, true : 오른쪽에서 왼쪽으로)
 weekends : Boolean, default : true; (달력에 토일을 포함할지, 포함한다)
 hiddenDays: [] (숨길 column(요일)을 숨긴다. 표시숫자는 default 값에 따른다. 0(sun)...
@@ -127,3 +127,250 @@ maxTime : 24:00:00 (스크롤 막대가 끝까지 되었을대 종료될 시각)
 (minTime과 maxTime 을 정하면 제일처음시간과 제일마지막시각을 정할 수 잇는듯)
 slotEventOverlap : true (이벤트 일정간 서로 중첩으로 쌓을 수 있는지를 표시)
 
+#### Current date
+defaultDate : moment (ISO8601에 적합한 2017-06-19 타입의 날짜를 반환한다. moment()식으로 사용)
+nowIndicator : false (주간 달력등에서 현재시각을 레드라인으로 표시한다)
+defaultView: 'agenda',
+visibleRange: {
+    start: '2017-03-22',
+    end: '2017-03-25'
+} (이런식으로 지정하면, agenda 타입의 원하는 날짜만 볼 수있다.)
+defaultView: 'agenda',
+visibleRange: function(currentDate) {
+    return {
+        start: currentDate.clone().subtract(1, 'days'),
+        end: currentDate.clone().add(3, 'days') // exclusive end, so 3
+    };
+} (시작날짜를 현재날짜로 하고, 3일 추가한 날짜로 표시할 수 도 있다.)
+validRange : ------
+defaultView: 'month',
+validRange: {
+    start: '2017-05-01',
+    end: '2017-06-01'
+} (이렇게 month로 지정하면 그달만 보여주는 달력이된다.end 값이 없다면 5월까지만 보고 그이후로는 계속 볼수있다.)
+defaultView: 'month',
+validRange: function(nowDate) {
+    return {
+        start: nowDate,
+        end: nowDate.clone().add(1, 'months')
+    };
+}(이런식으로쓰면 언제든지 다음 1달까지만 볼수있다)
+dateIncrement  : duration-ish object (<> 를 눌렀을때, 얼마나 경과하게 될지를 설정할수있다.)
+dateAlignment : String (사용자 정의 또는 일반보기의 첫 번째 표시 일을 결정합니다.)
+weekends: false,
+defaultView: 'agendaFourDay',
+views: {
+    agendaFourDay: {
+        type: 'agenda',
+        dayCount: 4
+    }
+} : dayCoiunt :Integer (표시한 일수만큼 나타낸다)
+--
+$('#my-prev-button').click(function() {
+    $('#calendar').fullCalendar('prev');
+}) (document 안애 이런 메서드를 추가하면 버튼을 만들수있다. 만들수 잇는 버튼으로는
+  prev, next, prevYear, nextYear, tody, gotoDate, incrementDate,getDate)
+  .fullCalendar( 'gotoDate', date ),
+  .fullCalendar( 'incrementDate', duration ),
+  $('#my-button').click(function() {
+    var moment = $('#calendar').fullCalendar('getDate');
+    alert("The current date of the calendar is " + moment.format());
+}); (getDate)
+
+#### 번역과 관련된 자료
+해당 js를 추가하던가
+<script src='fullcalendar/locale/es.js'></script>
+전체를 추가하여 해당 지역을 추가하던가
+<script src='fullcalendar/locale-all.js'></script>
+ locale: 'es'
+이런식으로도 쓸수있다
+<script src='lib/moment.js'></script>
+<script src='lib/jquery-ui.custom-datepicker.js'></script>
+<script src='fullcalendar/fullcalendar.js'></script>
+<script src='fullcalendar/locale-all.js'></script>
+
+timeFormat:
+'H(:mm)' // uppercase H for 24-hour clock (시간을 24시간으로표현)
+'ddd'     // like 'Mon', for month view (달을 일반적mon으로표현)
+'ddd M/D' // like 'Mon 9/7', for week views (mon 9/7)
+'dddd'    // like 'Monday', for day views (Monday)
+'MMMM YYYY'   // like 'September 2009', for month view
+'MMM D YYYY'  // like 'Sep 13 2009', for week views
+'MMMM D YYYY' // like 'September 8 2009', for day views
+{ (버튼 아이콘 이름 표시하기 (버튼아이콘과 심버튼))
+    today:    'today',
+    month:    'month',
+    week:     'week',
+    day:      'day',
+    list:     'list'
+}
+displayEventTime : Boolean (이벤트에 표시되는시간과 텍스트중에 텍스트트 보이게하지여부결정)
+displayEventEnd : Boolean (캘린더에 이벤트가 렌더링 될 때 이벤트의 종료 시간 텍스트를 표시할지 여부.)
+eventLimitText : more (+2 more 처럼 표시할수 있나보다)
+dayPopoverFormat : String (popover창의 제목을 결정하는데 날짜형식 영어여야한다 ,dddd,MMMM d 등)
+
+#### Click 과 Hover 기능
+navLinks : false( 요일이름과 주이름을 클릭할수잇는지 결정, 모든요일상세일정으로갈수잇다)
+이기능은 날짜 칸을 클릭시 알람으로 날짜, 좌표, 요일과 선택후 색상처리를 할수잇따.
+dayClick: function(date, jsEvent, view) {
+
+    alert('Clicked on: ' + date.format());
+
+    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+    alert('Current view: ' + view.name);
+
+    // change the day's background color just for fun
+    $(this).css('background-color', 'red');
+
+}
+이벤트를 클릭햇을대 url로 이동한다. eventclick 메서드가 없으면 현재창에서이동, false면 새창으로 이동
+events: [
+         {
+             title: 'My Event',
+             start: '2017-06-01',
+             url: 'http://google.com/'
+         }
+         // other events here
+     ],
+     eventClick: function(event) {
+         if (event.url) {
+             window.open(event.url);
+             return false;
+         }
+     }
+마우스 오버시
+eventMouseover: function(event, jsEvent, view){}
+마우스 오버아웃
+eventMouseout : function(event, jsEvent, view){}
+
+#### 이벤트 드래그 및 크기재조정
+editable : false(수정가능하게할껀지)
+eventStartEditable : true(모든이벤트시작시간은 조정가능)
+eventDurationEditable : true (모든이벤트 기간은 조정가능)
+dragRevertDuration : 500(0.5s 마우스끌기 실패후 원래 위치로 돌아가는시간)
+dragOpacity : 0.75 (드래그되는 이벤트의 불투명도)
+dragScroll  : true (끌기, 이동 중 스크롤이 자동으로 이동해줄지 여부)
+eventOverlap : true ( 이벤트들이 겹치게 하는 것이 가능하게 할 것인지)
+events: [ <!-- event data here  -->  ]
+   eventOverlap: function(stillEvent, movingEvent) {
+       return stillEvent.allDay && movingEvent.allDay;
+   }
+eventConstraint (이벤트 제약조건 : 업무시간에만 이벤트를 넣을수 있게 할 수 있다.)
+{
+    start: '10:00', // a start time (10am in this example)
+    end: '18:00', // an end time (6pm in this example)
+
+    dow: [ 1, 2, 3, 4 ]
+    // days of week. an array of zero-based day of week integers (0=Sunday)
+    // (Monday-Thursday in this example)
+}
+longPressDelay : 1000 (모바일, 태블릿 경우의 터치시간조정)
+eventLongPressDelay : 1000 위와같다
+eventDragStart: function( event, jsEvent, ui, view ) { }
+eventDragStop : function( event, jsEvent, ui, view ) { }
+eventDrop : function( event, delta, revertFunc, jsEvent, ui, view ) { }
+eventResizeStart : function( event, jsEvent, ui, view ) { }
+eventResizeStop : function( event, jsEvent, ui, view ) { }
+eventResize : function( event, delta, revertFunc, jsEvent, ui, view ) { }
+
+#### 선택
+selectable : false (클릭 및 드래그로 여러 요일또는 시간대를 강조할수있다. 선택을 지우는 방법은 unselect,  그러니까 선택했을때 표시됨)
+selectHelper : false (클릭 및 드래그 했을때 표시할지)
+unselectAuto : true (페이지의 다른 곳을 클릭했을때 선택항목이지워짐, selectable이있어야함)
+unselectCancle : '' (unselectAuto 옵션을 무시할 요소를 지정하는 방법입니다.)
+selectOverlap  : true (이벤트가 있는기간과 겹치게 선택할수있을지 결정)
+selectOverlap: function(event) {
+        return event.rendering === 'background';
+    }
+    (추가하면 겹치게 설정할수없다.)
+selectConstraint : event ID, "businessHours", obejct
+selectAllow : function(selectInfo){start, end, resouceId} (처럼 선택할수있는방향을설정)
+selectMinDistance  : 0 (클릭했을대 바로선택되면 0, 숫자가증가하면 선택하고 그만큼 끌어야 선택된다)
+selectLongPressDelay : 1000 (터치장치일때 설정)
+select : function( start, end, jsEvent, view, [ resource ] )
+unselect : function( view, jsEvent )
+select method : .fullCalendar( 'select', start, [ end ], [ resource ] )
+unselect : .fullCalendar( 'unselect' )
+
+#### utilites
+var m = moment(); (순간의 시간을 저장한다.)
+var noTime = $.fullCalendar.moment('2014-05-01');
+var local = $.fullCalendar.moment('2014-05-01T12:00:00');
+var utc = $.fullCalendar.moment.utc('2014-05-01T12:00:00');
+var noTZ = $.fullCalendar.moment.parseZone('2014-05-01T12:00:00');
+
+var calendar = $('#calendar').fullCalendar('getCalendar');
+var m = calendar.moment();
+
+#### 이벤트 정하기
+id
+String/Integer. Optional
+지정한 이벤트를 식별한다.
+
+title
+String. Required.
+이벤트요소의 텍스트
+
+allDay
+true or false. Optional.
+이값을 사용하지않으면 allDayDefault가 사용됨
+
+start
+이벤트 시간날짜의 시작, 필수사항.
+
+end
+이벤트가 끝나는 날짜/시간, 선택적임
+끝나는 시간을정할경우 종료는 그날의 24시이다
+
+url
+String. Optional.
+url 링크를 걸수있다. eventClick을 하면 설정을 할 수 있다.
+
+className
+String/Array. Optional.
+이벤트요소에 첨부되는 CSS클래스(배열)
+
+editable
+true or false. Optional.
+편집가능옵션
+
+startEditable
+true or false. Optional.
+단일이벤트에 대해선 마스터 eventDurationEditable 옵션을 대체
+
+durationEditable
+true or false. Optional.
+이 단일 이벤트에 대한 마스터 eventDurationEditable 옵션을 대체합니다
+
+resourceEditable
+true or false. Optional.
+이 단일 이벤트에 대한 마스터 eventResourceEditable 옵션을 대체합니다.
+
+rendering
+배경 이벤트같은 요소의 대체 렌더링을 허용
+
+overlap
+true or false. Optional.
+이 단일 이벤트에 대한 마스터 eventOverlap 옵션을 대체합니다.
+false의 경우,이 이벤트가 다른 이벤트에 대해서 드래그 또는 사이즈 변경되는 것을 방지합니다. 또한이 이벤트를 통해 다른 이벤트가 드래그 / 크기 조정되는 것을 방지합니다.
+
+constraint
+an event ID, "businessHours", object. Optional.
+이 단일 이벤트에 대한 마스터 eventConstraint 옵션을 대체합니다.
+
+source
+이벤트 소스 개체. 자동으로 채워집니다.
+이 이벤트가 발생한 이벤트 소스에 대한 참조입니다.
+
+color
+달력의 eventColor 옵션과 마찬가지로 이벤트의 배경색과 테두리 색상을 설정합니다.
+
+backgroundColor
+달력 전체의 eventBackgroundColor 옵션과 마찬가지로 이벤트의 배경색을 설정합니다.
+
+borderColor
+달력 전체의 eventBorderColor 옵션과 마찬가지로 이벤트의 테두리 색상을 설정합니다.
+
+textColor
+달력 전체의 eventTextColor 옵션과 마찬가지로 이벤트의 텍스트 색상을 설정합니다.
