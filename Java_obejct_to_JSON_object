@@ -1,3 +1,10 @@
+Differences from Jackson 1.x
+Most of the APIs still maintains the same method name and signature, just the packaging is different.
+Jackson 1.x – org.codehaus.jackson.map
+Jackson 2.x – com.fasterxml.jackson.databind
+
+---------
+
 # 1 Convert Java object to JSON, writeValue(...)
 
 
