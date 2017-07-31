@@ -83,3 +83,89 @@ System.out.println(sample);
 * 결과
 
 STR(kk)
+
+
+
+
+###  dd ###
+//작성자 확인
+	@RequestMapping("passwdCheck.do")
+	public ModelAndView passwdCheck(String passwd,  int minlength, int maxlength, Model model){
+		String check = null;
+		JSONObject jsonObj = new JSONObject();
+		ModelAndView mv = new ModelAndView();
+			
+		
+			if(passwd.length() < minlength ) {
+				check = "비밀번호를4자이상으로 입력해주세요";
+			}else if(passwd.length() > maxlength) {
+				check = "비밀번호를 12자 이하로 입력해주세요";
+			}else if(passwd.indexOf("\'") != -1){
+		    	check = "\' 포함할수없습니다.";	
+		    }else if(passwd.indexOf("\"") != -1){
+		    	check = "\" 포함할수없습니다.";		
+		    }else if(passwd.indexOf("\\") != -1){
+		    	check = "\\ 포함할수없습니다.";		
+		    }else if(passwd.indexOf("|") != -1){
+		    	check = "| 포함할수없습니다.";		
+		    }else if (checkDuplicate3Character(passwd)) {//중복된 3자 이상의 문자 또는 숫자 사용불가
+				check = "중복된 3자 이상의 문자 사용불가입니다.";
+			}else {}
+		String stringToJson = check;
+		
+			try{
+				jsonObj.put("passwd", stringToJson); 
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		model.addAttribute("json", jsonObj);
+		
+		mv.setViewName("json");
+		
+		return mv;
+	}
+	
+	
+	
+public static boolean checkDuplicate3Character(String d) {
+	int p = d.length(); //비밀번호 길이
+	byte[] b = d.getBytes(); //비밀번호 byte
+	for (int i = 0; i < ((p * 2) / 3); i++) {
+		int b1 = b[i + 1];
+		int b2 = b[i + 2];
+
+		if ((b[i] == b1) && (b[i] == b2)) {
+			return true;
+		} else {
+			continue;
+		}
+	}
+	return false;
+}
+
+public static int digitCheck(String passwd) {
+
+	int varDigit = 0;
+	int varAlpha = 0;
+	int varHex = 0;
+	int varSum = 0;
+	for (int i = 0; i < passwd.length(); i++) {
+		char index = passwd.charAt(i);
+
+		if (index >= '0' && index <= '9') {
+			varDigit = 1;
+		} else if ( (index >= 'a' && index <= 'z') || (index >= 'A' && index <= 'Z') ) {
+			varAlpha = 1;
+		} else if (index == '!' || index == '@' || index == '$'
+				|| index == '%' || index == '^' || index == '&'
+				|| index == '*') {
+			varHex = 1;
+		} 
+	}
+
+	varSum = varDigit + varAlpha + varHex;
+	System.out.println("varSum : "+varSum);
+	return varSum;
+}
+
+### email ###
