@@ -1,0 +1,76 @@
+## centos7 + oracle 11g r2 setup 
+
+
+***
+참고 자료로 명시해 놓은 오라클 공식 가이드라인에 다르면 오라클 설치를 위한 Oracle Base 디렉터리는 top-level directory 라고 한다. Optimal Flexible Architecture 가이드라인은 아래와 같이 Oracle base directory를 설정하기를 추천한다고 명시되어 있다. (e47689.pdf - 87page)
+ /mount_point/app/software_owner
+가이드라인의 예제에서는 /u01이라는 디렉터리를 마운트 포인트로 사용한다.
+/u01/app/software_owner
+
+11g 설치에서는 /u01 디렉터리를 만들어서 사용하는 것으로 하고
+10g 설치에서는 설치 전에 미리 파티션으로 잡아놓은 /Database 디렉터리를 사용하도록 한다.
+(*10g 설치는 OCP시험이 합격하고나면 정리해봐야 할 듯하다. 지금 다니는 회사에서 사용하는 방식은 미리 마운트해놓은 /Database를 사용하는 방식이다. 시험공부를 하고 있는 중이라... 혹시라도 모를 오답을 찍을 수도 있는 사태를 미연에 방지하기 위해서..)
+
+***
+
+### user 생성 
+
+그룹/사용자 관리 계획
+관리 계정 : oracle11(uid : 1100)
+관리 그룹 : dba(GID : 900), oper(GID :910), asmadmin(GID:920), oinstall (GID:1000)
+
+***
+[root@localhost ~]# cat /etc/passwd | grep [사용자계정이름]
+사용자계정이름:x:1000:1000:soongu:/home/사용자계정이름:/bin/bash
+
+[root@localhost ~]# cat /etc/group | grep [사용자계정이름]
+사용자계정이름:x:1000:사용자계정이름
+
+- 적당한 그룹이 있는지 확인한다
+[root@localhost ~]# cat /etc/group | grep 3939 (3939는 임의의번호)
+
+- gid와 uid를 3939로 변경
+[root@localhost ~]# groupmod -g 3939 seonho
+[root@localhost ~]# cat /etc/passwd | grep seonho
+seonho:x:1000:3939:soongu:/home/seonho:/bin/bash
+
+[root@localhost ~]# usermod -u 3939 seonho 
+[root@localhost ~]# cat /etc/passwd | grep seonho
+seonho:x:3939:3939:soongu:/home/seonho:/bin/bash
+
+(ERROR : userid is not in the sudoers file. This incident will be reported.)
+(sudoers파일은 sudo명령어에 대한 설정을 다루는 파일이고 이곳에 sudo명령어를 사용할 수 있는 계정을 지정할수 있습니다. 
+그 외에도 여러가지 설정에 대한 부분이 있으며 /etc/sudoers 에 위치하고 있습니다. 기
+본으로 지정된 내용을 보면 root   ALL=(ALL) ALL 이라는 부분이 있는데 
+이 설정이 root 유저가 sudo명령어를 사용할 수 있도록 하는 부분입니다. )
+
+해결법
+1. 재부팅을 하여 복구 모드로 접속한 다음 su 명령어를 쳐서 root 로 접속한다
+2. chomod u+w /etc/sudoers 파일에 쓰기권한을 부여한다
+3. 적당한위치 root ALL=(ALL) ALL 밑에 사용자 계정으로 똑같이 추가
+3. 사용자계정 ALL=(ALL) ALL
+4. :wq
+5. 쓰기 권한을 부여 했던 파일에 권한을 제거한다. chmod u-w /etc/sudoers
+6. reboot
+
+- 사용자생성
+[root@localhost ~]# groupadd -g 900 dba
+[root@localhost ~]# groupadd -g 910 oper
+[root@localhost ~]# groupadd -g 920 asmadmin
+[root@localhost ~]# groupadd -g 1005 oinstall
+[root@localhost ~]# useradd -g dba -G oinstall,asmadmin,oper -u 1100 -d /u01/oracle11 oracle11
+[root@localhost ~]# passwd oracle11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
