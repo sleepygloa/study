@@ -136,3 +136,13 @@ export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 [root@localhost jdk1.7.0_79]# source ~/.bash_profile
 
 
+
+
+
+
+
+
+
+
+wget --no-check-certificate -v -c --tries=2 -O linux.x64_11gR2_database_1of2.zip --user=oracle_login_email@whatever.com --password=oracle_password http://download.oracle.com/otn/linux/oracle11g/R2/linux.x64_11gR2_database_1of2.zip
+wget --no-check-certificate -v -c --tries=2 -O linux.x64_11gR2_database_2of2.zip --user=oracle_login_email@whatever.com --password=oracle_password http://download.oracle.com/otn/linux/oracle11g/R2/linux.x64_11gR2_database_2of2.zip
