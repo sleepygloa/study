@@ -136,7 +136,140 @@ export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 [root@localhost jdk1.7.0_79]# source ~/.bash_profile
 
 
+## .bash_profile 설정
 
+[root@localhost ~]# vim /u01/oracle11/.bash_profile 
+
+#JAVA PATH Setup
+export JAVA_HOME=/opt/jdk1.7.0_79
+export JRE_HOME=/opt/jdk1.7.0_79/jre서
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+## export PATH=$PATH:/opt/jdk1.7.0_79/bin:/opt/jdk1.7.0_79/jre/bin
+
+#ORACLE Setup
+export TMP=/tmp
+export TMPDIR=/$TMP
+export ORALCE_OWNER=oracle11
+
+### ORACLE 11g home directory
+export ORACLE_BASE=/u01/app
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/db_1
+export ORACLE_HOME_LISTENER=$ORACLE_HOME/bin/lsnrctl
+export ORACLE_SID=ORCL
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
+export PATH=$ORACLE_HOME/bin:$PATH
+
+
+## 커널 및 자원 제한 설정
+
+e47689.pdf - 84page를 참고하면 Configuring Kernel Parameters for Linux라는 Chapter가 있는데 이곳에서 권장하는 기준으로 커널의 세팅을 바꿔준다. 확인해야 하는 커널 파라미터가 적혀있는 파일들은 아래와 같다.
+/proc/sys/kernel/sem
+/proc/sys/kernel/shmall
+/proc/sys/kernel/shmax
+/proc/sys/kernel/shmmni
+/proc/sys/fs/file-max
+/proc/sys/fs/aio-max-nr
+/proc/sys/net/ipv4/ip_local_port_range
+/proc/sys/net/core/rmem_default
+/proc/sys/net/core/rmem_max
+/proc/sys/net/core/wmem_default
+/proc/sys/net/core/wmem_max
+
+오라클 11g 권장값
+fs.aio-max-nr = 1048576
+fs.file-max = 6815744
+kernel.shmall = 2097152
+kernel.shmmax = 4294967295
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+net.ipv4.ip_local_port_range = 9000 65500
+net.core.rmem_default = 262144
+net.core.rmem_max = 4194304
+net.core.wmem_default = 262144
+net.core.wmem_max = 1048576
+
+#cat /proc/sys/kernel/sem 
+
+
+[root@localhost ~]# vim /etc/sysctl.conf
+
+kernel.sem = 250 32000 100 128
+fs.file-max = 6815744
+net.ipv4.ip_local_port_range = 9000 65500
+net.core.rmem_default = 262144
+net.core.rmem_max = 4194304
+net.core.wmem_default = 262144
+net.core.wmem_max = 1048576
+
+
+수정 완료 후 아래 명령 수행
+[root@localhost ~]# /sbin/sysctl -p
+
+kernel.sem = 250 32000 100 128
+fs.file-max = 6815744
+net.ipv4.ip_local_port_range = 9000 65500
+net.core.rmem_default = 262144
+net.core.rmem_max = 4194304
+net.core.wmem_default = 262144
+net.core.wmem_max = 1048576
+
+## 오라클 설치시 필요한 패키지 설치
+
+http://docs.oracle.com/cd/E11882_01/install.112/e47689/pre_install.htm#LADBI1111
+를 방문해서 Checking the Software Requirements 클릭> Pacakge Requirements 클릭> Oracle Database Package Requirements for Linux x86-64 클릭해서 해당 링크로 이동하면 리눅스 버전별로 필요한 라이브러리가 명시되어 있다. 나의 경우 설치한 OS가 CentOS7 이므로 이에 준하는 OS인 Red Hat Enterprise Linux7을 찾아서 설치하면 된다. 
+
+CentOS7에서 오라클을 구동할 경우 필요한 패키지는 아래와 같다
+binutils-2.23.52.0.1-12.el7.x86_64 
+compat-libcap1-1.10-3.el7.x86_64 
+compat-libstdc++-33-3.2.3-71.el7.i686
+compat-libstdc++-33-3.2.3-71.el7.x86_64
+gcc-4.8.2-3.el7.x86_64 
+gcc-c++-4.8.2-3.el7.x86_64 
+glibc-2.17-36.el7.i686 
+glibc-2.17-36.el7.x86_64 
+glibc-devel-2.17-36.el7.i686 
+glibc-devel-2.17-36.el7.x86_64 
+ksh
+libaio-0.3.109-9.el7.i686 
+libaio-0.3.109-9.el7.x86_64 
+libaio-devel-0.3.109-9.el7.i686 
+libaio-devel-0.3.109-9.el7.x86_64 
+libgcc-4.8.2-3.el7.i686 
+libgcc-4.8.2-3.el7.x86_64 
+libstdc++-4.8.2-3.el7.i686 
+libstdc++-4.8.2-3.el7.x86_64 
+libstdc++-devel-4.8.2-3.el7.i686 
+libstdc++-devel-4.8.2-3.el7.x86_64 
+libXi-1.7.2-1.el7.i686 
+libXi-1.7.2-1.el7.x86_64 
+libXtst-1.2.2-1.el7.i686 
+libXtst-1.2.2-1.el7.x86_64 
+make-3.82-19.el7.x86_64 
+sysstat-10.1.5-1.el7.x86_64 
+
+여기에 추가해서 Oracle ODBC Drivers항목을 참조해보면 unixODBC 라이브러리도 설치해야한다고 나와 있다. CentOS7 에서 필요한 unixODBC 라이브러리는 아래와 같다
+unixODBC-2.3.1-6.el7.x86_64 or later
+unixODBC-2.3.1-6.el7.i686 or later
+unixODBC-devel-2.3.1-6.el7.x86_64 or later
+unixODBC-devel-2.3.1-6.el7.i686 or later
+
+
+이 항목들을 일일이 아래의 명령을 통해 실제로 설치되어 있는지 확인할 수도 있으나...
+[root@localhost ~]# rpm -qa | grep compat-libcap1-1
+compat-libcap1-1.10-7.el7.x86_64
+
+,,,
+
+아래와 명령을 통해 한번에 수행해서 필요한 항목을 확인할 수 있다.
+rpm -q --qf '%{NAME}-%{VERSION}-%{RELEASE}(%{ARCH})\n' binutils \
+
+
+각각의 패키지를 yum으로 설치한다.
+-- yum에 등록된 패키지 이름 확인
+[root@localhost ~]# yum search compat-libstdc++
+-- 설치
+[root@localhost ~]# yum install compat-libstdc++-33.x86_64 
+와 같은 방식으로 나머지 패키지를 모두 설치한다.
 
 
 
