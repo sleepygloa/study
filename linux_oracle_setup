@@ -118,8 +118,21 @@ update-alternatives --config java
 [root@localhost jdk1.7.0_79]# update-alternatives --set jar /opt/jdk1.7.0_79/bin/jar
 [root@localhost jdk1.7.0_79]# update-alternatives --set javac /opt/jdk1.7.0_79/bin/javac
 [root@localhost jdk1.7.0_79]# java -version
-java version "1.7.0_79"
+java version "1.8.0.144"
 Java(TM) SE Runtime Environment (build 1.7.0_79-b15)
 Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)
+
+##  환경변수 설정
+[root@localhost jdk1.7.0_79]# vim ~/.bash_profile
+
+#JAVA PATH Setup
+export JAVA_HOME=/opt/jdk1.7.0_79
+export JRE_HOME=/opt/jdk1.7.0_79/jre
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+## export PATH=$PATH:/opt/jdk1.7.0_79/bin:/opt/jdk1.7.0_79/jre/bin
+
+을 쓰고 [esc] 키를 누루고 난 후 :wq 입력후 터미널로 복귀
+
+[root@localhost jdk1.7.0_79]# source ~/.bash_profile
 
 
