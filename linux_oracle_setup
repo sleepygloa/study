@@ -53,6 +53,10 @@ seonho:x:3939:3939:soongu:/home/seonho:/bin/bash
 5. 쓰기 권한을 부여 했던 파일에 권한을 제거한다. chmod u-w /etc/sudoers
 6. reboot
 
+(ERROR : process uid)
+(이 오류는이미 이 아이디 계정으로사용 중이기 때문에 uid를 바꿀 수 없다는 메세지입니다.
+자세히 생각해보면 로그아웃 한다음 root계정으로 바로접속 후 원하는 계정의 uid를 바꾸면 되겠습니다)
+
 - 사용자생성
 [root@localhost ~]# groupadd -g 900 dba
 [root@localhost ~]# groupadd -g 910 oper
@@ -60,17 +64,62 @@ seonho:x:3939:3939:soongu:/home/seonho:/bin/bash
 [root@localhost ~]# groupadd -g 1005 oinstall
 [root@localhost ~]# useradd -g dba -G oinstall,asmadmin,oper -u 1100 -d /u01/oracle11 oracle11
 [root@localhost ~]# passwd oracle11
+비밀번호입력
+
+
+yum install oracle-rdbms-server-11gR2-preinstall
+
+yum update
+
+Add the following lines to the "/etc/security/limits.conf" file.
+
+oracle              soft    nproc   16384
+oracle              hard    nproc   16384
+oracle              soft    nofile  4096
+oracle              hard    nofile  65536
+oracle              soft    stack   10240
 
 
 
 
+mkdir -p /u01/app/oracle/product/11.2.0/db_1
+chown -R oracle11:oinstall /u01
+chmod -R 775 /u01
 
 
 
+## wget 설치
+yum install wget
 
+## Java 설치
+wget http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz
+ wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
 
+ls (패키지가 다운로드 되었는지 확인)
+cp jdk-8u144-linux-x64.tar.gz /opt
+cd /opt
+tar zxvf jdk-7u79-linux-x64.tar.gz
 
+(압축파일해제시 압축 파일 확장자가 tar 또는 tar.gz 일 것입니다.
+tar 는 xvf 옵션, tar.gz 는 zxvf 옵션을 사용해야한다.)
+(또 Java 를 설치시 Oracle 사이트에서 cookie-accept 를 했느냐이다.
+이걸 하지 않고 wget을 이용하여 java를 다운 받고 설치하면 압축파일이 깨지는 오류가 날 것이다.)
 
+cd jdk1.8.0.144/
+update-alternatives --install /usr/bin/java java /opt/jdk1.8.0.144/bin/java 2
+update-alternatives --config java
+방금 설치한 java 번호 누르고 엔터
 
+-- alternatives 명령을 이용해 javac, jar 명령어 패스 (command path)를 설정
+( set up javac,jar commands path using alternatives commands)
+
+[root@localhost jdk1.7.0_79]# update-alternatives --install /usr/bin/jar jar /opt/jdk1.7.0_79/bin/jar 3
+[root@localhost jdk1.7.0_79]# update-alternatives --install /usr/bin/javac javac /opt/jdk1.7.0_79/bin/javac 3
+[root@localhost jdk1.7.0_79]# update-alternatives --set jar /opt/jdk1.7.0_79/bin/jar
+[root@localhost jdk1.7.0_79]# update-alternatives --set javac /opt/jdk1.7.0_79/bin/javac
+[root@localhost jdk1.7.0_79]# java -version
+java version "1.7.0_79"
+Java(TM) SE Runtime Environment (build 1.7.0_79-b15)
+Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)
 
 
