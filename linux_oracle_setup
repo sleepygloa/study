@@ -87,6 +87,15 @@ seonho:x:3939:3939:soongu:/home/seonho:/bin/bash
 비밀번호입력
 
 
+******
+또하나의 groupadd oinstall
+groupadd dba
+useradd -g oinstall -G dba oracle
+passwd oracle
+
+******
+
+
 yum install oracle-rdbms-server-11gR2-preinstall
 
 yum update
