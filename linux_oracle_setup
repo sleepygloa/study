@@ -3,14 +3,10 @@
 
 *** 시작하기전에
 설치를 TUI, CUI 등등으로 설치 하였다면 그래픽 환경으로 실행 할 수 있도록도 해보자
-su -root
-yum -y groupinstall "Server with GUI"
-startx
 
-부팅시GUI 실행가능하게하려면
-sudo ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
-런레벨별로 실행환경이달라진다
-이정도는 알고있어야쥬
+# yum -y groups install "GNOME Desktop" 
+
+# startx 
 
 
 
@@ -23,6 +19,8 @@ sudo ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.tar
 11g 설치에서는 /u01 디렉터리를 만들어서 사용하는 것으로 하고
 10g 설치에서는 설치 전에 미리 파티션으로 잡아놓은 /Database 디렉터리를 사용하도록 한다.
 (*10g 설치는 OCP시험이 합격하고나면 정리해봐야 할 듯하다. 지금 다니는 회사에서 사용하는 방식은 미리 마운트해놓은 /Database를 사용하는 방식이다. 시험공부를 하고 있는 중이라... 혹시라도 모를 오답을 찍을 수도 있는 사태를 미연에 방지하기 위해서..)
+
+# reboot
 
 ***
 
