@@ -5,33 +5,95 @@
 설치를 TUI, CUI 등등으로 설치 하였다면 그래픽 환경으로 실행 할 수 있도록도 해보자
 
 # yum -y groups install "GNOME Desktop" 
-
 # reboot 
 
- 재시작을하면 됩니다그러나...
- 오류가뜹니다
+재시작을하면 됩니다그러나...오류가뜹니다
 
 license not accepted 라고뜨는데이때 잘보면항목중
-1번항목만보입니다
-1번을누르면다시 1,2번 항목이보이는데 2번을눌러 라이센스승낙을 누릅시다
+1번항목만보입니다. 1번을누르면다시 1,2번 항목이보이는데 2번을눌러 라이센스승낙을 누릅시다
 
 # startx 
 
-
-
 ***
-참고 자료로 명시해 놓은 오라클 공식 가이드라인에 다르면 오라클 설치를 위한 Oracle Base 디렉터리는 top-level directory 라고 한다. Optimal Flexible Architecture 가이드라인은 아래와 같이 Oracle base directory를 설정하기를 추천한다고 명시되어 있다. (e47689.pdf - 87page)
- /mount_point/app/software_owner
-가이드라인의 예제에서는 /u01이라는 디렉터리를 마운트 포인트로 사용한다.
-/u01/app/software_owner
-
 11g 설치에서는 /u01 디렉터리를 만들어서 사용하는 것으로 하고
 10g 설치에서는 설치 전에 미리 파티션으로 잡아놓은 /Database 디렉터리를 사용하도록 한다.
-(*10g 설치는 OCP시험이 합격하고나면 정리해봐야 할 듯하다. 지금 다니는 회사에서 사용하는 방식은 미리 마운트해놓은 /Database를 사용하는 방식이다. 시험공부를 하고 있는 중이라... 혹시라도 모를 오답을 찍을 수도 있는 사태를 미연에 방지하기 위해서..)
+(*10g 설치는 OCP시험이 합격하고나면 정리해봐야 할 듯하다. 지금 다니는 회사에서 사용하는 방식은
+미리 마운트해놓은 /Database를 사용하는 방식이다. 시험공부를 하고 있는 중이라... 혹시라도 모를 오답을 찍을 수도 있는
+사태를 미연에 방지하기 위해서..)
 
 # reboot
 
 ***
+
+
+---------------------------------------------------------------------------------
+## 오라클 설치시 필요한 패키지 설치
+
+http://docs.oracle.com/cd/E11882_01/install.112/e47689/pre_install.htm#LADBI1111
+를 방문해서 Checking the Software Requirements 클릭> Pacakge Requirements 클릭> Oracle Database Package Requirements for Linux x86-64 클릭해서 해당 링크로 이동하면 리눅스 버전별로 필요한 라이브러리가 명시되어 있다. 나의 경우 설치한 OS가 CentOS7 이므로 이에 준하는 OS인 Red Hat Enterprise Linux7을 찾아서 설치하면 된다. 
+
+CentOS7에서 오라클을 구동할 경우 필요한 패키지는 아래와 같다
+binutils-2.23.52.0.1-12.el7.x86_64 
+compat-libcap1-1.10-3.el7.x86_64 
+compat-libstdc++-33-3.2.3-71.el7.i686
+compat-libstdc++-33-3.2.3-71.el7.x86_64
+gcc-4.8.2-3.el7.x86_64 
+gcc-c++-4.8.2-3.el7.x86_64 
+glibc-2.17-36.el7.i686 
+glibc-2.17-36.el7.x86_64 
+glibc-devel-2.17-36.el7.i686 
+glibc-devel-2.17-36.el7.x86_64 
+ksh
+libaio-0.3.109-9.el7.i686 
+libaio-0.3.109-9.el7.x86_64 
+libaio-devel-0.3.109-9.el7.i686 
+libaio-devel-0.3.109-9.el7.x86_64 
+libgcc-4.8.2-3.el7.i686 
+libgcc-4.8.2-3.el7.x86_64 
+libstdc++-4.8.2-3.el7.i686 
+libstdc++-4.8.2-3.el7.x86_64 
+libstdc++-devel-4.8.2-3.el7.i686 
+libstdc++-devel-4.8.2-3.el7.x86_64 
+libXi-1.7.2-1.el7.i686 
+libXi-1.7.2-1.el7.x86_64 
+libXtst-1.2.2-1.el7.i686 
+libXtst-1.2.2-1.el7.x86_64 
+make-3.82-19.el7.x86_64 
+sysstat-10.1.5-1.el7.x86_64 
+
+여기에 추가해서 Oracle ODBC Drivers항목을 참조해보면 unixODBC 라이브러리도 설치해야한다고 나와 있다. CentOS7 에서 필요한 unixODBC 라이브러리는 아래와 같다
+unixODBC-2.3.1-6.el7.x86_64 or later
+unixODBC-2.3.1-6.el7.i686 or later
+unixODBC-devel-2.3.1-6.el7.x86_64 or later
+unixODBC-devel-2.3.1-6.el7.i686 or later
+
+
+이 항목들을 일일이 아래의 명령을 통해 실제로 설치되어 있는지 확인할 수도 있으나...
+[root@localhost ~]# rpm -qa | grep compat-libcap1-1
+compat-libcap1-1.10-7.el7.x86_64
+
+,,,
+
+아래와 명령을 통해 한번에 수행해서 필요한 항목을 확인할 수 있다.
+rpm -q --qf '%{NAME}-%{VERSION}-%{RELEASE}(%{ARCH})\n' binutils \
+
+
+각각의 패키지를 yum으로 설치한다.
+-- yum에 등록된 패키지 이름 확인
+[root@localhost ~]# yum search compat-libstdc++
+-- 설치
+[root@localhost ~]# yum install compat-libstdc++-33.x86_64 
+와 같은 방식으로 나머지 패키지를 모두 설치한다.
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 ### user 생성 
 
@@ -40,22 +102,22 @@ license not accepted 라고뜨는데이때 잘보면항목중
 관리 그룹 : dba(GID : 900), oper(GID :910), asmadmin(GID:920), oinstall (GID:1000)
 
 ***
-[root@localhost ~]# cat /etc/passwd | grep [사용자계정이름]
+1. [root@localhost ~]# cat /etc/passwd | grep [사용자계정이름]
 사용자계정이름:x:1000:1000:soongu:/home/사용자계정이름:/bin/bash
 
-[root@localhost ~]# cat /etc/group | grep [사용자계정이름]
+2. [root@localhost ~]# cat /etc/group | grep [사용자계정이름]
 사용자계정이름:x:1000:사용자계정이름
 
 - 적당한 그룹이 있는지 확인한다
-[root@localhost ~]# cat /etc/group | grep 3939 (3939는 임의의번호)
+3. [root@localhost ~]# cat /etc/group | grep 3939 (3939는 임의의번호)
 
 - gid와 uid를 3939로 변경
-[root@localhost ~]# groupmod -g 3939 seonho
-[root@localhost ~]# cat /etc/passwd | grep seonho
+4. [root@localhost ~]# groupmod -g 3939 seonho
+5. [root@localhost ~]# cat /etc/passwd | grep seonho
 seonho:x:1000:3939:soongu:/home/seonho:/bin/bash
 
-[root@localhost ~]# usermod -u 3939 seonho 
-[root@localhost ~]# cat /etc/passwd | grep seonho
+6. [root@localhost ~]# usermod -u 3939 seonho 
+7. [root@localhost ~]# cat /etc/passwd | grep seonho
 seonho:x:3939:3939:soongu:/home/seonho:/bin/bash
 
 (ERROR : userid is not in the sudoers file. This incident will be reported.)
@@ -65,25 +127,25 @@ seonho:x:3939:3939:soongu:/home/seonho:/bin/bash
 이 설정이 root 유저가 sudo명령어를 사용할 수 있도록 하는 부분입니다. )
 
 해결법
-1. 재부팅을 하여 복구 모드로 접속한 다음 su 명령어를 쳐서 root 로 접속한다
-2. chomod u+w /etc/sudoers 파일에 쓰기권한을 부여한다
-3. 적당한위치 root ALL=(ALL) ALL 밑에 사용자 계정으로 똑같이 추가
-3. 사용자계정 ALL=(ALL) ALL
-4. :wq
-5. 쓰기 권한을 부여 했던 파일에 권한을 제거한다. chmod u-w /etc/sudoers
-6. reboot
+1). 재부팅을 하여 복구 모드로 접속한 다음 su 명령어를 쳐서 root 로 접속한다
+2). chomod u+w /etc/sudoers 파일에 쓰기권한을 부여한다
+3). 적당한위치 root ALL=(ALL) ALL 밑에 사용자 계정으로 똑같이 추가
+3). 사용자계정 ALL=(ALL) ALL
+4). :wq
+5). 쓰기 권한을 부여 했던 파일에 권한을 제거한다. chmod u-w /etc/sudoers
+6). reboot
 
 (ERROR : process uid)
 (이 오류는이미 이 아이디 계정으로사용 중이기 때문에 uid를 바꿀 수 없다는 메세지입니다.
 자세히 생각해보면 로그아웃 한다음 root계정으로 바로접속 후 원하는 계정의 uid를 바꾸면 되겠습니다)
 
 - 사용자생성
-[root@localhost ~]# groupadd -g 900 dba
-[root@localhost ~]# groupadd -g 910 oper
-[root@localhost ~]# groupadd -g 920 asmadmin
-[root@localhost ~]# groupadd -g 1005 oinstall
-[root@localhost ~]# useradd -g dba -G oinstall,asmadmin,oper -u 1100 -d /u01/oracle11 oracle11
-[root@localhost ~]# passwd oracle11
+8. [root@localhost ~]# groupadd -g 900 dba
+9. [root@localhost ~]# groupadd -g 910 oper
+10. [root@localhost ~]# groupadd -g 920 asmadmin
+11. [root@localhost ~]# groupadd -g 1005 oinstall
+12. [root@localhost ~]# useradd -g dba -G oinstall, asmadmin, oper -u 1100 -d /u01/oracle oracle
+13. [root@localhost ~]# passwd oracle
 비밀번호입력
 
 
@@ -100,7 +162,7 @@ yum install oracle-rdbms-server-11gR2-preinstall
 
 yum update
 
-Add the following lines to the "/etc/security/limits.conf" file.
+14. Add the following lines to the "/etc/security/limits.conf" file.
 
 oracle              soft    nproc   16384
 oracle              hard    nproc   16384
@@ -111,63 +173,61 @@ oracle              soft    stack   10240
 
 
 
-mkdir -p /u01/app/oracle/product/11.2.0/db_1
-chown -R oracle11:oinstall /u01
-chmod -R 775 /u01
-
-
+15. mkdir -p /u01/app/oracle/product/11.2.0/db_1
+16. chown -R oracle11:oinstall /u01
+17. chmod -R 775 /u01
 
 ## wget 설치
 yum install wget
 
 ## Java 설치
 wget http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz
- wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+18. wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
 
-ls (패키지가 다운로드 되었는지 확인)
-cp jdk-8u144-linux-x64.tar.gz /opt
-cd /opt
-tar zxvf jdk-7u79-linux-x64.tar.gz
+19. ls (패키지가 다운로드 되었는지 확인)
+20. cp jdk-8u144-linux-x64.tar.gz /opt
+21. cd /opt
+22. tar zxvf jdk-7u79-linux-x64.tar.gz
 
 (압축파일해제시 압축 파일 확장자가 tar 또는 tar.gz 일 것입니다.
 tar 는 xvf 옵션, tar.gz 는 zxvf 옵션을 사용해야한다.)
 (또 Java 를 설치시 Oracle 사이트에서 cookie-accept 를 했느냐이다.
 이걸 하지 않고 wget을 이용하여 java를 다운 받고 설치하면 압축파일이 깨지는 오류가 날 것이다.)
 
-cd jdk1.8.0.144/
-update-alternatives --install /usr/bin/java java /opt/jdk1.8.0.144/bin/java 2
-update-alternatives --config java
+23. cd jdk1.8.0.144/
+24. update-alternatives --install /usr/bin/java java /opt/jdk1.8.0.144/bin/java 2
+25 .update-alternatives --config java
 방금 설치한 java 번호 누르고 엔터
 
 -- alternatives 명령을 이용해 javac, jar 명령어 패스 (command path)를 설정
 ( set up javac,jar commands path using alternatives commands)
 
-[root@localhost jdk1.7.0_79]# update-alternatives --install /usr/bin/jar jar /opt/jdk1.7.0_79/bin/jar 3
-[root@localhost jdk1.7.0_79]# update-alternatives --install /usr/bin/javac javac /opt/jdk1.7.0_79/bin/javac 3
-[root@localhost jdk1.7.0_79]# update-alternatives --set jar /opt/jdk1.7.0_79/bin/jar
-[root@localhost jdk1.7.0_79]# update-alternatives --set javac /opt/jdk1.7.0_79/bin/javac
-[root@localhost jdk1.7.0_79]# java -version
+26. [root@localhost jdk1.7.0_79]# update-alternatives --install /usr/bin/jar jar /opt/jdk1.7.0_79/bin/jar 3
+27. [root@localhost jdk1.7.0_79]# update-alternatives --install /usr/bin/javac javac /opt/jdk1.7.0_79/bin/javac 3
+28. [root@localhost jdk1.7.0_79]# update-alternatives --set jar /opt/jdk1.7.0_79/bin/jar
+29. [root@localhost jdk1.7.0_79]# update-alternatives --set javac /opt/jdk1.7.0_79/bin/javac
+30. [root@localhost jdk1.7.0_79]# java -version
 java version "1.8.0.144"
 Java(TM) SE Runtime Environment (build 1.7.0_79-b15)
 Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)
 
 ##  환경변수 설정
-[root@localhost jdk1.7.0_79]# vim ~/.bash_profile
+31. [root@localhost jdk1.7.0_79]# vim ~/.bash_profile
 
 #JAVA PATH Setup
-export JAVA_HOME=/opt/jdk1.7.0_79
-export JRE_HOME=/opt/jdk1.7.0_79/jre
-export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+32. export JAVA_HOME=/opt/jdk1.7.0_79
+33. export JRE_HOME=/opt/jdk1.7.0_79/jre
+34. export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 ## export PATH=$PATH:/opt/jdk1.7.0_79/bin:/opt/jdk1.7.0_79/jre/bin
 
 을 쓰고 [esc] 키를 누루고 난 후 :wq 입력후 터미널로 복귀
 
-[root@localhost jdk1.7.0_79]# source ~/.bash_profile
+35. [root@localhost jdk1.7.0_79]# source ~/.bash_profile
 
 
 ## .bash_profile 설정
 
-[root@localhost ~]# vim /u01/oracle11/.bash_profile 
+36. [root@localhost ~]# vim /u01/oracle11/.bash_profile 
 
 #JAVA PATH Setup
 export JAVA_HOME=/opt/jdk1.7.0_79
@@ -258,63 +318,7 @@ net.core.rmem_max=4194304
 net.core.wmem_max=1048576
 fs.aio-max-nr = 1048576
 
-## 오라클 설치시 필요한 패키지 설치
 
-http://docs.oracle.com/cd/E11882_01/install.112/e47689/pre_install.htm#LADBI1111
-를 방문해서 Checking the Software Requirements 클릭> Pacakge Requirements 클릭> Oracle Database Package Requirements for Linux x86-64 클릭해서 해당 링크로 이동하면 리눅스 버전별로 필요한 라이브러리가 명시되어 있다. 나의 경우 설치한 OS가 CentOS7 이므로 이에 준하는 OS인 Red Hat Enterprise Linux7을 찾아서 설치하면 된다. 
-
-CentOS7에서 오라클을 구동할 경우 필요한 패키지는 아래와 같다
-binutils-2.23.52.0.1-12.el7.x86_64 
-compat-libcap1-1.10-3.el7.x86_64 
-compat-libstdc++-33-3.2.3-71.el7.i686
-compat-libstdc++-33-3.2.3-71.el7.x86_64
-gcc-4.8.2-3.el7.x86_64 
-gcc-c++-4.8.2-3.el7.x86_64 
-glibc-2.17-36.el7.i686 
-glibc-2.17-36.el7.x86_64 
-glibc-devel-2.17-36.el7.i686 
-glibc-devel-2.17-36.el7.x86_64 
-ksh
-libaio-0.3.109-9.el7.i686 
-libaio-0.3.109-9.el7.x86_64 
-libaio-devel-0.3.109-9.el7.i686 
-libaio-devel-0.3.109-9.el7.x86_64 
-libgcc-4.8.2-3.el7.i686 
-libgcc-4.8.2-3.el7.x86_64 
-libstdc++-4.8.2-3.el7.i686 
-libstdc++-4.8.2-3.el7.x86_64 
-libstdc++-devel-4.8.2-3.el7.i686 
-libstdc++-devel-4.8.2-3.el7.x86_64 
-libXi-1.7.2-1.el7.i686 
-libXi-1.7.2-1.el7.x86_64 
-libXtst-1.2.2-1.el7.i686 
-libXtst-1.2.2-1.el7.x86_64 
-make-3.82-19.el7.x86_64 
-sysstat-10.1.5-1.el7.x86_64 
-
-여기에 추가해서 Oracle ODBC Drivers항목을 참조해보면 unixODBC 라이브러리도 설치해야한다고 나와 있다. CentOS7 에서 필요한 unixODBC 라이브러리는 아래와 같다
-unixODBC-2.3.1-6.el7.x86_64 or later
-unixODBC-2.3.1-6.el7.i686 or later
-unixODBC-devel-2.3.1-6.el7.x86_64 or later
-unixODBC-devel-2.3.1-6.el7.i686 or later
-
-
-이 항목들을 일일이 아래의 명령을 통해 실제로 설치되어 있는지 확인할 수도 있으나...
-[root@localhost ~]# rpm -qa | grep compat-libcap1-1
-compat-libcap1-1.10-7.el7.x86_64
-
-,,,
-
-아래와 명령을 통해 한번에 수행해서 필요한 항목을 확인할 수 있다.
-rpm -q --qf '%{NAME}-%{VERSION}-%{RELEASE}(%{ARCH})\n' binutils \
-
-
-각각의 패키지를 yum으로 설치한다.
--- yum에 등록된 패키지 이름 확인
-[root@localhost ~]# yum search compat-libstdc++
--- 설치
-[root@localhost ~]# yum install compat-libstdc++-33.x86_64 
-와 같은 방식으로 나머지 패키지를 모두 설치한다.
 
 
 
