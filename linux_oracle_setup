@@ -211,7 +211,7 @@ net.core.wmem_max = 1048576
 #cat /proc/sys/kernel/sem 
 
 
-[root@localhost ~]# vim /etc/sysctl.conf
+[root@localhost ~]# vim /etc/sysctl.conf 제일끝에 아래 내용을 추가한다
 
 kernel.sem = 250 32000 100 128
 fs.file-max = 6815744
@@ -222,16 +222,32 @@ net.core.wmem_default = 262144
 net.core.wmem_max = 1048576
 
 
-수정 완료 후 아래 명령 수행
+수정 완료 후 아래 명령 수행, 명령어를치면 변경된 내용이 출력된다
 [root@localhost ~]# /sbin/sysctl -p
 
-kernel.sem = 250 32000 100 128
-fs.file-max = 6815744
+sudo vi /usr/lib/sysctl.d/00-system.conf
+아래의 줄들을 주석 처리한다.
+
+# Disable netfilter on bridges.
+#net.bridge.bridge-nf-call-ip6tables = 0
+#net.bridge.bridge-nf-call-iptables = 0
+#net.bridge.bridge-nf-call-arptables = 0
+
+sudo vi /etc/sysctl.conf
+다음 내용을 끝에 추가한다.
+
+
 net.ipv4.ip_local_port_range = 9000 65500
-net.core.rmem_default = 262144
-net.core.rmem_max = 4194304
-net.core.wmem_default = 262144
-net.core.wmem_max = 1048576
+fs.file-max = 6815744
+kernel.shmall = 10523004
+kernel.shmmax = 6465333657
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+net.core.rmem_default=262144
+net.core.wmem_default=262144
+net.core.rmem_max=4194304
+net.core.wmem_max=1048576
+fs.aio-max-nr = 1048576
 
 ## 오라클 설치시 필요한 패키지 설치
 
