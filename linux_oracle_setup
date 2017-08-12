@@ -6,6 +6,15 @@
 
 # yum -y groups install "GNOME Desktop" 
 
+# reboot 
+
+ 재시작을하면 됩니다그러나...
+ 오류가뜹니다
+
+license not accepted 라고뜨는데이때 잘보면항목중
+1번항목만보입니다
+1번을누르면다시 1,2번 항목이보이는데 2번을눌러 라이센스승낙을 누릅시다
+
 # startx 
 
 
