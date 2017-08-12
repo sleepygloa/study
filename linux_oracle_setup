@@ -1,6 +1,19 @@
 ## centos7 + oracle 11g r2 setup 
 
 
+*** 시작하기전에
+설치를 TUI, CUI 등등으로 설치 하였다면 그래픽 환경으로 실행 할 수 있도록도 해보자
+su -root
+yum -y groupinstall "Server with GUI"
+startx
+
+부팅시GUI 실행가능하게하려면
+sudo ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
+런레벨별로 실행환경이달라진다
+이정도는 알고있어야쥬
+
+
+
 ***
 참고 자료로 명시해 놓은 오라클 공식 가이드라인에 다르면 오라클 설치를 위한 Oracle Base 디렉터리는 top-level directory 라고 한다. Optimal Flexible Architecture 가이드라인은 아래와 같이 Oracle base directory를 설정하기를 추천한다고 명시되어 있다. (e47689.pdf - 87page)
  /mount_point/app/software_owner
