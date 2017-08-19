@@ -3,4 +3,7 @@
 
 
 
-3. cmd > sqlplus / as sysdba
+3. cmd > sqlplus sys/"password" as sysdba
+
+alter user scott identified tiger
+
