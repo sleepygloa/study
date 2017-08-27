@@ -2,29 +2,29 @@
 
 
 *** 시작하기전에
-설치를 TUI, CUI 등등으로 설치 하였다면 그래픽 환경으로 실행 할 수 있도록도 해보자
+1. TUI환경에서 설치를 한다면 어려움을 겪을 수있으니 GUI환경을 설치하면서 진행해보자
 
-# yum -y groups install "GNOME Desktop" 
-# reboot 
+  # yum -y groups install "GNOME Desktop" 
+  # reboot 
 
-재시작을하면 됩니다그러나...오류가뜹니다
+  재시작을하면 됩니다그러나...오류가뜹니다
 
-license not accepted 라고뜨는데이때 잘보면항목중
-1번항목만보입니다. 1번을누르면다시 1,2번 항목이보이는데 2번을눌러 라이센스승낙을 누릅시다
+  license not accepted 라고뜨는데이때 잘보면항목중
+  1번항목만보입니다. 1번을누르면다시 1,2번 항목이보이는데 2번을눌러 라이센스승낙을 누릅시다
 
-# startx 
+  # startx 
 
+  ***
+  11g 설치에서는 /u01 디렉터리를 만들어서 사용하는 것으로 하고
+  10g 설치에서는 설치 전에 미리 파티션으로 잡아놓은 /Database 디렉터리를 사용하도록 한다.
+  (*10g 설치는 OCP시험이 합격하고나면 정리해봐야 할 듯하다. 지금 다니는 회사에서 사용하는 방식은
+  미리 마운트해놓은 /Database를 사용하는 방식이다. 시험공부를 하고 있는 중이라... 혹시라도 모를 오답을 찍을 수도 있는
+  사태를 미연에 방지하기 위해서..)
+
+  # reboot
 ***
-11g 설치에서는 /u01 디렉터리를 만들어서 사용하는 것으로 하고
-10g 설치에서는 설치 전에 미리 파티션으로 잡아놓은 /Database 디렉터리를 사용하도록 한다.
-(*10g 설치는 OCP시험이 합격하고나면 정리해봐야 할 듯하다. 지금 다니는 회사에서 사용하는 방식은
-미리 마운트해놓은 /Database를 사용하는 방식이다. 시험공부를 하고 있는 중이라... 혹시라도 모를 오답을 찍을 수도 있는
-사태를 미연에 방지하기 위해서..)
-
-# reboot
-
-***
-
+2. GUI환경을 설치하고나니 용량이 부족해집니다. 30 GB 로 설정한다음 설치를 진행합시다.
+20GB 중 실제 용량은 18GB 정도되는데 설치하려고하면 이미 17GB 를 사용하고 있어서 할 수가 없어요 
 
 ---------------------------------------------------------------------------------
 ## 오라클 설치시 필요한 패키지 설치
@@ -144,21 +144,12 @@ seonho:x:3939:3939:soongu:/home/seonho:/bin/bash
 9. [root@localhost ~]# groupadd -g 910 oper
 10. [root@localhost ~]# groupadd -g 920 asmadmin
 11. [root@localhost ~]# groupadd -g 1005 oinstall
-12. [root@localhost ~]# useradd -g dba -G oinstall, asmadmin, oper -u 1100 -d /u01/oracle oracle
+12. [root@localhost ~]# useradd -g oinstall -G dba oracle
 13. [root@localhost ~]# passwd oracle
-비밀번호입력
-
-
-******
-또하나의 groupadd oinstall
-groupadd dba
-useradd -g oinstall -G dba oracle
-passwd oracle
 
 ******
 
-
-yum install oracle-rdbms-server-11gR2-preinstall
+yum install oracle-rdbms-server-11gR2-preinstall (이거안됨) 
 
 yum update
 
@@ -174,7 +165,7 @@ oracle              soft    stack   10240
 
 
 15. mkdir -p /u01/app/oracle/product/11.2.0/db_1
-16. chown -R oracle11:oinstall /u01
+16. chown -R oracle:oinstall /u01
 17. chmod -R 775 /u01
 
 ## wget 설치
@@ -329,3 +320,36 @@ fs.aio-max-nr = 1048576
 
 wget --no-check-certificate -v -c --tries=2 -O linux.x64_11gR2_database_1of2.zip --user=oracle_login_email@whatever.com --password=oracle_password http://download.oracle.com/otn/linux/oracle11g/R2/linux.x64_11gR2_database_1of2.zip
 wget --no-check-certificate -v -c --tries=2 -O linux.x64_11gR2_database_2of2.zip --user=oracle_login_email@whatever.com --password=oracle_password http://download.oracle.com/otn/linux/oracle11g/R2/linux.x64_11gR2_database_2of2.zip
+
+
+111. 다운로드한 오라클 DB파일을 oracle계정으로 옮긴다
+scp ./linux.x64_11gR2_database_*.zip oracle@domain:/home/oracle
+(domain에는 해당 주소를 입력 예를 들면 localhost)
+
+112. 오라클계정으로 접속한다.
+ssh oracle@localhost (enter)
+passwd (enter)
+
+113. 홈 디렉토리로 복사한 집파일 2개를 압축을 푼다.
+unzip linux ~~~~ 1of2
+unzip linux ~~~~ 2of2
+
+114. 설치파일실행하기 (압축해제는 홈디렉토리의 /database 폴더 안에 되었을 것이다
+./database/runInstaller (enter)
+
+(한글이 깨져서 나온다면, centos 설치시 한글을 지정해서 그렇다 그러니 이렇게 설정해주자)
+vim ~/.bash_profile (의 제일 아래줄에)
+export LANG=C (:wq)
+
+./database/runInstaller -jreLoc /usr/lib/jvm/jre
+
+115. 설치중
+1) 이메일 입력하지 않고 체크해제 (다음)
+2) install database software only (체크)(다음)
+3) single instance database install (선택)(다음)
+4) 필요한 언어 추가 (다음)
+5) enterprise edition (선택) (다음)
+6) 설치경로확인
+/u01/app/oracle
+/u01/app/oracle/11.2.0/dbhome_1
+7) 
