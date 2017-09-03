@@ -352,8 +352,95 @@ export LANG=C (:wq)
 6) 설치경로확인
 /u01/app/oracle
 /u01/app/oracle/11.2.0/dbhome_1
-7) 
+7) 설치중 발생하는 오류 2개 해결법
+ 7-1) 이때부터는 터미널을 2개 열고 진행하는 것이 편하다
 
+진행에 필요한 패키지 설치: 관리자 계정으로진행
+sudo yum install glibc-static.x86_64 glibc-static.i686
+
+파일수정:오라클 계정으로 진행
+cd /u01/app/oracle/product/11.2.0/dbhome_1/ctx/lib
+vim ins_ctx.mk
+
+아래문구를 그아래문구로 바꾸자
+ctxhx: $(CTXHXOBJ)
+    $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK)
+-----------------------
+ctxhx: $(CTXHXOBJ)
+    -static $(LINK_CTXHX) $(CTXHXOBJ) $(INSO_LINK) /usr/lib64/stdc.a
+
+재시도
+
+7-2) 두번째 오류
+cd /u01/app/oracle/product/11.2.0/dbhome_1/sysman/lib
+vi ins_emagent.mk
+
+아래문구를 그아래문구로 바꾸자
+$(SYSMANBIN) emdctl:
+    $(MK_EMAGENT_NMECTL)
+------------------------
+$(SYSMANBIN) emdctl:
+    $(MK_EMAGENT_NMECTL) -lnnz11
+    
+재시도
+excute configuration scripts 창이 뜬다면 ok로 빠져나가자 (표시되는 리스트 파일을 루트 권한으로 실행해야한다는 메세지이다)
+
+설치완료(종료)를 누르지는 않고 120번을 진행하자
+
+120. 루트로 접속한 터미널로 위에 발생한 메세지창의 리스트를 실행시켜주자
+
+root
+
+/u01/app/oraInventory/orainstRoot.sh --> 엔터 
+/u01/app/oracle/product/11.2.0/dbhome_1/root/sh  --> 엔터
+
+설치 종료(아까 완료누르지않았던 완료를 누르자)
+
+121. 환경변수 추가
+vim ~/.bash_profile
+
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/dbhome_1
+export PATH=$PATH:$ORACLE_HOME/bin
+
+source ~/.bash_profile
+-----파일내용------
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+export JAVA_HOME=/opt/jdk1.8.0.144
+export JRE_HOME=/opt/jdk1.8.0.144/jre
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+##export PATH=$PATH:/opt/jdk1.8.0.144/bin:/opt/jdk1.8.0.144/jre/bin
+
+#ORACLE Setup
+export TMP=/tmp
+export TMPDIR=/$TMP
+
+###ORACLE 11g home directory
+export ORACLE_BASE=/u01/app
+export ORACLE_HOME=$ORACLE_BASE/oracle/product/11.2.0/dbhome_1
+export ORACLE_OWNER=oracle
+export ORACLE_SID=orcl
+export ORACLE_TERM=xterm
+export NLS_LANG=AMERICAN_AMERICA.KO16KSC5601;
+export THREADS_FLAG=native
+export TEMPDIR=/tmp
+export EDITOR=vim
+export PATH=$PATH:$ORACLE_HOME/bin
+------------------
+이런식으로 정리될거이다
+
+
+121. 리스너 
+
+
+
+
+
+완료
 
 
 
