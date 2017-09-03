@@ -353,3 +353,12 @@ export LANG=C (:wq)
 /u01/app/oracle
 /u01/app/oracle/11.2.0/dbhome_1
 7) 
+
+
+
+
+
+
+
+# 리스너설치경로 
+http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
