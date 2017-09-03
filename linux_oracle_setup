@@ -423,7 +423,6 @@ export TMPDIR=/$TMP
 export ORACLE_BASE=/u01/app
 export ORACLE_HOME=$ORACLE_BASE/oracle/product/11.2.0/dbhome_1
 export ORACLE_OWNER=oracle
-export ORACLE_SID=orcl
 export ORACLE_TERM=xterm
 export NLS_LANG=AMERICAN_AMERICA.KO16KSC5601;
 export THREADS_FLAG=native
@@ -434,7 +433,277 @@ export PATH=$PATH:$ORACLE_HOME/bin
 이런식으로 정리될거이다
 
 
-121. 리스너 
+121. 리스너 설치
+터미널을 오라클계정으로 접속한다음 프로그램을 실행시키자
+netca 엔터
+
+listener configuration -> add -> listener name : LISTENER --> protocol setting 다음 --> 포트기본값 사용 : 1521 
+--> 리스너를 추가로 설치 ? no -->  다음다음 종료
+
+122. DB 설정
+리스너와 똑같이 터미널을 오라클계정으로 접속한다음 프로그램을 실행시킨다
+dbca 엔터
+(next = 다음) (편의상이렇게하겠다)
+
+next -> create database -> general purpose or transaction processing 
+--> global database name : orcl (<- *.ora file 에서 service name 으로 사용한다)
+    SID : orcl
+여기 두개는 접속시 사용할 방법과 이름?을 정하는 것이다
+--> enterprise manager , next --> use the same administrative passwd for All accounts
+passwd : 설정
+--> next next
+--> memory, size, charset 설정하는부분에서 다음을 누르던 원하는 방향으로 세팅하자  (charset)
+use unicode click
+national character set : UTF8
+Default Language : Korean
+Default : Korea
+--> nextnextnextnext --> 설치완료
+
+123. 환경변수 추가
+vim ~/.bash_profile
+export ORACLE_SID=orcl
+
+source ~/.bash_profile
+-----파일내용------
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+export PATH
+
+export JAVA_HOME=/opt/jdk1.8.0.144
+export JRE_HOME=/opt/jdk1.8.0.144/jre
+export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+##export PATH=$PATH:/opt/jdk1.8.0.144/bin:/opt/jdk1.8.0.144/jre/bin
+
+#ORACLE Setup
+export TMP=/tmp
+export TMPDIR=/$TMP
+
+###ORACLE 11g home directory
+export ORACLE_BASE=/u01/app
+export ORACLE_HOME=$ORACLE_BASE/oracle/product/11.2.0/dbhome_1
+export ORACLE_OWNER=oracle
+export ORACLE_TERM=xterm
+export NLS_LANG=AMERICAN_AMERICA.KO16KSC5601;
+export THREADS_FLAG=native
+export TEMPDIR=/tmp
+export EDITOR=vim
+export PATH=$PATH:$ORACLE_HOME/bin
+------------------
+
+## 오라클 자동실행 설정하기
+
+오라클 계정으로
+vim /etc/oratab
+
+아래의 파일을 그아래처럼 바꾸자
+orcl:/usr/oracle/app/product/11.2.0/dbhome_1:N
+----
+orcl:/usr/oracle/app/product/11.2.0/dbhome_1:Y
+
+관리자 계정으로
+아래파일에 내용을 추가핮 (파일이없을 수도 있으니 만들어서 추가해주자)
+-----
+#!/bin/bash
+# oracle: Start/Stop Oracle Database 11g R2
+#
+# chkconfig: 345 90 10
+# description: The Oracle Database is an Object-Relational Database Management System.
+#
+# processname: oracle
+ 
+. /etc/rc.d/init.d/functions
+ 
+LOCKFILE=/var/lock/subsys/oracle
+ORACLE_HOME=/usr/oracle/app/product/11.2.0/dbhome_1
+ORACLE_USER=oracle
+ 
+case "$1" in
+'start')
+    if [ -f $LOCKFILE ]; then
+        echo $0 already running.
+        exit 1
+    fi
+    echo -n $"Starting Oracle Database:"
+    su - $ORACLE_USER -c "$ORACLE_HOME/bin/lsnrctl start"
+    su - $ORACLE_USER -c "$ORACLE_HOME/bin/dbstart $ORACLE_HOME"
+    su - $ORACLE_USER -c "$ORACLE_HOME/bin/emctl start dbconsole"
+    touch $LOCKFILE
+    ;;
+'stop')
+    if [ ! -f $LOCKFILE ]; then
+        echo $0 already stopping.
+        exit 1
+    fi
+    echo -n $"Stopping Oracle Database:"
+    su - $ORACLE_USER -c "$ORACLE_HOME/bin/lsnrctl stop"
+    su - $ORACLE_USER -c "$ORACLE_HOME/bin/dbshut"
+    su - $ORACLE_USER -c "$ORACLE_HOME/bin/emctl stop dbconsole"
+    rm -f $LOCKFILE
+    ;;
+'restart')
+    $0 stop
+    $0 start
+    ;;
+'status')
+    if [ -f $LOCKFILE ]; then
+        echo $0 started.
+    else
+        echo $0 stopped.
+    fi
+    ;;
+*)
+    echo "Usage: $0 [start|stop|status]"
+    exit 1
+esac
+ 
+exit 0
+# End of file
+-----
+
+다음을 실행시키자
+sudo chmod 755 /etc/rc.d/init.d/oracle
+sudo chkconfig --add oracle
+sudo chkconfig oracle on
+
+### 방화벽 끄기
+systemctl status firewalld
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
+
+### 리스너 포트 열기
+systemctl status firewalld
+netstat -tulpn | grep LISTEN
+sudo firewall-cmd --zone=public --add-port=1521/tcp --permanent
+sudo firewall-cmd --reload
+
+reboot
+
+# 테이블 스페이스 설정하기, tablespace setting
+테이블스페이스는 오라클 아이디생성을 하고 연결을 할때 사용한다.
+
+테이블스페이스 목록보기 (tablespace)
+SELECT TABLESPACE_NAME, STATUS, CONTENTS FROM DBA_TABLESPACES;
+
+테이블스페이스 파일목록보기
+SELECT FILE_NAME, TABLESPACE_NAME, BYTES, STATUS FROM DBA_DATA_FILES;
+
+테이블스페이스 용량보기
+SELECT TABLESPACE_NAME, BYTES, BLOCKS FROM DBA_FREE_SPACE;
+
+테이블스페이스 삭제
+DROP TABLESPACE tablespace-name
+INCLUDING CONTENTS AND DATAFILES
+CASCADE CONSTRAINTS;
+
+테이블스페이스생성 : 여기에 보이는 파일경로는 각기 설치한 경로마다 다르다. 
+경로에보이는 data, temp폴더는 만들어주지않으니 생성한다음 진행하자
+CREATE TABLESPACE tablespace-name_data
+DATAFILE '/u01/app/oracle/oradata/orcl/data/file_name.dbf'
+SIZE 100M
+AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+
+CREATE TEMPORARY TABLESPACE tablespace-name_temp
+TEMPFILE '/u01/app/oracle/oradata/orcl/temp/file_name.dbf'
+SIZE 50M
+AUTOEXTEND ON NEXT 5M MAXSIZE UNLIMITED;
+
+# 오라클 유저 관리 (oracle user manage)
+위에서 만든 테이블 스페이스정보를 입력하면서 아이디를 만든다.
+
+CREATE USER account-id IDENTIFIED BY account-password
+DEFAULT TABLESPACE tablespace-name_data
+TEMPORARY TABLESPACE tablespace-name_temp
+PROFILE DEFAULT
+QUOTA UNLIMITED ON tablespace-name_data
+ACCOUNT UNLOCK;
+
+흔히 알고있는 간단히 아이디 만들기
+CREATE USER account-id IDENTIFIED BY account-password;
+
+권한부여
+GRANT RESOURCE, CONNECT TO account-id;
+GRANT CREATE VIEW, CREATE SYNONYM TO account-id;
+
+권한 제거
+REVOKE RESOURCE, CONNECT FROM account-id;
+
+
+# TNS 접속 설정하기, 원격으로 오라클 접속, 외부에서 VMware DB 접속하기, SQLDeveloper 에서 접속하기
+윈도우 버전 오라클은 오라클 클라이언트 를 설치해주고 설정해주어 쉽게 진행할 수 있는데,
+Mac 버전은 일일이 다운받고 설정해주어야한다.
+
+### 리스너설치경로 
+http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+다운받아서 압축 해제한다음 아래 경로로 이동시켜 붙여넣어준다.
+/u01/app/oracle/product/11.2.0/dbhome_1/instantclient/
+
+### 환경변수 추가하기
+vim ~/.bash_profile
+
+export TNS_ADMIN=$ORACLE_HOME/network/admin
+export ORA_NLS33=$ORACLE_HOME/ocommon/nls/admin/data
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib:/usr/local/lib
+
+source ~/.bash_profile
+
+reboot
+
+### ./sqlplus / as sysdba  접속 오류
+
+
+### TNS 접속시 발생하는 오류
+ORA-28001: the password has expired
+-> alter user 유저명 identified by 패스워드;
+
+ora 17176 locale not recognized
+-> 
+1. sqldeveolper 오른쪽 클릭
+2. 패키지 보기
+3. Contents/Resources/sqldeveloper/sqldeveloper/bin/sqldeveloper.conf
+4. 옵션 추가
+AddVMOption -Duser.language=ko
+AddVMOption -Duser.country=KR 
+
+oracle, listener 활성화 오류
+./sqlplus / as sysdba 엔터 
+startup
+show sga (로 실행되고있는지 확인)
+exit
+lnsrctl status
+lnsrctl start 리스너 가동
+
+The network adaptor could not establish the connection
+1. 로그인 설정 정보가 잘못 됬을때, 리스터의 tnsname.ora파일의 정보와 같아야한다.
+2. 방화벽문제
+3. 리스너가 가동중이지 않을때 
+
+sqlplus접속하여 db 가동이 되지 않을때 
+ORA-01078: failure in processing system parameters
+LRM-00109: could not open parameter file '/home/oracle/product/10.1.0/db_1/dbs/initORCL.ora'
+오류가 보인다면
+vim ~/.bash_profile에서
+ORACLE_SID=ORCL --> orcl 
+
+could not open parameter file "C:\Program\11.2.0\DBhome_1\Database\initorcl.ora"
+startup pfile='c:\\u01\\app\oracle\\product\\11.2.0\\dbhome_1\\dbs\\init.ora' (enter)
+
+
+
+
+
+
+
+
+
+
+출처: http://ending1.tistory.com/49 [내 맘대로]
+
+
+
+
+
 
 
 
@@ -447,5 +716,3 @@ export PATH=$PATH:$ORACLE_HOME/bin
 
 
 
-# 리스너설치경로 
-http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
