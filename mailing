@@ -52,20 +52,6 @@
 
 
 2.js
-/**
- * systemProInfoGrid
- * systemProInfoGridNavi
- */
-/** Copyright (c) 2016 VertexID RND, Inc.
- * 
- * Application Name : 메뉴내역관리[LogProApp]
- * Program Code     : PC0016
- * Description      :
- * Revision History
- * Author          	Date           		Description
- * ------------		-------------		------------------
- * Shin Dong Cheol  2017. 11. 13.  		First Draft.
- */
 
 var LogProApp = function (){
 	"use strict";
@@ -170,19 +156,7 @@ public class SendMailUtils {
 	private static final Log LOG = LogFactory.getLog(SendMailUtils.class);
 	
 	
-	/**
-	 * 
-	 * [설명] 
-	 * SMPT 메일 전송 API(1건)
-	 * @Author "Shin Dong Cheol"
-	 * @Date 2017. 11. 24.
-	 * 
-	 * @param session : javax.mail.Session
-	 * @param toEmail : 받는 사람
-	 * @param fromEmail : 보내는 사람
-	 * @param subject : 제목
-	 * @param body : 메일 내용
-	 */
+
 	public static void sendEmail(Session session, String toEmail, String fromEmail, String subject, String body) {
 		
 		try {
