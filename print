@@ -1,0 +1,58 @@
+      1. find print device
+      2. find printing file
+      3. set print setting (print, tray ... etc)
+      4. run print
+      
+      
+      
+      
+      PrintService[] pservices = PrintServiceLookup.lookupPrintServices(null, null);
+
+        //Acquire Printer
+        PrintService printer = null;
+        for (PrintService serv: pservices) {
+            System.out.println(serv.toString()); //PRINTING YOUR PRINTER NAME
+            if (serv.getName().equals("PRINTER NAME")) {
+                printer = serv;
+            }
+        }
+
+        if (printer != null) {
+            System.out.println("Found!");
+
+            try{
+                File file = new File("경로");
+
+                //Open File
+                FileInputStream fis = new FileInputStream(file);
+
+                //Create Doc out of file, autosense filetype
+                Doc pdfDoc = new SimpleDoc(fis, DocFlavor.INPUT_STREAM.AUTOSENSE, null);
+
+                //Create job for printer
+                DocPrintJob printJob = printer.createPrintJob();
+
+                //Create AttributeSet
+                PrintRequestAttributeSet pset = new HashPrintRequestAttributeSet();
+
+                //Add MediaTray to AttributeSet
+                pset.add(MediaTray.TOP);
+
+                //Add Duplex Option to AttributeSet
+                pset.add(Sides.DUPLEX);
+
+                //Print using Doc and Attributes
+                printJob.print(pdfDoc, pset);
+
+                //Close File
+                fis.close();
+            }catch(FileNotFoundException e){
+                System.out.println("FileNotFoundException");
+            }catch(PrintException p){
+                System.out.println("PrintException");
+            }catch(IOException io){
+                System.out.println("IOException");
+            }
+
+
+        }
