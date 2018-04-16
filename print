@@ -56,3 +56,48 @@
 
 
         }
+
+
+
+
+--------------------------------
+//            File file = new File("C:\\Users\\seonho-gritis\\Downloads\\ibExItemLabelA4Report.pdf");
+//
+//            //Open File
+//            FileInputStream fis = new FileInputStream(file);
+//
+//            //Create Doc out of file, autosense filetype
+//            Doc pdfDoc = new SimpleDoc(fis, DocFlavor.INPUT_STREAM.AUTOSENSE, null);
+//
+//            //Create job for printer
+//            DocPrintJob printJob = printer.createPrintJob();
+//
+//            //Create AttributeSet
+//            PrintRequestAttributeSet pset = new HashPrintRequestAttributeSet();
+//
+//            //Add MediaTray to AttributeSet
+//            pset.add(MediaTray.TOP);
+//
+//            if (printer.isAttributeValueSupported(MediaSizeName.ISO_A4, null, null)){
+//                pset.add(MediaSizeName.ISO_A4);
+//            }
+//
+//            //Add Duplex Option to AttributeSet
+//            pset.add(Sides.DUPLEX);
+//
+//            //Print using Doc and Attributes
+//            printJob.print(pdfDoc, pset);
+//
+//            //Close File
+//            fis.close();
+//        }catch(PrintException p){
+//            Log.debug("PrintException");
+//            p.printStackTrace();
+//        }catch(ClassCastException cce){
+//            Log.debug("ClassCastException");
+//            cce.printStackTrace();
+//        }catch(IOException io){
+//            Log.debug("IOException");
+//            io.printStackTrace();
+//        }
+-------------------------
