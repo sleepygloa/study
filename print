@@ -352,3 +352,50 @@
             Log.info(("dataMap.get(1) = " + dataMap.get(1)));
             return isOnCheck;
         }
+
+
+-----------------------------------
+
+
+   @RequestMapping("/createIbExItemLabelReportDownload")
+   public void createIbExItemLabelReportDownload(HttpServletRequest resq, HttpSession session,  HttpServletResponse resp) throws Exception{
+     ApplicationContext appContext = new FileSystemXmlApplicationContext();
+     String fileName = "ibExItemLabelA4Report.pdf";
+     String filePath = session.getServletContext().getRealPath("//resources//report//ibExItemLabelA4Report.pdf");
+     File file = new File(filePath);
+
+     Log.debug(fileName);Log.debug(filePath);
+     String userAgent = resq.getHeader("User-Agent");
+     boolean ie = userAgent.indexOf("MSIE") > -1 || userAgent.indexOf("rv:11") > -1;
+
+     if (ie) {
+      fileName = URLEncoder.encode(file.getName(), "utf-8");
+     } else {
+      fileName = new String(file.getName().getBytes("utf-8"),"iso-8859-1");
+     }
+
+     resp.setContentType("application/octet-stream");
+     resp.setHeader("Content-Disposition","attachment;filename=\"" +fileName+"\";");
+
+     FileInputStream fis=new FileInputStream(file);
+     BufferedInputStream bis=new BufferedInputStream(fis);
+     ServletOutputStream so=resp.getOutputStream();
+     BufferedOutputStream bos=new BufferedOutputStream(so);
+
+     try{
+         byte[] data=new byte[2048];
+         int input=0;
+         while((input=bis.read(data))!=-1){
+              bos.write(data,0,input);
+              bos.flush();
+         }
+
+     }catch(Exception e){
+
+     }finally{
+         if(bos!=null) bos.close();
+         if(bis!=null) bis.close();
+         if(so!=null) so.close();
+         if(fis!=null) fis.close();
+     }
+   }
