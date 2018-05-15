@@ -1,3 +1,3 @@
-## LAYOUT4E ·¹ÀÌ¾Æ¿ô ÀÌ¿ëÇÏ¿© ÀÎ½ºÅ¸ ¸¸µé±â
+## LAYOUT4E ë ˆì´ì•„ì›ƒ ì´ìš©í•˜ì—¬ ì¸ìŠ¤íƒ€ ë§Œë“¤ê¸°
 
-![study(/layout4e_readme_img.png)
+![study](/layout4e_readme_img.png)
