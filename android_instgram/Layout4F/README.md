@@ -1,3 +1,3 @@
-## LAYOUT4E 레이아웃 이용하여 인스타 만들기
+## LAYOUT4F 인스타 화면 클릭, 터치 이벤트 만들기
 
-![study](./layout4e_readme_img.png)
+![study](./layout4f_readme_img.png)
