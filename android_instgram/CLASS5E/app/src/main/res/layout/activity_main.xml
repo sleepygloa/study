@@ -3,17 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="horizontal"
+    tools:context="com.seonhoblog.class5e.MainActivity">
 
-    <FrameLayout
+    <fragment
         android:id="@+id/fragment_left"
+        android:name="com.seonhoblog.class5e.LeftFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#ffe073" />
+        android:layout_weight="1" />
 
-    <FrameLayout
+    <fragment
         android:id="@+id/fl_right"
+        android:name="com.seonhoblog.class5e.RedFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"/>
