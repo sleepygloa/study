@@ -7,6 +7,7 @@
     tools:context="com.seonhoblog.class5e.LeftFragment">
 
     <View
+        android:id="@+id/v_red"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -14,6 +15,7 @@
         />
 
     <View
+        android:id="@+id/v_green"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -21,6 +23,7 @@
         />
 
     <View
+        android:id="@+id/v_blue"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
