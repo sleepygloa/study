@@ -1,3 +1,3 @@
 ## CLASS5D ViewPager 해보기
 
-![study](./viewPager.png)
+![study](./viewPager.mov)
