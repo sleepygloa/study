@@ -3,3 +3,8 @@
 ![study](./asyncCalculatorPercent.png)
 
 ![study](./asyncCalculatorComplete.png)
+
+
+## ASYNCCALCULATOR Log 추가
+
+![study](./log.png)

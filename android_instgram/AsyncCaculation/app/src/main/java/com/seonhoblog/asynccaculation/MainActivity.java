@@ -3,6 +3,7 @@ package com.seonhoblog.asynccaculation;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values){
             super.onProgressUpdate(values);
-            tvDisplay.setText(values[0]+ "Percent");
+//            tvDisplay.setText(values[0]+ "Percent");
+            Log.d("AsyncCalculatorTask ", values[0] + " percent");
         }
 
         /** UI Thread */
