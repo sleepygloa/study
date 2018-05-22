@@ -44,7 +44,7 @@ public class TimelineFragment extends Fragment{
         RecyclerView recyclerView = (RecyclerView) baseView.findViewById(R.id.rv_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         postViewAdapter = new PostViewAdapter();
-        recyclerView.setAdapter(new PostViewAdapter());
+        recyclerView.setAdapter(postViewAdapter);
 
         return baseView;
     }
@@ -55,7 +55,7 @@ public class TimelineFragment extends Fragment{
         fetchPostsTask.execute(Api.GET_POST);
 
     }
-    class FetchPostsTask extends AsyncTask<String, Void, Post[]>{
+    class FetchPostsTask extends AsyncTask<String, Void, Api.Post[]>{
         @Override
         protected Api.Post[] doInBackground(String... strings){
 
@@ -105,15 +105,14 @@ public class TimelineFragment extends Fragment{
 
             Post item = arrayList.get(position);
 
-            String url = item.getImage().getUrl();
-
+            String url = item.getIMG();
             Glide.with(TimelineFragment.this)
                     .load(Api.BASE_URL+url)
                     .into(holder.iv_post);
 
-            holder.tv_username.setText(item.getUploader());
-            holder.tv_posttext.setText(item.getText());
-            holder.tv_postlikecount.setText( String.valueOf( item.getLikes() ) );
+            holder.tv_username.setText(item.getIN_USER_ID());
+            holder.tv_posttext.setText(item.getTEXT());
+            holder.tv_postlikecount.setText( String.valueOf( item.getLIKES() ) );
         }
 
         @Override

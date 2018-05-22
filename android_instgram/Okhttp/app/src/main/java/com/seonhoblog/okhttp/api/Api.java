@@ -2,8 +2,9 @@ package com.seonhoblog.okhttp.api;
 
 public class Api {
 
-    public static final String BASE_URL = "http://52.79.195.156:3000";
-    public static final String GET_POST = BASE_URL + "/api/post";
+    public static final String BASE_URL = "http://61.252.235.153:18082";
+//    public static final String BASE_URL = "http://localhost:8080";
+    public static final String GET_POST = BASE_URL + "/instar/getInstarContent";
 
     /**
      {
@@ -21,44 +22,49 @@ public class Api {
       */
 
     public static class Post {
-        int id;
-        String uploader;
-        String text;
-        int likes;
-        String created_at;
-        String updated_at;
-        Image image;
+        int IDX;
+        String IN_USER_ID;
+        String TEXT;
+        int LIKES = 0;
+        String IN_DT;
+        String UP_DT;
+        Img IMAGE;
+        String IMG;
 
-
-        public int getId() {
-            return id;
+        public int getIDX() {
+            return IDX;
         }
 
-        public String getUploader() {
-            return uploader;
+        public String getIN_USER_ID() {
+            return IN_USER_ID;
         }
 
-        public String getText() {
-            return text;
+        public String getTEXT() {
+            return TEXT;
         }
 
-        public int getLikes() {
-            return likes;
+        public int getLIKES() {
+            return LIKES;
         }
 
-        public String getCreated_at() {
-            return created_at;
+        public String getIN_DT() {
+            return IN_DT;
         }
 
-        public String getUpdated_at() {
-            return updated_at;
+        public String getUP_DT() {
+            return UP_DT;
         }
 
-        public Image getImage() {
-            return image;
+        public Img getIMAGE() {
+            return IMAGE;
         }
 
-        public static class Image{
+        public String getIMG() {
+            return IMG;
+        }
+
+
+        public static class Img{
             String url;
 
             public String getUrl() {
