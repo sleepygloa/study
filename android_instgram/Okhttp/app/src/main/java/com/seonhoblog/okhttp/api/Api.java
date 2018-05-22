@@ -2,9 +2,12 @@ package com.seonhoblog.okhttp.api;
 
 public class Api {
 
-    public static final String BASE_URL = "http://61.252.235.153:18082";
-//    public static final String BASE_URL = "http://localhost:8080";
+//    public static final String BASE_URL = "http://61.252.235.153:18082";
+    public static final String BASE_URL = "http://localhost:8080";
     public static final String GET_POST = BASE_URL + "/instar/getInstarContent";
+    public static final String UP_POST = BASE_URL + "/instar/setInstarContent";
+
+
 
     /**
      {
