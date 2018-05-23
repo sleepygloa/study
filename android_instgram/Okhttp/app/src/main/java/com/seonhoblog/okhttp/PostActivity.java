@@ -55,20 +55,12 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-
-//        ivPost.setImageURI(photoUri);
-
-//        Bundle extras = getIntent().getExtras();
-//        Bitmap imageBitmap = (Bitmap) extras.get("data");
-//        ivPost.setImageBitmap(imageBitmap);
-
         Glide.with(this)
                 .load(photoUri)
                 .into(ivPost);
 
-        /** Uri  */
-        Log.d("Uri", photoUri.toString());
-        //uri -> bitmap -> file
+        /** Uri content://media/external/images/media/255 */
+        // Uri -> Bitmap -> File
     }
 
     private void post(String uriString, String textString){
@@ -76,8 +68,8 @@ public class PostActivity extends AppCompatActivity {
         postTask.execute(uriString, textString);
     }
 
-    class PostTask extends AsyncTask<String, Void, Boolean>{
 
+    class PostTask extends AsyncTask<String, Void, Boolean>{
 
         private ProgressDialog progressDialog;
 
@@ -120,11 +112,7 @@ public class PostActivity extends AppCompatActivity {
 
                 Response response = okHttpClient.newCall(request).execute();
 
-                if(response.code() == 200) {
-                    return true;
-                }else{
-                    return false;
-                }
+                return response.code() == 200;
 
             }catch(IOException e){
                 Log.d("PostTask", "post failed", e);
@@ -175,6 +163,7 @@ public class PostActivity extends AppCompatActivity {
         return resizedBitmap;
     }
 
+    /** 크기 비율로 압축 */
     private float getSampleRatio(int width, int height) {
         final int targetWidth = 1280;
         final int targetHeight = 1280;
@@ -199,9 +188,10 @@ public class PostActivity extends AppCompatActivity {
         return Math.round(ratio);
     }
 
+    /** 파일 복사하기 */
     public File createFileFromBitmap(Bitmap bitmap) throws IOException {
 
-        File newFile = new File(getFilesDir(), "");
+        File newFile = new File(getFilesDir(), makeImageFileName());
         FileOutputStream fileOutputStream = new FileOutputStream(newFile);
 
         /** JPG  손실압축이라 1~100 수준이있지만, PNG  무손실압축이라 1과 100은 무의미  */
@@ -212,6 +202,7 @@ public class PostActivity extends AppCompatActivity {
         return newFile;
     }
 
+    /** 파일이름 만들기 */
     private String makeImageFileName(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
         Date date = new Date();

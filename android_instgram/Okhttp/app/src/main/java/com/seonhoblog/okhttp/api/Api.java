@@ -2,12 +2,12 @@ package com.seonhoblog.okhttp.api;
 
 public class Api {
 
-//    public static final String BASE_URL = "http://61.252.235.153:18082";
-    public static final String BASE_URL = "http://localhost:8080";
+    public static final String BASE_URL = "http://61.252.235.153:18082";
+//    public static final String BASE_URL = "http://localhost:8080";
     public static final String GET_POST = BASE_URL + "/instar/getInstarContent";
     public static final String UP_POST = BASE_URL + "/instar/setInstarContent";
-
-
+    public static final String POST_LIKE = BASE_URL + "/instar/addLike";
+    public static final String DEL_LIKE = BASE_URL + "/instar/delLike";
 
     /**
      {
@@ -33,6 +33,8 @@ public class Api {
         String UP_DT;
         Img IMAGE;
         String IMG;
+        int COUNT;
+        boolean USERLIKED;
 
         public int getIDX() {
             return IDX;
@@ -66,6 +68,21 @@ public class Api {
             return IMG;
         }
 
+        public int getCount() {
+            return COUNT;
+        }
+
+        public void setCount(int COUNT) {
+            this.COUNT = COUNT;
+        }
+
+        public boolean isUserliked() {
+            return USERLIKED;
+        }
+
+        public void setUserliked(boolean USERLIKED) {
+            this.USERLIKED = USERLIKED;
+        }
 
         public static class Img{
             String url;

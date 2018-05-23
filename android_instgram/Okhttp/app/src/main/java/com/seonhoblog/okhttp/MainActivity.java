@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
      *  TimelineFragment, EmptyFragment
      */
 
-    Fragment[] arrFragments = new Fragment[2];
+    Fragment[] arrFragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_pager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tl_tabs);
 
-
+        arrFragments = new Fragment[2];
         arrFragments[0] = new TimelineFragment();
         arrFragments[1] = new EmptyFragment();
 
