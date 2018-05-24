@@ -232,7 +232,7 @@ public class TimelineFragment extends Fragment{
             Api.Post post = arrayList.get(position);
 
             Log.d("Like", post.isUserliked() + "/" + post.getIN_USER_ID() + "/" + post.getIN_USER_ID());
-
+            //좋아요 누른 사람의 좋아요유무 파악
             boolean like = !(post.isUserliked());
 
             LikeTaskRequest likeTaskRequest = new LikeTaskRequest(like, post.getIN_USER_ID(), post.getIN_USER_ID());
