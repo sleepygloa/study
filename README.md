@@ -174,3 +174,13 @@ http://grepcode.com/file/repo1.maven.org/maven2/net.sf.jasperreports/jasperrepor
 
 ### 서명
 http://stove99.tistory.com/207
+
+
+### BARCODE
+
+1. line barcode (MIT)
+https://www.npmjs.com/package/jsbarcode
+
+2. 2D  barcode (MIT)
+https://www.npmjs.com/package/qrcode
+https://www.jqueryscript.net/demo/jQuery-Plugin-For-Creating-QR-Codes-On-Your-Website-ClassyQR/
