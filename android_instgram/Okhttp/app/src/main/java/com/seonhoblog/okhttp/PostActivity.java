@@ -37,6 +37,7 @@ import okhttp3.Response;
 public class PostActivity extends AppCompatActivity {
 
     EditText etText;
+    Bitmap thumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,11 @@ public class PostActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Uri photoUri = intent.getData();
-
+        Log.d("PostActivity", ""+photoUri);
         ImageView ivPost = (ImageView) findViewById(R.id.iv_post);
         etText = (EditText) findViewById(R.id.et_text);
+
+
         findViewById(R.id.btn_post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

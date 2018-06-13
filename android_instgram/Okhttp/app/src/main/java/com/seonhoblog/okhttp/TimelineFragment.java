@@ -5,13 +5,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -29,8 +33,11 @@ import com.seonhoblog.okhttp.api.Api;
 import com.seonhoblog.okhttp.api.Api.Post;
 import com.seonhoblog.okhttp.uuid.UserUUID;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -42,8 +49,11 @@ public class TimelineFragment extends Fragment{
 
     ArrayList<Post> arrayList;
     PostViewAdapter postViewAdapter;
+    Uri photoUri;
+    File photoFile = null;
 
 
+//    photoUri = FileProvider.getUriForFile(SelectPhotoDialogActivity.this,"com.example.test.provider", photoFile);
     public TimelineFragment() {
         // Required empty public constructor
     }
@@ -97,7 +107,9 @@ public class TimelineFragment extends Fragment{
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(cameraIntent.resolveActivity(getActivity().getPackageManager()) != null){
             startActivityForResult(cameraIntent, 1000);
+
         }
+
     }
 
     public void startGallery() {
@@ -117,10 +129,60 @@ public class TimelineFragment extends Fragment{
         if(requestCode == 1000 && resultCode == Activity.RESULT_OK){
             Log.d("onActivityResult", "Camera SUCCESS");
             Intent startIntent = new Intent(getActivity(), PostActivity.class);
-            startIntent.setData(data.getData());
+//            startIntent.setData(data.getData());
+
+
+            try {
+                photoFile = createImageFile();
+            } catch (IOException e) {
+                Log.d("startCameraActivity", "ERROR 파일 생성오류");
+//                Toast.makeText(startCameraActivity.this, "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();              finish();
+            }
+            if (photoFile != null) {
+                Log.d("startCameraActivity", "ERROR 파일 카메라 실행오류");
+                photoUri = FileProvider.getUriForFile( getActivity(),
+                        "com.seonhoblog.okhttp.provider", photoFile); //FileProvider의 경우 이전 포스트를 참고하세요.
+                startIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri); //사진을 찍어 해당 Content uri를 photoUri에 적용시키기 위함
+                startActivityForResult(startIntent, 1000);
+            }
+
+
             startActivity(startIntent);
         }
     }
+
+
+    // Android M에서는 Uri.fromFile 함수를 사용하였으나 7.0부터는 이 함수를 사용할 시 FileUriExposedException이
+    // 발생하므로 아래와 같이 함수를 작성합니다. 이전 포스트에 참고한 영문 사이트를 들어가시면 자세한 설명을 볼 수 있습니다.
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
+        String imageFileName = "IP" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStorageDirectory() + "/test/"); //test라는 경로에 이미지를 저장하기 위함
+        if (!storageDir.exists()) {
+            storageDir.mkdirs();
+        }
+        File image = File.createTempFile(
+                imageFileName,
+                ".jpg",
+                storageDir
+        );
+        return image;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void fetchAsyncPosts() {
         arrayList = new ArrayList<>();

@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * TODO
-     * MainActivity
+     * MainActivity2
      *  ViewPager (below), TabLayout (above)
      *
      *  2 Fragment
