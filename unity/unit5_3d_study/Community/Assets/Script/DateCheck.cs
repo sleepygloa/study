@@ -51,6 +51,7 @@ public class DateCheck : MonoBehaviour {
 
         univoice = GetComponent<AudioSource>();
 
+
         //이전에 이 프로그램을 실행한 날짜를 불러온.
         oldMonth = PlayerPrefs.GetInt("Month");
         oldDay = PlayerPrefs.GetInt("Day");

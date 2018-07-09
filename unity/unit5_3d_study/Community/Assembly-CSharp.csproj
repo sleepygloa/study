@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\CameraControl.cs" />
     <Compile Include="Assets\Script\DateCheck.cs" />
+    <Compile Include="Assets\Script\Touch.cs" />
     <Compile Include="Assets\UnityChan\Scripts\AutoBlink.cs" />
     <Compile Include="Assets\UnityChan\Scripts\CameraController.cs" />
     <Compile Include="Assets\UnityChan\Scripts\FaceUpdate.cs" />
