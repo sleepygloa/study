@@ -17,6 +17,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".Layout.LayoutActivity"></activity>
+        <activity android:name=".Layout.RelativeViewActivity"></activity>
+        <activity android:name=".Layout.FrameViewActivity"></activity>
+        <activity android:name=".Layout.GridViewActivity"></activity>
+        <activity android:name=".Layout.LinearViewActivity"></activity>
+        <activity android:name=".Layout.TotalViewActivity"></activity>
+        <activity android:name=".Layout.ContraintViewActivity"></activity>
+
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="30dp"
     >
 
@@ -17,27 +18,41 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
-        android:text="메인화면으로"/>
+        android:text="LinearLayout"/>
 
     <Button
         android:id="@+id/btn_layout_relative"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
-        android:text="메인화면으로"/>
+        android:text="RelativeLayout"/>
 
     <Button
         android:id="@+id/btn_layout_grid"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
-        android:text="메인화면으로"/>
+        android:text="TableLayout"/>
 
     <Button
         android:id="@+id/btn_layout_frame"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
-        android:text="메인화면으로"/>
+        android:text="FrameLayout"/>
+
+    <Button
+        android:id="@+id/btn_layout_total"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:text="TotalView"/>
+
+    <Button
+        android:id="@+id/btn_layout_contraint"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:text="Contraint"/>
 
 </LinearLayout>
