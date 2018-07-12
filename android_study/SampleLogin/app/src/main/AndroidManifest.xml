@@ -24,6 +24,7 @@
         <activity android:name=".Layout.LinearViewActivity"></activity>
         <activity android:name=".Layout.TotalViewActivity"></activity>
         <activity android:name=".Layout.ContraintViewActivity"></activity>
+        <activity android:name=".Layout.ScrollViewActivity"></activity>
 
     </application>
 

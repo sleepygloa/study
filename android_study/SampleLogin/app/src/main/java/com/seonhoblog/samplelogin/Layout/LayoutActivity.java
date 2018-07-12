@@ -25,6 +25,7 @@ public class LayoutActivity extends AppCompatActivity {
         Button buttonFrame = (Button) findViewById(R.id.btn_layout_frame);
         Button bottonTotal = (Button) findViewById(R.id.btn_layout_total);
         Button buttonContraint = (Button) findViewById(R.id.btn_layout_contraint);
+        Button buttonFrameScroll = (Button) findViewById(R.id.btn_layout_framescoll);
 
         buttonToMain.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -66,6 +67,12 @@ public class LayoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toPage(ContraintViewActivity.class);
+            }
+        });
+        buttonContraint.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                toPage(FrameScrollViewActivity.class);
             }
         });
     }
