@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -28,6 +29,18 @@
         <activity android:name=".Layout.TotalViewActivity"></activity>
         <activity android:name=".Layout.ContraintViewActivity"></activity>
         <activity android:name=".Layout.ScrollViewActivity"></activity>
+
+        <activity android:name=".service.ServiceActivity"></activity>
+
+
+        <receiver android:name=".receiver.Receiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+
+        </receiver>
 
     </application>
 
