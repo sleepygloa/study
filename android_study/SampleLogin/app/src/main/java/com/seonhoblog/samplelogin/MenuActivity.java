@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.seonhoblog.samplelogin.Layout.LayoutActivity;
+import com.seonhoblog.samplelogin.event.EventActivity;
 import com.seonhoblog.samplelogin.receiver.Receiver;
 import com.seonhoblog.samplelogin.receiver.SmsActivity;
 import com.seonhoblog.samplelogin.service.ServiceActivity;
@@ -24,6 +25,7 @@ public class MenuActivity extends AppCompatActivity {
         Button button3 = (Button) findViewById(R.id.btn_item);
         Button button4 = (Button) findViewById(R.id.btn_service);
         Button button5 = (Button) findViewById(R.id.btn_receiver);
+        Button btnEvent = (Button) findViewById(R.id.btn_event);
 
         btnLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +63,12 @@ public class MenuActivity extends AppCompatActivity {
                 toReceiver();
             }
         });
-
+        btnEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toEvent();
+            }
+        });
 
     }
 
@@ -85,6 +92,12 @@ public class MenuActivity extends AppCompatActivity {
 
     private void toLogin(){
         Intent intent = new Intent();
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toEvent(){
+        Intent intent = new Intent(MenuActivity.this, EventActivity.class);
         setResult(RESULT_OK);
         finish();
     }
