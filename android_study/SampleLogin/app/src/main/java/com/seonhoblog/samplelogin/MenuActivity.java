@@ -28,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
         Button button5 = (Button) findViewById(R.id.btn_receiver);
         Button btnEvent = (Button) findViewById(R.id.btn_event);
         Button btnProgress = (Button) findViewById(R.id.btn_progress);
+        Button btnDialog = (Button) findViewById(R.id.btn_dialog);
 
         btnLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +78,13 @@ public class MenuActivity extends AppCompatActivity {
                 toProgress();
             }
         });
+        btnDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toDialog();
+            }
+        });
+
 
     }
 
@@ -112,6 +120,12 @@ public class MenuActivity extends AppCompatActivity {
 
     private void toProgress(){
         Intent intent = new Intent(MenuActivity.this, ProgressActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toDialog(){
+        Intent intent = new Intent(MenuActivity.this, DialogActivity.class);
         setResult(RESULT_OK);
         finish();
     }
