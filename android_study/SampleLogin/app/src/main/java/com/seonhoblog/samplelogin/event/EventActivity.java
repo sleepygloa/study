@@ -1,104 +1,64 @@
 package com.seonhoblog.samplelogin.event;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.seonhoblog.samplelogin.R;
 
 
 public class EventActivity extends AppCompatActivity{
 
-    TextView textView;
-
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
-        textView = (TextView) findViewById(R.id.tv_event_text);
+        Button btnTouch = (Button) findViewById(R.id.btn_event_touch);
+        Button btnDialog = (Button) findViewById(R.id.btn_event_dialog);
+        Button btnProgress = (Button) findViewById(R.id.btn_event_progress);
 
-        View view = findViewById(R.id.v_event_view);
-        view.setOnTouchListener(new View.OnTouchListener() {
+
+        btnTouch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent motionEvent) {
-                int action = motionEvent.getAction();
-
-                float curX = motionEvent.getX();
-                float curY = motionEvent.getY();
-
-                if(action == MotionEvent.ACTION_DOWN){
-                    println("손가락 눌림 : " + curX + ", " + curY);
-                }else if(action == MotionEvent.ACTION_MOVE){
-                    println("손가락 움직임 : " + curX + ", " + curY);
-                }else{
-                    println("손가락 뗌 : " + curX + ", " + curY);
-                }
-
-                return true;
+            public void onClick(View v) {
+                toTouch();
             }
         });
-
-
-        final GestureDetector detector;
-        detector = new GestureDetector(this, new GestureDetector.OnGestureListener() {
+        btnDialog.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onDown(MotionEvent motionEvent) {
-                println("onDown() 호출됨 ");
-                return true;
-            }
-
-            @Override
-            public void onShowPress(MotionEvent motionEvent) {
-                println("onShowPress() 호출됨 ");
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent motionEvent) {
-                println("onSingleTapUp() 호출됨 ");
-                return true;
-            }
-
-            @Override
-            public boolean onScroll(MotionEvent motionEvent1, MotionEvent motionEvent2,
-                                    float x, float y) {
-                println("onScroll() 호출됨 : " + x + ", " + y);
-                return true;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent motionEvent) {
-                println("onLongPress() 호출됨");
-            }
-
-            @Override
-            public boolean onFling(MotionEvent motionEvent1, MotionEvent motionEvent2, float x, float y) {
-                println("onFling() 호출됨 : " + x + ", " + y);
-                return true;
+            public void onClick(View v) {
+                toDialog();
             }
         });
-
-        View view2 = findViewById(R.id.v_event_view);
-        view2.setOnTouchListener(new View.OnTouchListener() {
+        btnProgress.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent motionEvent) {
-                detector.onTouchEvent(motionEvent);
-                return true;
-
+            public void onClick(View v) {
+                toProgress();
             }
         });
-
     }
 
-    public void println(String data){
-        textView.append(data + "\n");
+    private void toTouch(){
+        Intent intent = new Intent(this, TouchActivity.class);
+        setResult(RESULT_OK);
+        finish();
     }
 
+    private void toDialog(){
+        Intent intent = new Intent(this, DialogActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toProgress(){
+        Intent intent = new Intent(this, ProgressBar.class);
+        setResult(RESULT_OK);
+        finish();
+    }
 
 }

@@ -5,15 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:id="@+id/v_event_view"
+    <Button
+        android:id="@+id/btn_event_touch"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content"
+        android:text="touch"/>
 
-    <TextView
-        android:id="@+id/tv_event_text"
+    <Button
+        android:id="@+id/btn_event_dialog"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="wrap_content"
+        android:text="dialog"/>
+
+    <Button
+        android:id="@+id/btn_event_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="progress"/>
+
+
+
 
 
 </LinearLayout>

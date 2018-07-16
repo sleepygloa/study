@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.seonhoblog.samplelogin.Layout.LayoutActivity;
+import com.seonhoblog.samplelogin.event.DialogActivity;
 import com.seonhoblog.samplelogin.event.EventActivity;
 import com.seonhoblog.samplelogin.event.ProgressActivity;
 import com.seonhoblog.samplelogin.receiver.Receiver;
@@ -27,8 +28,6 @@ public class MenuActivity extends AppCompatActivity {
         Button button4 = (Button) findViewById(R.id.btn_service);
         Button button5 = (Button) findViewById(R.id.btn_receiver);
         Button btnEvent = (Button) findViewById(R.id.btn_event);
-        Button btnProgress = (Button) findViewById(R.id.btn_progress);
-        Button btnDialog = (Button) findViewById(R.id.btn_dialog);
 
         btnLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,18 +71,6 @@ public class MenuActivity extends AppCompatActivity {
                 toEvent();
             }
         });
-        btnProgress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toProgress();
-            }
-        });
-        btnDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toDialog();
-            }
-        });
 
 
     }
@@ -118,15 +105,4 @@ public class MenuActivity extends AppCompatActivity {
         finish();
     }
 
-    private void toProgress(){
-        Intent intent = new Intent(MenuActivity.this, ProgressActivity.class);
-        setResult(RESULT_OK);
-        finish();
-    }
-
-    private void toDialog(){
-        Intent intent = new Intent(MenuActivity.this, DialogActivity.class);
-        setResult(RESULT_OK);
-        finish();
-    }
 }
