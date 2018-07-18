@@ -2,16 +2,13 @@ package com.seonhoblog.samplelogin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.seonhoblog.samplelogin.Layout.LayoutActivity;
-import com.seonhoblog.samplelogin.event.DialogActivity;
+import com.seonhoblog.samplelogin.fragment.FragmentActivity;
+import com.seonhoblog.samplelogin.layout.LayoutActivity;
 import com.seonhoblog.samplelogin.event.EventActivity;
-import com.seonhoblog.samplelogin.event.ProgressActivity;
-import com.seonhoblog.samplelogin.receiver.Receiver;
 import com.seonhoblog.samplelogin.receiver.SmsActivity;
 import com.seonhoblog.samplelogin.service.ServiceActivity;
 
@@ -28,6 +25,8 @@ public class MenuActivity extends AppCompatActivity {
         Button button4 = (Button) findViewById(R.id.btn_service);
         Button button5 = (Button) findViewById(R.id.btn_receiver);
         Button btnEvent = (Button) findViewById(R.id.btn_event);
+        Button btnFlagment = (Button) findViewById(R.id.btn_flagment);
+        Button btnActionBar = (Button) findViewById(R.id.btn_actionbar);
 
         btnLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +70,18 @@ public class MenuActivity extends AppCompatActivity {
                 toEvent();
             }
         });
-
+        btnFlagment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toFlagment();
+            }
+        });
+        btnActionBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toActionBar();
+            }
+        });
 
     }
 
@@ -105,4 +115,15 @@ public class MenuActivity extends AppCompatActivity {
         finish();
     }
 
+    private void toFlagment(){
+        Intent intent = new Intent(MenuActivity.this, FragmentActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toActionBar(){
+        Intent intent = new Intent(MenuActivity.this, ActionBarActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
 }

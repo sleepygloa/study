@@ -1,4 +1,4 @@
-package com.seonhoblog.samplelogin.Layout;
+package com.seonhoblog.samplelogin.layout;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

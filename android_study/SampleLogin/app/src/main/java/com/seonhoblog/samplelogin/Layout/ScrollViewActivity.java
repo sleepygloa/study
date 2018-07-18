@@ -1,4 +1,4 @@
-package com.seonhoblog.samplelogin.Layout;
+package com.seonhoblog.samplelogin.layout;
 
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
