@@ -32,6 +32,9 @@
         <activity android:name=".layout.ScrollViewActivity"></activity>
 
         <activity android:name=".service.ServiceActivity"></activity>
+        <activity
+            android:name=".paintBoard.ColorPaletteDialog"
+            android:theme="@android:style/Theme.Dialog"></activity>
 
 
         <receiver android:name=".receiver.Receiver"

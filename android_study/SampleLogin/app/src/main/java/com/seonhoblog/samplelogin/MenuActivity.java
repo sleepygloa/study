@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.seonhoblog.samplelogin.bitmapBtn.BitmapBtnActivity;
+import com.seonhoblog.samplelogin.cameraImgModify.ImgCoverFlowActivity;
 import com.seonhoblog.samplelogin.fragment.FragmentActivity;
 import com.seonhoblog.samplelogin.keypad.KeypadActivity;
 import com.seonhoblog.samplelogin.layout.LayoutActivity;
 import com.seonhoblog.samplelogin.event.EventActivity;
 import com.seonhoblog.samplelogin.listView.ListViewActivity;
+import com.seonhoblog.samplelogin.multitouch.MultiTouchActivity;
 import com.seonhoblog.samplelogin.receiver.SmsActivity;
 import com.seonhoblog.samplelogin.service.ServiceActivity;
 import com.seonhoblog.samplelogin.tapMenu.TapMenuActivity;
@@ -34,6 +36,9 @@ public class MenuActivity extends AppCompatActivity {
         Button btnKeypad = (Button) findViewById(R.id.btn_keypad);
         Button btnBitmapBtn = (Button) findViewById(R.id.btn_bitmapBtn);
         Button btnListView = (Button) findViewById(R.id.btn_listview);
+        Button btnMultiTouch = (Button) findViewById(R.id.btn_multitouch);
+        Button btnPaintBoard = (Button) findViewById(R.id.btn_paintboard);
+        Button btnImgCoverFlow = (Button) findViewById(R.id.btn_imgcoverflow);
 
 
         btnLayout.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +105,24 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toListView();
+            }
+        });
+        btnMultiTouch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toMultiTouch();
+            }
+        });
+        btnPaintBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toPaintBoard();
+            }
+        });
+        btnImgCoverFlow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toImgCoverFlow();
             }
         });
 
@@ -172,4 +195,20 @@ public class MenuActivity extends AppCompatActivity {
         finish();
     }
 
+    private void toMultiTouch(){
+        Intent intent = new Intent (MenuActivity.this, MultiTouchActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+    private void toPaintBoard(){
+        Intent intent = new Intent (MenuActivity.this, MultiTouchActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toImgCoverFlow(){
+        Intent intent = new Intent (MenuActivity.this, ImgCoverFlowActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
 }
