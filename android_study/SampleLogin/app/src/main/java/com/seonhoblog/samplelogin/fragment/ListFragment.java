@@ -36,11 +36,10 @@ public class ListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
 
-    ViewGroup rootView = (ViewGroup) inflater.findViewById(R.layout.activity_fragment_list, container, false);
+    ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_fragment_list, container, false);
 
-    ListView listView = (ListView) rootView.findViewById(R.id.listView)
+    ListView listView = (ListView) rootView.findViewById(R.id.lv_fragment_list_view);
     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
             android.R.layout.simple_list_item_1, values);
 

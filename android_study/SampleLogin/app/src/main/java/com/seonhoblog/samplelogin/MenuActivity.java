@@ -6,11 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.seonhoblog.samplelogin.bitmapBtn.BitmapBtnActivity;
 import com.seonhoblog.samplelogin.fragment.FragmentActivity;
+import com.seonhoblog.samplelogin.keypad.KeypadActivity;
 import com.seonhoblog.samplelogin.layout.LayoutActivity;
 import com.seonhoblog.samplelogin.event.EventActivity;
+import com.seonhoblog.samplelogin.listView.ListViewActivity;
 import com.seonhoblog.samplelogin.receiver.SmsActivity;
 import com.seonhoblog.samplelogin.service.ServiceActivity;
+import com.seonhoblog.samplelogin.tapMenu.TapMenuActivity;
+import com.seonhoblog.samplelogin.web.WebActivity;
 
 public class MenuActivity extends AppCompatActivity {
     @Override
@@ -19,31 +24,22 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         Button btnLayout = (Button) findViewById(R.id.btn_layout);
-        Button button = (Button) findViewById(R.id.btn_customer);
-        Button button2 = (Button) findViewById(R.id.btn_sales);
         Button button3 = (Button) findViewById(R.id.btn_item);
         Button button4 = (Button) findViewById(R.id.btn_service);
         Button button5 = (Button) findViewById(R.id.btn_receiver);
         Button btnEvent = (Button) findViewById(R.id.btn_event);
         Button btnFlagment = (Button) findViewById(R.id.btn_flagment);
-        Button btnActionBar = (Button) findViewById(R.id.btn_actionbar);
+        Button btnTapMenu = (Button) findViewById(R.id.btn_tabMenu);
+        Button btnWeb = (Button) findViewById(R.id.btn_web);
+        Button btnKeypad = (Button) findViewById(R.id.btn_keypad);
+        Button btnBitmapBtn = (Button) findViewById(R.id.btn_bitmapBtn);
+        Button btnListView = (Button) findViewById(R.id.btn_listview);
+
 
         btnLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toLayout();
-            }
-        });
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toLogin();
-            }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toLogin();
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
@@ -76,12 +72,38 @@ public class MenuActivity extends AppCompatActivity {
                 toFlagment();
             }
         });
-        btnActionBar.setOnClickListener(new View.OnClickListener() {
+        btnTapMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toActionBar();
+                toTapMenu();
             }
         });
+        btnWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toWeb();
+            }
+        });
+        btnKeypad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toKeypad();
+            }
+        });
+        btnBitmapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toBitmapBtn();
+            }
+        });
+        btnListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toListView();
+            }
+        });
+
+
 
     }
 
@@ -121,9 +143,33 @@ public class MenuActivity extends AppCompatActivity {
         finish();
     }
 
-    private void toActionBar(){
-        Intent intent = new Intent(MenuActivity.this, ActionBarActivity.class);
+    private void toTapMenu(){
+        Intent intent = new Intent(MenuActivity.this, TapMenuActivity.class);
         setResult(RESULT_OK);
         finish();
     }
+
+    private void toWeb(){
+        Intent intent = new Intent (MenuActivity.this, WebActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+    private void toKeypad(){
+        Intent intent = new Intent (MenuActivity.this, KeypadActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toBitmapBtn(){
+        Intent intent = new Intent (MenuActivity.this, BitmapBtnActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toListView(){
+        Intent intent = new Intent (MenuActivity.this, ListViewActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
 }
