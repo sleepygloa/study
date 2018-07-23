@@ -6,17 +6,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.seonhoblog.samplelogin.asyncTask.AsyncTaskActivity;
 import com.seonhoblog.samplelogin.bitmapBtn.BitmapBtnActivity;
 import com.seonhoblog.samplelogin.cameraImgModify.ImgCoverFlowActivity;
 import com.seonhoblog.samplelogin.fragment.FragmentActivity;
+import com.seonhoblog.samplelogin.graphAnimation.GraphAnimActivity;
+import com.seonhoblog.samplelogin.http.HttpActivity;
 import com.seonhoblog.samplelogin.keypad.KeypadActivity;
 import com.seonhoblog.samplelogin.layout.LayoutActivity;
 import com.seonhoblog.samplelogin.event.EventActivity;
 import com.seonhoblog.samplelogin.listView.ListViewActivity;
 import com.seonhoblog.samplelogin.multitouch.MultiTouchActivity;
 import com.seonhoblog.samplelogin.receiver.SmsActivity;
+import com.seonhoblog.samplelogin.rss.RssActivity;
 import com.seonhoblog.samplelogin.service.ServiceActivity;
+import com.seonhoblog.samplelogin.socket.SocketActivity;
 import com.seonhoblog.samplelogin.tapMenu.TapMenuActivity;
+import com.seonhoblog.samplelogin.thread.ThreadActivity;
 import com.seonhoblog.samplelogin.web.WebActivity;
 
 public class MenuActivity extends AppCompatActivity {
@@ -39,6 +45,12 @@ public class MenuActivity extends AppCompatActivity {
         Button btnMultiTouch = (Button) findViewById(R.id.btn_multitouch);
         Button btnPaintBoard = (Button) findViewById(R.id.btn_paintboard);
         Button btnImgCoverFlow = (Button) findViewById(R.id.btn_imgcoverflow);
+        Button btnThread = (Button) findViewById(R.id.btn_thread);
+        Button btnAsyncTask = (Button) findViewById(R.id.btn_asyncTask);
+        Button btnGraphAnim = (Button) findViewById(R.id.btn_graphanim);
+        Button btnSocket = (Button) findViewById(R.id.btn_socket);
+        Button btnHttp = (Button) findViewById(R.id.btn_http);
+        Button btnRss = (Button) findViewById(R.id.btn_rss);
 
 
         btnLayout.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +137,42 @@ public class MenuActivity extends AppCompatActivity {
                 toImgCoverFlow();
             }
         });
-
+        btnThread.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toThread();
+            }
+        });
+        btnAsyncTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toAsyncTask();
+            }
+        });
+        btnGraphAnim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toGraphAnim();
+            }
+        });
+        btnSocket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toSocket();
+            }
+        });
+        btnHttp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toHttp();
+            }
+        });
+        btnRss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toRss();
+            }
+        });
 
 
     }
@@ -211,4 +258,41 @@ public class MenuActivity extends AppCompatActivity {
         setResult(RESULT_OK);
         finish();
     }
+
+    private void toThread(){
+        Intent intent = new Intent (MenuActivity.this, ThreadActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toAsyncTask(){
+        Intent intent = new Intent (MenuActivity.this, AsyncTaskActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toGraphAnim(){
+        Intent intent = new Intent (MenuActivity.this, GraphAnimActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toSocket(){
+        Intent intent = new Intent (MenuActivity.this, SocketActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toHttp(){
+        Intent intent = new Intent (MenuActivity.this, HttpActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toRss(){
+        Intent intent = new Intent (MenuActivity.this, RssActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
 }

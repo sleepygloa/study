@@ -143,4 +143,64 @@
         android:layout_marginBottom="5dp"
         />
 
+    <Button
+        android:id="@+id/btn_thread"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="쓰레드"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_asyncTask"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="AsyncTask"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_graphanim"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="AsyncTask"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_socket"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="socket"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_http"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="http"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_rss"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="rss"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
 </LinearLayout>
