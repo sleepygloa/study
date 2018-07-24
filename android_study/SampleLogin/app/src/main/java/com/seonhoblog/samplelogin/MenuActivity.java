@@ -19,11 +19,15 @@ import com.seonhoblog.samplelogin.keypad.KeypadActivity;
 import com.seonhoblog.samplelogin.layout.LayoutActivity;
 import com.seonhoblog.samplelogin.event.EventActivity;
 import com.seonhoblog.samplelogin.listView.ListViewActivity;
+import com.seonhoblog.samplelogin.location.GpsActivity;
+import com.seonhoblog.samplelogin.location.MapActivity;
 import com.seonhoblog.samplelogin.multimedia.AudioActivity;
 import com.seonhoblog.samplelogin.multimedia.AudioRecordActivity;
+import com.seonhoblog.samplelogin.multimedia.CameraPickSaveActivity;
 import com.seonhoblog.samplelogin.multimedia.VideoActivity;
 import com.seonhoblog.samplelogin.multimedia.VideoRecordActivity;
 import com.seonhoblog.samplelogin.multitouch.MultiTouchActivity;
+import com.seonhoblog.samplelogin.push.PushActivity;
 import com.seonhoblog.samplelogin.receiver.SmsActivity;
 import com.seonhoblog.samplelogin.rss.RssActivity;
 import com.seonhoblog.samplelogin.service.ServiceActivity;
@@ -31,6 +35,7 @@ import com.seonhoblog.samplelogin.socket.SocketActivity;
 import com.seonhoblog.samplelogin.tapMenu.TapMenuActivity;
 import com.seonhoblog.samplelogin.thread.ThreadActivity;
 import com.seonhoblog.samplelogin.web.WebActivity;
+import com.seonhoblog.samplelogin.widget.WidgetIntroActivity;
 
 public class MenuActivity extends AppCompatActivity {
     @Override
@@ -39,8 +44,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         Button btnLayout = (Button) findViewById(R.id.btn_layout);
-        Button button3 = (Button) findViewById(R.id.btn_item);
-        Button button4 = (Button) findViewById(R.id.btn_service);
         Button button5 = (Button) findViewById(R.id.btn_receiver);
         Button btnEvent = (Button) findViewById(R.id.btn_event);
         Button btnFlagment = (Button) findViewById(R.id.btn_flagment);
@@ -64,7 +67,11 @@ public class MenuActivity extends AppCompatActivity {
         Button btnAudioRecord = (Button) findViewById(R.id.btn_audio_record);
         Button btnVideo = (Button) findViewById(R.id.btn_video);
         Button btnVideoRecord = (Button) findViewById(R.id.btn_video_record);
-        Button btnCameraPickSave = (Button) findViewById(R.id.btn_camera_pick_save);
+        Button btnCameraPickSave = (Button) findViewById(R.id.btn_camerapicksave);
+        Button btnGps = (Button) findViewById(R.id.btn_gps);
+        Button btnMap = (Button) findViewById(R.id.btn_map);
+        Button btnWidget = (Button) findViewById(R.id.btn_widget);
+        Button btnPush = (Button) findViewById(R.id.btn_push);
 
 
 
@@ -72,18 +79,6 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toLayout();
-            }
-        });
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toLogin();
-            }
-        });
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
         button5.setOnClickListener(new View.OnClickListener() {
@@ -228,6 +223,30 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toCameraPickSave();
+            }
+        });
+        btnGps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toGps();
+            }
+        });
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toMap();
+            }
+        });
+        btnWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toWidget();
+            }
+        });
+        btnPush.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toPush();
             }
         });
 
@@ -394,4 +413,27 @@ public class MenuActivity extends AppCompatActivity {
         finish();
     }
 
+    private void toGps(){
+        Intent intent = new Intent (MenuActivity.this, GpsActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toMap(){
+        Intent intent = new Intent (MenuActivity.this, MapActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toWidget(){
+        Intent intent = new Intent (MenuActivity.this, WidgetIntroActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toPush(){
+        Intent intent = new Intent (MenuActivity.this, PushActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
 }

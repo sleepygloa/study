@@ -264,7 +264,7 @@
         />
 
     <Button
-        android:id="@+id/btn_camera_pick_save"
+        android:id="@+id/btn_camerapicksave"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="사진찍어 저장하기"
@@ -273,4 +273,43 @@
         android:layout_marginBottom="5dp"
         />
 
+    <Button
+        android:id="@+id/btn_gps"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="GPS로 위치 확인하기"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_map"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="지도로 내위치 확인하기"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_widget"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="위젯만들기"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <Button
+        android:id="@+id/btn_push"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="푸쉬하기"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        />
 </LinearLayout>
