@@ -1,6 +1,7 @@
 package com.seonhoblog.samplelogin;
 
 import android.content.Intent;
+import android.media.AudioRecord;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import com.seonhoblog.samplelogin.asyncTask.AsyncTaskActivity;
 import com.seonhoblog.samplelogin.bitmapBtn.BitmapBtnActivity;
 import com.seonhoblog.samplelogin.cameraImgModify.ImgCoverFlowActivity;
+import com.seonhoblog.samplelogin.createDb.CreateDbActivity;
+import com.seonhoblog.samplelogin.createDb.CreateDbSelectActivity;
 import com.seonhoblog.samplelogin.fragment.FragmentActivity;
 import com.seonhoblog.samplelogin.graphAnimation.GraphAnimActivity;
 import com.seonhoblog.samplelogin.http.HttpActivity;
@@ -16,6 +19,10 @@ import com.seonhoblog.samplelogin.keypad.KeypadActivity;
 import com.seonhoblog.samplelogin.layout.LayoutActivity;
 import com.seonhoblog.samplelogin.event.EventActivity;
 import com.seonhoblog.samplelogin.listView.ListViewActivity;
+import com.seonhoblog.samplelogin.multimedia.AudioActivity;
+import com.seonhoblog.samplelogin.multimedia.AudioRecordActivity;
+import com.seonhoblog.samplelogin.multimedia.VideoActivity;
+import com.seonhoblog.samplelogin.multimedia.VideoRecordActivity;
 import com.seonhoblog.samplelogin.multitouch.MultiTouchActivity;
 import com.seonhoblog.samplelogin.receiver.SmsActivity;
 import com.seonhoblog.samplelogin.rss.RssActivity;
@@ -51,6 +58,14 @@ public class MenuActivity extends AppCompatActivity {
         Button btnSocket = (Button) findViewById(R.id.btn_socket);
         Button btnHttp = (Button) findViewById(R.id.btn_http);
         Button btnRss = (Button) findViewById(R.id.btn_rss);
+        Button btnCreateDb = (Button) findViewById(R.id.btn_createdb);
+        Button btnCreateDbSelect = (Button) findViewById(R.id.btn_createdb_select);
+        Button btnAudio = (Button) findViewById(R.id.btn_audio);
+        Button btnAudioRecord = (Button) findViewById(R.id.btn_audio_record);
+        Button btnVideo = (Button) findViewById(R.id.btn_video);
+        Button btnVideoRecord = (Button) findViewById(R.id.btn_video_record);
+        Button btnCameraPickSave = (Button) findViewById(R.id.btn_camera_pick_save);
+
 
 
         btnLayout.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +188,48 @@ public class MenuActivity extends AppCompatActivity {
                 toRss();
             }
         });
+        btnCreateDb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toCreateDb();
+            }
+        });
+        btnCreateDbSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toCreateDbSelect();
+            }
+        });
+        btnAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toAudio();
+            }
+        });
+        btnAudioRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toAudioRecord();
+            }
+        });
+        btnVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toVideo();
+            }
+        });
+        btnVideoRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toVideoRecord();
+            }
+        });
+        btnCameraPickSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toCameraPickSave();
+            }
+        });
 
 
     }
@@ -291,6 +348,48 @@ public class MenuActivity extends AppCompatActivity {
 
     private void toRss(){
         Intent intent = new Intent (MenuActivity.this, RssActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toCreateDb(){
+        Intent intent = new Intent (MenuActivity.this, CreateDbActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toCreateDbSelect(){
+        Intent intent = new Intent (MenuActivity.this, CreateDbSelectActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toAudio(){
+        Intent intent = new Intent (MenuActivity.this, AudioActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toAudioRecord(){
+        Intent intent = new Intent (MenuActivity.this, AudioRecordActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toVideo(){
+        Intent intent = new Intent (MenuActivity.this, VideoActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toVideoRecord(){
+        Intent intent = new Intent (MenuActivity.this, VideoRecordActivity.class);
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    private void toCameraPickSave(){
+        Intent intent = new Intent (MenuActivity.this, CameraPickSaveActivity.class);
         setResult(RESULT_OK);
         finish();
     }
