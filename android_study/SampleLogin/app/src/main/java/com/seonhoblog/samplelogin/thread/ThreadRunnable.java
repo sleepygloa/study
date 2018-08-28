@@ -21,8 +21,8 @@ public class ThreadRunnable extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bar = (ProgressBar) findViewById(R.id.progress);
-        textView = (TextView) findViewById(R.id.textView);
+        bar = (ProgressBar) findViewById(R.id.pb_thread_bar);
+        textView = (TextView) findViewById(R.id.tv_thread_text);
 
         handler = new Handler();
         runnable = new ThreadRunnable.ProgressRunnable();

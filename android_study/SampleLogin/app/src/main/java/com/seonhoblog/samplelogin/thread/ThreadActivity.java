@@ -30,8 +30,8 @@ public class ThreadActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread);
 
-        bar = (ProgressBar) findViewById(R.id.progress);
-        textView = (TextView) findViewById(R.id.textView);
+        bar = (ProgressBar) findViewById(R.id.pb_thread_bar);
+        textView = (TextView) findViewById(R.id.tv_thread_text);
 
         handler = new ThreadActivity.ProgressHandler();
 

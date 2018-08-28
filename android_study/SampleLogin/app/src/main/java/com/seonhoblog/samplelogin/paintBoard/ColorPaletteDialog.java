@@ -12,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 
+import com.seonhoblog.samplelogin.R;
+
 /**
  * 색상을 선택하는 대화상자용 액티비티
  * 
@@ -29,7 +31,7 @@ public class ColorPaletteDialog extends Activity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog);
+        setContentView(R.layout.activity_paintboard_dialog);
 		
         this.setTitle("색상 선택");
         

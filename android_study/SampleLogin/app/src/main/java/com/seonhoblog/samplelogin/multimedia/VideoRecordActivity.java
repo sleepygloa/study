@@ -220,7 +220,7 @@ public class VideoRecordActivity extends AppCompatActivity {
 
     protected void onPause() {
         if (camera != null) {
-            camera.release();
+//            camera.release();
             camera = null;
         }
 

@@ -16,6 +16,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 
+
+import com.seonhoblog.samplelogin.R;
 /**
  * 선굵기를 선택하는 대화상자용 액티비티
  * 
@@ -33,7 +35,7 @@ public class PenPaletteDialog extends Activity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog);
+        setContentView(R.layout.activity_paintboard_dialog);
 		
         this.setTitle("선굵기 선택");
         

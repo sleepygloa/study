@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.seonhoblog.samplelogin.R;
 /**
  * 부드러운 곡선으로 그려지도록 기능 추가
  * 

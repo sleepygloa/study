@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "1089805705198",
-    "firebase_url": "https://samplepush-59726.firebaseio.com",
-    "project_id": "samplepush-59726",
-    "storage_bucket": "samplepush-59726.appspot.com"
+    "project_number": "910068487166",
+    "firebase_url": "https://samplepush-b9cce.firebaseio.com",
+    "project_id": "samplepush-b9cce",
+    "storage_bucket": "samplepush-b9cce.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1089805705198:android:e5638728ceef3893",
+        "mobilesdk_app_id": "1:910068487166:android:d85fc87b3bc4df3b",
         "android_client_info": {
-          "package_name": "org.androidtown.push"
+          "package_name": "com.seonhoblog.samplelogin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1089805705198-r350bg6vo1v48ocn6k3vhr5v55oub1fn.apps.googleusercontent.com",
+          "client_id": "910068487166-3prdrpineonn5g1ameov3bfk5bg5k8qd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAUwAS_ri_Ie6FQ4zwjQZICtnbQgMr8aqk"
+          "current_key": "AIzaSyCvTVmGa4cGW6yn6hhgP4jEhdq5-PfDsdw"
         }
       ],
       "services": {

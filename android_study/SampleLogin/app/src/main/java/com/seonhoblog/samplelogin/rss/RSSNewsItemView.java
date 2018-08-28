@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.seonhoblog.samplelogin.R;
+
 public class RSSNewsItemView extends LinearLayout {
 
 	/**
@@ -41,29 +43,29 @@ public class RSSNewsItemView extends LinearLayout {
 
 		// Layout Inflation
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		inflater.inflate(R.layout.listitem, this, true);
+		inflater.inflate(R.layout.activity_rss_item, this, true);
 
 		// Set Icon
-		mIcon = (ImageView) findViewById(R.id.iconItem);
+		mIcon = (ImageView) findViewById(R.id.iv_rss_item_img);
 		mIcon.setImageDrawable(aItem.getIcon());
 
 		// Set Text 01
-		mText01 = (TextView) findViewById(R.id.dataItem01);
+		mText01 = (TextView) findViewById(R.id.tv_rss_item_text);
 		mText01.setText(aItem.getTitle());
 
 		// Set Text 02
-		mText02 = (TextView) findViewById(R.id.dataItem02);
+		mText02 = (TextView) findViewById(R.id.tv_rss_item_text2);
 		mText02.setText(aItem.getPubDate());
 
 		// Set Text 03
-		mText03 = (TextView) findViewById(R.id.dataItem03);
+		mText03 = (TextView) findViewById(R.id.tv_rss_item_text3);
 		String category = aItem.getCategory();
 		if (category != null) {
 			mText03.setText(category);
 		}
 
 		// Set Text 04
-		mText04 = (WebView) findViewById(R.id.dataItem04);
+		mText04 = (WebView) findViewById(R.id.wv_rss_item_contents);
 		//mText04.setText(aItem.getDescription());
 		
 		setTextToWebView(aItem.getDescription());

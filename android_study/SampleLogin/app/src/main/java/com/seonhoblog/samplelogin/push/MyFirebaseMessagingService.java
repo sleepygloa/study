@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.seonhoblog.samplelogin.MainActivity;
 
 import java.util.Map;
 
