@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\02.Scripts\BarrelCtrl.cs" />
     <Compile Include="Assets\02.Scripts\BulletCtrl.cs" />
     <Compile Include="Assets\02.Scripts\FireCtrl.cs" />
     <Compile Include="Assets\02.Scripts\MyGizmos.cs" />
@@ -75,6 +76,12 @@
     <Compile Include="Assets\03.Prefabs\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
     <Compile Include="Assets\03.Prefabs\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
     <None Include="Assets\03.Prefabs\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
+    <Reference Include="Unity.ProGrids">
+      <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProGrids.Editor">
+      <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -84,20 +91,14 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProGrids">
-      <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProGrids.Editor">
-      <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
       <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

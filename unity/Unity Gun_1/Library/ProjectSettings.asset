@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: 00000000000000000000000000000000
+  productGUID: 12727b7b55976412dba443cc0af5a574
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -691,7 +691,7 @@ PlayerSettings:
   apiCompatibilityLevel: 2
   cloudProjectId: 6144bc7e-63e3-4fb5-a9e7-3423ca5cc529
   framebufferDepthMemorylessMode: 0
-  projectName: EffectsExamples
+  projectName: Unity Gun_1
   organizationId: seonho88
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
