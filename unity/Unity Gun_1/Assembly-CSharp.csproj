@@ -61,12 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\02.Scripts\BarrelCtrl.cs" />
-    <Compile Include="Assets\02.Scripts\BulletCtrl.cs" />
-    <Compile Include="Assets\02.Scripts\FireCtrl.cs" />
-    <Compile Include="Assets\02.Scripts\MyGizmos.cs" />
-    <Compile Include="Assets\02.Scripts\PlayerCtrl.cs" />
-    <Compile Include="Assets\02.Scripts\RemoveBullet.cs" />
     <Compile Include="Assets\03.Prefabs\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\03.Prefabs\EffectExamples\Shared\Scripts\ExtinguishableFire.cs" />
     <Compile Include="Assets\03.Prefabs\EffectExamples\Shared\Scripts\GunAim.cs" />
@@ -336,6 +330,18 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{81F8F046-F223-A4F5-0769-90EEEE65F5ED}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="StageAD.csproj">
+      <Project>{82320D55-4429-85BD-8E2A-79261140CB80}</Project>
+      <Name>StageAD</Name>
+    </ProjectReference>
+    <ProjectReference Include="EnermyAD.csproj">
+      <Project>{D813B90A-D37B-D354-C74D-5C21852C0293}</Project>
+      <Name>EnermyAD</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayerAD.csproj">
+      <Project>{E92FDFC1-D691-9CC2-6399-3D405CA56DD2}</Project>
+      <Name>PlayerAD</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

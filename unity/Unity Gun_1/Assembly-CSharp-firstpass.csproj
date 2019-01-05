@@ -318,6 +318,20 @@
       <HintPath>/Applications/Unity/Unity.app/Contents/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="StageAD.csproj">
+      <Project>{82320D55-4429-85BD-8E2A-79261140CB80}</Project>
+      <Name>StageAD</Name>
+    </ProjectReference>
+    <ProjectReference Include="EnermyAD.csproj">
+      <Project>{D813B90A-D37B-D354-C74D-5C21852C0293}</Project>
+      <Name>EnermyAD</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayerAD.csproj">
+      <Project>{E92FDFC1-D691-9CC2-6399-3D405CA56DD2}</Project>
+      <Name>PlayerAD</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
