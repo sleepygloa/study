@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{F0CCC104-B021-F4B4-0065-9E609C5363DF}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Enemy/EnermyAI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Enemy/MoveAgent.cs">
     <Files>
-      <File FileName="Assets/02.Scripts/Enemy/MoveAgent.cs" Line="131" Column="98" />
-      <File FileName="Assets/02.Scripts/Enemy/EnermyAI.cs" Line="154" Column="69" />
-      <File FileName="Assets/02.Scripts/Player/PlayerCtrl.cs" Line="1" Column="1" />
-      <File FileName="Assets/02.Scripts/Enemy/EnermyFire.cs" Line="83" Column="39" />
-      <File FileName="Assets/02.Scripts/Enemy/EnermyDamage.cs" Line="50" Column="30" />
+      <File FileName="Assets/02.Scripts/Common/Shake.cs" Line="7" Column="22" />
+      <File FileName="Assets/02.Scripts/Stage/BarrelCtrl.cs" Line="92" Column="61" />
+      <File FileName="Assets/02.Scripts/Player/BulletCtrl.cs" Line="1" Column="1" />
+      <File FileName="Assets/02.Scripts/Enemy/EnermyDamage.cs" Line="51" Column="6" />
+      <File FileName="Assets/02.Scripts/Player/Damage.cs" Line="39" Column="34" />
+      <File FileName="Assets/02.Scripts/Enemy/EnermyAI.cs" Line="72" Column="68" />
+      <File FileName="Assets/02.Scripts/Enemy/MoveAgent.cs" Line="39" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

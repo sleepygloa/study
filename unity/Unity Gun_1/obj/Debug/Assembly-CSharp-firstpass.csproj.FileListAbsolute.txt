@@ -262,3 +262,4 @@
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/PlayerAD.pdb
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/UnityEditor.UI.dll.mdb
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/UnityEditor.UI.xml
+/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/CommonAD.pdb
