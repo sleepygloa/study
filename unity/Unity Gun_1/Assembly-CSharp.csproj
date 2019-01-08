@@ -339,6 +339,10 @@
       <Project>{82320D55-4429-85BD-8E2A-79261140CB80}</Project>
       <Name>StageAD</Name>
     </ProjectReference>
+    <ProjectReference Include="MainAD.csproj">
+      <Project>{759FCA55-EDD5-1766-3969-A4157B2006CC}</Project>
+      <Name>MainAD</Name>
+    </ProjectReference>
     <ProjectReference Include="EnermyAD.csproj">
       <Project>{D813B90A-D37B-D354-C74D-5C21852C0293}</Project>
       <Name>EnermyAD</Name>

@@ -279,3 +279,5 @@
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/UnityEditor.iOS.Extensions.dll.mdb
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
+/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/CommonAD.dll
+/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/CommonAD.pdb
