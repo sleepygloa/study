@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\02.Scripts\Enemy\EnemyHpBar.cs" />
     <Compile Include="Assets\02.Scripts\Enemy\EnermyAI.cs" />
     <Compile Include="Assets\02.Scripts\Enemy\EnermyDamage.cs" />
     <Compile Include="Assets\02.Scripts\Enemy\EnermyFire.cs" />

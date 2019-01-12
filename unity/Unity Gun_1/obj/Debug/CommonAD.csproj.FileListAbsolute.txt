@@ -273,8 +273,8 @@
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/Unity.IvyParser.dll.mdb
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.xml
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
-/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/obj/Debug/CommonAD.csprojAssemblyReference.cache
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/obj/Debug/CommonAD.csproj.CoreCompileInputs.cache
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/obj/Debug/CommonAD.csproj.CopyComplete
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/obj/Debug/CommonAD.dll
 /Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/obj/Debug/CommonAD.pdb
+/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/obj/Debug/CommonAD.csprojAssemblyReference.cache

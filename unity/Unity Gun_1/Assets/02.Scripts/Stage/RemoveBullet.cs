@@ -17,6 +17,7 @@ public class RemoveBullet : MonoBehaviour
             ShowEffect(collision);
             //충돌한 게임오브젝트 삭제
             Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 
