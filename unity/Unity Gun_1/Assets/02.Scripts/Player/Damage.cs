@@ -10,7 +10,7 @@ public class Damage : MonoBehaviour
     private const string enemyTag = "ENEMY";
 
     private float initHp = 100.0f;
-    private float currHp;
+    public float currHp;
     //BloodScreen 텍스처를 저장하기 위한 변수
     public Image bloodScreen;
 
@@ -27,6 +27,8 @@ public class Damage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //불러온 데이터 값을 hp 에 적용
+        initHp = GameManager.instance.gameData.hp;
         currHp = initHp;
 
         //생명 게이지의 초기 색상을 설정

@@ -1794,6 +1794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 345420605}
   - component: {fileID: 345420604}
+  - component: {fileID: 345420606}
   m_Layer: 0
   m_Name: GameMgr
   m_TagString: Untagged
@@ -1833,7 +1834,14 @@ MonoBehaviour:
     type: 3}
   maxPool: 10
   bulletPool: []
-  inventoryCG: {fileID: 0}
+  inventoryCG: {fileID: 800345695}
+  killCountTxt: {fileID: 864810215}
+  gameData: {fileID: 11400000, guid: 7f5cd9333ab954679a346dfd281b0f67, type: 2}
+  itemObjects:
+  - {fileID: 844070343}
+  - {fileID: 1665059519}
+  - {fileID: 931210003}
+  - {fileID: 439758965}
 --- !u!4 &345420605
 Transform:
   m_ObjectHideFlags: 0
@@ -1848,6 +1856,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345420606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345420603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09950ddbad82c410c85cedc39aeee5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &369799190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,6 +2191,7 @@ GameObject:
   - component: {fileID: 439758968}
   - component: {fileID: 439758967}
   - component: {fileID: 439758969}
+  - component: {fileID: 439758970}
   m_Layer: 5
   m_Name: ItemShock
   m_TagString: Untagged
@@ -2247,6 +2268,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c63cd02435b49f5b9ae0b131ae8400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &439758970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439758965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7571d7d1fd0524b7a990c6c2430411fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData:
+    itemType: 3
+    itemCalc: 1
+    name: Damage Up
+    desc: Increate 5% Damage
+    value: 0.05
 --- !u!1001 &441946841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2749,7 +2788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be034a5a8c884abd9d8461d9f35d788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 6
   rotSpeed: 80
   playerAnim:
     idle: {fileID: 0}
@@ -2844,6 +2883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adce95fe66d1243e79021c782c3c559a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHp: 120
   bloodScreen: {fileID: 90926966}
   hpBar: {fileID: 218919946}
 --- !u!1001 &520014136
@@ -4031,6 +4071,7 @@ GameObject:
   - component: {fileID: 844070346}
   - component: {fileID: 844070345}
   - component: {fileID: 844070347}
+  - component: {fileID: 844070348}
   m_Layer: 5
   m_Name: ItemHp
   m_TagString: Untagged
@@ -4107,6 +4148,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c63cd02435b49f5b9ae0b131ae8400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &844070348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844070343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7571d7d1fd0524b7a990c6c2430411fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData:
+    itemType: 0
+    itemCalc: 0
+    name: HP Up
+    desc: Increate + 10HP
+    value: 10
 --- !u!1 &854258215
 GameObject:
   m_ObjectHideFlags: 0
@@ -4236,6 +4295,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854258215}
   m_CullTransparentMesh: 0
+--- !u!1 &864810213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864810214}
+  - component: {fileID: 864810216}
+  - component: {fileID: 864810215}
+  m_Layer: 5
+  m_Name: KillCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &864810214
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864810213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1450289462}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -263.5, y: 143.5}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &864810215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864810213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: fae067962e5934395be31c8aba4a3455, type: 3}
+    m_FontSize: 22
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'KILL 0000
+
+'
+--- !u!222 &864810216
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864810213}
+  m_CullTransparentMesh: 0
 --- !u!1 &931210003
 GameObject:
   m_ObjectHideFlags: 0
@@ -4248,6 +4388,7 @@ GameObject:
   - component: {fileID: 931210006}
   - component: {fileID: 931210005}
   - component: {fileID: 931210007}
+  - component: {fileID: 931210008}
   m_Layer: 5
   m_Name: ItemGrenade
   m_TagString: Untagged
@@ -4324,6 +4465,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c63cd02435b49f5b9ae0b131ae8400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &931210008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931210003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7571d7d1fd0524b7a990c6c2430411fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData:
+    itemType: 2
+    itemCalc: 0
+    name: Grenade Up
+    desc: Increate +2 Grenade
+    value: 2
 --- !u!1001 &935467445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6045,6 +6204,7 @@ RectTransform:
   - {fileID: 1233450564}
   - {fileID: 800345692}
   - {fileID: 854258216}
+  - {fileID: 864810214}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6157,6 +6317,7 @@ GameObject:
   - component: {fileID: 1665059522}
   - component: {fileID: 1665059521}
   - component: {fileID: 1665059523}
+  - component: {fileID: 1665059524}
   m_Layer: 5
   m_Name: ItemSpeed
   m_TagString: Untagged
@@ -6233,6 +6394,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c63cd02435b49f5b9ae0b131ae8400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1665059524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665059519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7571d7d1fd0524b7a990c6c2430411fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData:
+    itemType: 1
+    itemCalc: 1
+    name: Speed Up
+    desc: Increate Speed 10%
+    value: 0.1
 --- !u!1001 &1694680836
 PrefabInstance:
   m_ObjectHideFlags: 0

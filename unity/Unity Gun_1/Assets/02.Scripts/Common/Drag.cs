@@ -55,6 +55,8 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if(itemTr.parent == inventoryTr)
         {
             itemTr.SetParent(itemListTr.transform);
+            //슬롯에 추가된 아이템의 갱신을 알릶
+            GameManager.instance.RemoveItem(GetComponent<ItemInfo>().itemData);
         }
     }
 }

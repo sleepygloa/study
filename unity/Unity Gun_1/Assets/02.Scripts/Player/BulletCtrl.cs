@@ -21,6 +21,8 @@ public class BulletCtrl : MonoBehaviour
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         trail = GetComponent<TrailRenderer>();
+        //불러온 데이터 값을 damage 에 적용
+        damage = GameManager.instance.gameData.damage;
     }
 
     private void OnEnable()
@@ -43,9 +45,4 @@ public class BulletCtrl : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * speed);   
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -61,6 +61,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\02.Scripts\Common\DataManager\DataManager.cs" />
+    <Compile Include="Assets\02.Scripts\Common\DataManager\GameData.cs" />
+    <Compile Include="Assets\02.Scripts\Common\DataManager\GameDataObject.cs" />
+    <Compile Include="Assets\02.Scripts\Common\DataManager\ItemInfo.cs" />
     <Compile Include="Assets\02.Scripts\Common\Drag.cs" />
     <Compile Include="Assets\02.Scripts\Common\Drop.cs" />
     <Compile Include="Assets\02.Scripts\Common\FollowCam.cs" />
