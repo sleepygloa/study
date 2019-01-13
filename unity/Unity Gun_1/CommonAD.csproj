@@ -69,6 +69,7 @@
     <Compile Include="Assets\02.Scripts\Common\Drop.cs" />
     <Compile Include="Assets\02.Scripts\Common\FollowCam.cs" />
     <Compile Include="Assets\02.Scripts\Common\GameManager.cs" />
+    <Compile Include="Assets\02.Scripts\Common\SceneLoader.cs" />
     <Compile Include="Assets\02.Scripts\Common\Shake.cs" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

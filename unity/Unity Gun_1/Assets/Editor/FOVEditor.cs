@@ -4,7 +4,7 @@ using UnityEngine;
 //Editor ㅋㅡㄹ래스에 접근하기 위해 명시해야 하는 네임스페이스
 using UnityEditor;
 
-[CustomEditor(typeof(EnemyFOV)]
+[CustomEditor(typeof(EnemyFOV))]
 public class FOVEditor : Editor
 {
     private void OnSceneGUI()
