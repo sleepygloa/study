@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\03.Prefabs\EffectExamples\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+    <Compile Include="Assets\Editor\FOVEditor.cs" />
     <None Include="Assets\03.Prefabs\EffectExamples\Editor\PackageManagerAssembly\PackageImportList.txt" />
     <Reference Include="Unity.ProGrids">
       <HintPath>/Users/seonhokim/wms/workspace/study/unity/Unity Gun_1/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>

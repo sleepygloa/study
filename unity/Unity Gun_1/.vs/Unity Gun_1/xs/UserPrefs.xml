@@ -1,14 +1,10 @@
 ﻿<Properties StartupConfiguration="{F0CCC104-B021-F4B4-0065-9E609C5363DF}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Common/DataManager/GameDataObject.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/02.Scripts/Common/FollowCam.cs">
     <Files>
-      <File FileName="Assets/02.Scripts/Common/DataManager/DataManager.cs" Line="45" Column="34" />
-      <File FileName="Assets/02.Scripts/Common/GameManager.cs" Line="110" Column="6" />
-      <File FileName="Assets/02.Scripts/Player/Damage.cs" Line="13" Column="11" />
-      <File FileName="Assets/02.Scripts/Player/PlayerCtrl.cs" Line="50" Column="57" />
-      <File FileName="Assets/02.Scripts/Player/BulletCtrl.cs" Line="25" Column="55" />
-      <File FileName="Assets/02.Scripts/Common/Drop.cs" Line="17" Column="48" />
-      <File FileName="Assets/02.Scripts/Common/Drag.cs" Line="59" Column="80" />
-      <File FileName="Assets/02.Scripts/Common/DataManager/GameDataObject.cs" Line="3" Column="1" />
+      <File FileName="Assets/02.Scripts/Enemy/EnemyFOV.cs" Line="81" Column="23" />
+      <File FileName="Assets/Editor/FOVEditor.cs" Line="9" Column="2" />
+      <File FileName="Assets/02.Scripts/Enemy/EnermyAI.cs" Line="126" Column="45" />
+      <File FileName="Assets/02.Scripts/Common/FollowCam.cs" Line="15" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

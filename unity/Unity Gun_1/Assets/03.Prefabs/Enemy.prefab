@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 582923074855739649}
   - component: {fileID: 582923074855739648}
   - component: {fileID: 582923074855739651}
+  - component: {fileID: 6922141927939389127}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: ENERMY
@@ -425,6 +426,20 @@ MonoBehaviour:
   hpBarPrefab: {fileID: 509227624377486009, guid: 942f256719bbc4a2ca59f0f810419061,
     type: 3}
   hpBarOffset: {x: 0, y: 2.2, z: 0}
+--- !u!114 &6922141927939389127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582923074855739650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a0495566db641c29d97f974e44804e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRange: 15
+  viewAngle: 120
 --- !u!1 &582923074930070266
 GameObject:
   m_ObjectHideFlags: 0

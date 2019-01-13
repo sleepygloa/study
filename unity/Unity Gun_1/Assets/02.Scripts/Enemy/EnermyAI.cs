@@ -37,6 +37,8 @@ public class EnermyAI : MonoBehaviour
     private MoveAgent moveAgent;
     //총알 발사를 제어하는 EnemyFire 클래스를 저장할 변수
     private EnermyFire enermyFire;
+    //시야각 및 추적 반경을 제어하는 EnemyFOV 클래스를 저장할 변수
+    private EnemyFOV enemyFOV;
 
     //애니메이터 컨트롤러에 정의한 파라미터의 해시값을 미리 추출
     private readonly int hashMove = Animator.StringToHash("IsMove");
@@ -65,6 +67,10 @@ public class EnermyAI : MonoBehaviour
         moveAgent = GetComponent<MoveAgent>();
         //총알 발사를 제어하는 EnemyFire 클래스를 추출
         enermyFire = GetComponent<EnermyFire>();
+        //시야각 및 추적 반경을 제어하는 EnemyFOV 클래스를 추출
+        enemyFOV = GetComponent<EnemyFOV>();
+
+
         //코루틴의 지연시간 생성
         ws = new WaitForSeconds(0.3f);
         //Cycle Offset 값을 불규칙하게 변경
@@ -91,6 +97,9 @@ public class EnermyAI : MonoBehaviour
     //적 캐릭터의 상태를 검사하는 코루틴 함수
     IEnumerator CheckState()
     {
+        //오브젝트 풀에 생성 시 다른 스크립트의 초기화를 위해 대기
+        yield return new WaitForSeconds(1.0f);
+
         //적 캐릭터가 사망하기 전까지 도는 무한루프
         while (!isDie)
         {
@@ -103,9 +112,18 @@ public class EnermyAI : MonoBehaviour
             //공격 사정거리 이내인 경우
             if(dist <= attackDist)
             {
-                state = State.ATTACK;
-            }//추적 사정거리 이내인 경우a
-            else if(dist <= traceDist)
+                //state = State.ATTACK;
+                //주인공과의 거리에 장애물 여부 판단
+                if(enemyFOV.isViewPlayer())
+                {
+                    state = State.ATTACK;
+                }
+                else
+                {
+                    state = State.TRACE;
+                }
+            }//추적 사정거리 이내인 경우
+            else if(enemyFOV.isTracePlayer())
             {
                 state = State.TRACE;
             }
