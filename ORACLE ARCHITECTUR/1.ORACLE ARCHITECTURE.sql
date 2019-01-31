@@ -95,3 +95,68 @@ ALTER DATABASE OPEN;
 ARCHIVE LOG LIST;
 
 SELECT name, log_mode FROM V$DATABASE;
+-- 예제 끝
+
+-- 서버 초기 파라미터 확인
+SHOW PARAMETERS buffer;
+
+-- name : 초기화 파라미터 명칭
+-- type : 초기화 파라미터 값 종류(Boolean, String, Integer, Parameter file, Reserved, Big Integer
+-- value : 현재 적용된 설정값
+-- isdefault : 설정값이 기본값일때
+-- isses_modifiable : ALTER SESSION 문으로 변경가능 유/무 --> true/false
+-- issys_modifiable : 설정값을 즉시변경할수있을때 immediate
+-- 현재 세션에 적용된 초기화 파라미터의 상세 정보
+SELECT  name, type, value, isdefault ISDEF,
+        isses_modifiable SESMOD, issys_modifiable SYSMOD
+FROM    V$PARAMETER;
+
+-- 현재 인스턴스에 적용된 초기화 파라미터의 상세 정보
+SELECT  name, type, value, isdefault ISDEF,
+        isses_modifiable SESMOD, issys_modifiable SYSMOD
+FROM    V$SYSTEM_PARAMETER;
+
+SELECT  name, type, value, isdefault ISDEF,
+        isses_modifiable SESMOD, issys_modifiable SYSMOD
+FROM    V$PARAMETER WHERE name LIKE '%buffer%';
+
+SELECT  name, type, value, isdefault ISDEF,
+        isses_modifiable SESMOD, issys_modifiable SYSMOD
+FROM    V$SYSTEM_PARAMETER WHERE name LIKE '%buffer%';
+
+-- 컨트롤파일
+SELECT name FROM V$CONTROLFILE;
+
+-- 특정 프로세스만이 사용하는 메모리영역  : PGA(Program Global Area)
+-- 프로게스 간에 공유하는 메모리 영역    : SGA(System Global Area)
+
+-- PGA는 PGA 간 공유하지않음
+-- PGA는 SGA 와 공유함.
+
+-- 프로세스와 PGA확인
+-- pid            : 오라클 내부에서 관리하는 프로세스 ID
+-- spid           : OS레벨의 프로세스 ID
+-- program        : 프로그램명칭(프로세스명칭)
+-- background     : 가동중 여부 가동중일때 1
+-- PGA_ALLOC_MEM  : 프로세스에 현재 할당된 PGA의 크기
+-- SGA : 서버프로세스(섀도 프로세스)
+-- [1-14]
+SELECT pid, spid, program, background, pga_alloc_mem FROM V$PROCESS;
+
+-- SGA 보관 데이터는 모든 서버 프로세스 및 백그라운드 프로세스에 공유
+--     인스턴스기동시 확보됨
+-- 공유풀 : 3개 캐시 (LIBRARY 캐시, DICTIONARY 캐시, RESULT 캐시)
+-- 라지풀 : 프로세스간 통신이 필요한 특정 처리에서 필요한 메모리 영역
+-- 자바풀 : 오라클 JVM 실행에 필요항 정보를 보관하는 메모리영역
+-- 스트림 풀 : STREAMS 를 실행하는데 필요한 정보를 보관하는 메모리영역
+-- 데이터베이스 버퍼 캐시 : 블록을 보관하는 메모리 영역 블록에 대한 캐시, 버퍼역할도 함
+-- REDO 로그 버퍼 : REDO 로그파일에 기록하지않은 데이터를 보관하는 영역
+
+-- 공유풀 : 데이터 블록 이외의 공유 가능한 데이터를 임시로 보관하기 위한 메모리 영역
+--- LIBRARY 캐시    : 파싱한 SQL정보, 컴파일된 PL/SQL 코드
+--- DICTIONARY 캐시 : 데이터 딕셔너리에서 조회한 데이터(???)
+--- RESULT 캐시     : 쿼리의 결과와 PL/SQL 함수의 결과
+
+-- LIBRARY 캐시 : 첫번째 실행시 SQL정보를 파싱하고, 두번째 실행시 부터는 파싱하지않고 처리하고 로우를 가져온다.(???) 파싱되는 시점은?
+-- DICTIONARY 캐시 : (???) SYSTEM 테이블 스페이스에 저장됨, 테이블 스페이스에 저장되는 DICTIONARY 정보를 DICTIONARY 캐시에 저장하면 액세스 를 줄일 수 있다.(???) 방법은?
+-- RESULT 캐시 : 11G 부터 지원, QUERY 결과를 캐시 하기 위해서는 'PARAMETER:RESULT_CACHE_MODE:MANUAL' 설정하고 SQL힌트절에 'result cache' 명시 하거나 또는 'PARAMETER:RESULT_CACHE_MODE:AUTO' 로 지정
