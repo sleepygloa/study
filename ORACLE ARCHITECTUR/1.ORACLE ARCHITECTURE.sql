@@ -337,3 +337,31 @@ SELECT username, privilege, admin_option FROM USER_SYS_PRIVS;
 --- 계정에 할당된 모든 시스템 권한
 SELECT privilege FROM SESSION_PRIVS;
 
+-- 일반 사용자 계정에도 SYSDBA 권한을 줄수는 있지만, AS SYSDBA, AS SYSOPER 로 접속해야하며, 접속후 SYS, PUBLIC 으로 변경이 되어 실제로 접속하는 계정이 다르게 된다.
+
+-- 롤
+-- [2-6] 롤 확인
+SELECT role FROM DBA_ROLES;
+
+-- [2-7]
+-- 계정 또는 롤에 직업 부여된 롤 확인
+-- grantee : granted_role (롤) 이 부여된 계정명과 롤
+-- admin_option :  롤이 WITH ADMIN 옵션으로 부여됨 유무
+SELECT grantee, granted_role, admin_option FROM DBA_ROLE_PRIVS;
+
+-- [2-8]
+-- 현재 계정에 직접적으로 부여된 롤 확인
+SELECT username, granted_role, admin_option FROM USER_ROLE_PRIVS;
+
+-- [2-9]
+-- 현재 계정에 부여되 있는 모든 룰 확인
+SELECT role FROM SESSION_ROLES;
+
+
+
+-- [2-10] 테이블 관리
+-- 여러 로우를 '영구 테이블 스페이스' 내 블록에 저장한다.
+-- 블록에 저장은 가장 하단 부터 채워지며, PCTFREE, PCTUSED 에 의해 판단
+-- PCTFREE : 블록 대비 로우를 저장 하는 비율
+-- PCTUSED : 블록 내 로우 가 변경됬을때 다시 저장 하는 비율(정도)
+
