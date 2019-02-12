@@ -1,4 +1,4 @@
-dhsmf z-- 1장
+-- 1장
 -- 세션 정보 확인
 -- [1-1]
 SELECT SID, SERIAL#, PROGRAM, USERNAME, TYPE FROM V$SESSION;
@@ -363,5 +363,66 @@ SELECT role FROM SESSION_ROLES;
 -- 여러 로우를 '영구 테이블 스페이스' 내 블록에 저장한다.
 -- 블록에 저장은 가장 하단 부터 채워지며, PCTFREE, PCTUSED 에 의해 판단
 -- PCTFREE : 블록 대비 로우를 저장 하는 비율
--- PCTUSED : 블록 내 로우 가 변경됬을때 다시 저장 하는 비율(정도)
+-- 세그먼트 공간 관리 방식 과 PCTUSED : 블록 내 로우 가 변경됬을때 다시 저장 하는 비율(정도)
+-- 세그먼트 빈 공간 관리 방식 종류 FLM(Free List Management), ASSM(Automatic Segment Space Management)
+--- FLM : PCTUSED 를 설정하고 사용률이 이 아래로 내려갈 때 데이터를 입력가능하게 한다. 수동, 10g2 미만, 'PARAMETER:SEGMENT SPACE MANAGEMENT:MANUAL'
+--- ASSM : 자동으로 판단하고, 10gR2 이후 방식, 'PARAMETER:SEGMENT SPACE MANAGEMENT:AUTO'
+SELECT tablespace_name, segment_space_management FROM DBA_TABLESPACES;
 
+-- [2-11] 로우 마이그레이션과 로우 체이닝
+-- SELECT table_name, chain_cnt FROM USER_TABLES WHERE table_name = <테이블명>;
+-- 로우 마이그레이션
+--- 세그만트 공간관리방식과 PCTUSED 에 의핸 빈공간은 블록 내 로우의 UPDATE 로 인한 데이터 크기거 커졌을때를 대비하기 위한 공간인데
+--- 실제로 공간이 커졌을때, 다른 블록으로 로우를 이동시키면서 원래 로우에 이동시켜진 블록의 로우의 위치를 저장한 포인터를 저장한다. 
+--- 읽어들일땐, 포인터를 가진 블록과 로우가 존재하는 블록을 읽어야하기때문에 마이그레이션이 자주발생하는 경우 속도가 느려진다.
+
+-- 로우 체이닝
+--- 로우의 크기가 블록의 크기보다 클때, 여러 블록에 나누어서 저장되는 형식이다. 
+--- 이 때, 세그먼트 공간관리방식과 로우 마이그레이션의 방식이 적용된다.
+--- PCTFREE 만큼 저장되고 다른블록으로 저장이될때, 포인터가 저장된다.
+
+-- 세그먼트 공간 관리 방식 확인
+SELECT table_name, chain_cnt FROM USER_TABLES;
+
+-- 로우 마이그레이션과 로우 체이닝 확인
+-- ANALYZE <테이블명>  COMPUTE STATISTICS;
+-- SELECT table_name, chain_cnt FROM USER_TABLES WHERE table_name = <테이블명>;
+
+-- 로우 마이그레이션 / 로우 체이닝이 발생한 로우를 확인
+SELECT owner_name, table_name, head_rowid FROM chained_rows;
+
+SELECT rowid, empno, ename FROM emp;
+
+-- [2-11]
+-- 로우 저장 블록은 저장 순서가 있는게 아니라 임의대로 저장된다. 그렇기 때문에 select 하면 정렬되지 않은 데이터가 보여진다.
+-- rowid : 로우의 물리적인 위치를 표시하는 특수 식별자임
+-- rowid = 파일번호 + 블록번호+로우번호+보조정보
+-- SELECT rowid FROM <테이블명>;
+-- rowid 를 이용한 검색이 가장빠르다
+
+-- [2-12] 문자 세트 확인
+SELECT * FROM V$NLS_PARAMETERS WHERE parameter LIKE '%CHARACTERSET';
+
+
+-- [2-13] 테이블 확인
+SELECT owner, table_name, tablespace_name, pct_free, pct_used FROM DBA_TABLES;
+
+SELECT table_name, tablespace_name, pct_free, pct_used FROM USER_TABLES;
+
+-- [2-14] 모든 컬럼에 관한 정보 확인
+SELECT owner, table_name, column_name data_type, data_length, data_precision, data_scale, nullable, char_length, char_used
+  FROM DBA_TAB_COLUMNS;
+  
+-- [2-15] 접속한 계정이 소유하는 테이블의 칼럼에 관한 정보 확인
+-- data_precision 정밀도, data_scale 스케일, char_used 칼럼 길이를 지정하는 단위(바이트B, 문자C)
+SELECT table_name, column_name data_type, data_length, data_precision, data_scale, nullable, char_length, char_used
+  FROM USER_TAB_COLUMNS;
+  
+-- [2-16] 데이터베이스에 존재하는 제약 확인
+SELECT owner, constraint_name, constraint_type, table_name, r_owner, r_constraint_name, index_owner, index_name
+  FROM DBA_CONSTRAINTS;
+  
+-- [2-17] 접속한 계정이 소유한 제약 확인
+-- constraint_type(C:heck, P:rimary key, U:nique key, R:Foreign key)
+SELECT constraint_name, constraint_type, table_name, r_owner, r_constraint_name, index_owner, index_name
+  FROM USER_CONSTRAINTS;
