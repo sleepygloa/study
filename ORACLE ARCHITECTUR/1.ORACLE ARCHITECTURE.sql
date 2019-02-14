@@ -426,3 +426,31 @@ SELECT owner, constraint_name, constraint_type, table_name, r_owner, r_constrain
 -- constraint_type(C:heck, P:rimary key, U:nique key, R:Foreign key)
 SELECT constraint_name, constraint_type, table_name, r_owner, r_constraint_name, index_owner, index_name
   FROM USER_CONSTRAINTS;
+  
+-- [2-18] 인덱스 [???]
+--- 인덱스종류
+--- NORMAL : B 트리 인덱스
+--- BITMAP : 비트맵 인덱스
+--- NORMAL/REV : 리버스 키 인덱스
+--- FUNCTION-BASED NORMAL : B 트리 인덱스로 만들어진 함수 기반 인덱스
+--- FUNCTION-BASED BITMAP : 비트맵 인덱스로 만들어진 함수 기반 인덱스
+--- FUNCTION-BASED NORMAL/REV : 리버스 키 인덱스로 만들어진 함수 기반 인덱스
+-- 데이터베이스 내에 존재하는 인덱스 확인
+SELECT owner, index_name, index_type, uniqueness, table_owner, table_name, tablespace_name
+  FROM DBA_INDEXES;
+  
+-- 접속한 계정이 소유하고 있는 인덱스 확인
+SELECT index_name, index_type, uniqueness, table_owner, table_name
+  FROM USER_INDEXES;
+  
+-- B 트리 인덱스가 생성된 칼럼의 확인
+SELECT index_owner, index_name, table_name, column_name
+  FROM DBA_IND_COLUMNS;
+  
+-- [2-19] OLTP 환경(OnLine Transaction Processing)
+-- 실시간으로 데이터를 변경하는 트랜젝션을 여러 사용자가 동시에 수행함. 트랜젝션 데이터양은 비교적 적다.
+-- 은행 거래 시스템, 항공 예약 시스템
+
+-- [2-20] DW 환경(Data Warehouse)
+-- 대량으로 축적된 데이터를 분석하는 쿼리가 수행. 실시간반영이 매우 적고, 주로 야간에 일괄처리를 함.
+-- OLTP 에서 쌓인 데이터를 분석하기 위한 용으로 많이 사용
