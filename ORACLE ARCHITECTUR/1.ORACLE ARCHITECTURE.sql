@@ -454,3 +454,112 @@ SELECT index_owner, index_name, table_name, column_name
 -- [2-20] DW 환경(Data Warehouse)
 -- 대량으로 축적된 데이터를 분석하는 쿼리가 수행. 실시간반영이 매우 적고, 주로 야간에 일괄처리를 함.
 -- OLTP 에서 쌓인 데이터를 분석하기 위한 용으로 많이 사용
+
+-- [3-1] 그 밖의 오브젝트
+
+
+-- [3-2] 뷰
+-- 데이터베이스 안의 뷰 확인
+SELECT owner, view_name, text FROM DBA_VIEWS;
+
+-- 접속한 계정이 소유한 뷰 확인
+SELECT view_name, text FROM USER_VIEWS;
+
+-- [3-3] MATERIALIZED VIEW 구체화된 뷰
+--- 뷰와 다르게 자기자신이 조회한 데이터를 가지고있다. 그 테이블을 '디테일 테이블(마스터 테이블)' 이라함.
+--- 보안성과 쿼리 간결화의 이점이있지만, MATERIALIZED VIEW 의 결과를 실제 테이블에 반영하기 위해선 리프레시를 해야한다.
+--- ON COMMIT : 매번 커밋되는 점에서 성능이 저하될수있다.
+--- ON DEMAND : 성능 저하는 없지만, 일일이 커밋해야 결과가 반영된다.
+
+-- MATERIALIED VIEW 확인
+SELECT owner, mview_name, query, refresh_mode FROM DBA_MVIEWS;
+
+-- [3-4] SEQUENCE 시퀀스
+--- 대량의 테이블데이터 시퀀스를 생성할때는 테이블에 LOCK 걸릴 수 있어 성능에 좋지 않다.
+
+-- 시퀀스 확인
+SELECT sequence_owner, sequence_name, min_value, increment_by
+  FROM DBA_SEQUENCES;
+
+-- [3-5] SYNONYM 시노님
+-- 오브젝트의 별칭
+-- 테이블이나 뷰, 시퀀스, 프로시저, 패키지등 여러가지를 시노님으로 정의할수있다.
+-- 보아성과 조작성이 향상된다.
+
+-- 시노님 확인
+SELECT owner, synonym_name, table_owner, table_name FROM DBA_SYNONYMS;
+
+-- [3-6] 오브젝트 저장 방시과 저장공간
+-- 논리적인 공간에 일대일로 저장하는 세그먼트는 테이블과 인덱스와 일대일로존재하고
+-- 테이블이있으면 세그먼트도 있다고보면된다.
+
+-- [3-7]  데이터베이스 내의 세그먼트 정보 확인
+SELECT owner, segment_name, segment_type, tablespace_name, bytes, blocks
+  FROM DBA_SEGMENTS;
+  
+-- 접속한 계정이 소유한 세그먼트 정보 확인
+SELECT segment_name, segment_type, tablespace_name, bytes, blocks
+  FROM USER_SEGMENTS;
+  
+-- [3-8] 익스텐트 : 특정 데이터 파일안에 연속된 블록의 집합, 묶어 관리하는 것.
+-- 데이터베이스 내의 익스텐트 확인
+SELECT owner, segment_name, segment_type, tablespace_name, extent_id
+  FROM DBA_EXTENTS;
+  
+-- 접속한 계정이 소유한 세그먼트의 익스텐트 정보확인
+SELECT segment_name, segment_type, tablespace_name, extent_id
+  FROM USER_EXTENTS;
+  
+-- [3-9] 익스텐트 자동관리방식
+-- UNIFORM : 테이블 스페이스 내의 모든 익스텐트를 같는 크기로 관리하는 방식
+-- AUTOALLOCATE , 초기 익스텐트 개수와 크기를 무시하며, 내부 알고리즘에 따라 자동으로 결정됨
+-- 익스텐트 관리방식은 테이블 스페이스를 생성할 때 지정하고, 오브젝트를 생성할 때 사용자가 지정할 수 없다
+
+-- [3-10] 익스텐트 추가할당
+-- 오브젝트에 저장된 데이터가 많아 새로운 데이터를 세그먼트에 저장 할 수 없을때, 자동으로 익스텐트를 추가 할당해 세그먼트를 확장한다
+
+-- [3-11] 익스텐트 할당 해제
+-- 원칙적으로 한번 세그먼트에 할당되면 해당 세그먼트의 오브젝트를 제거할 때까지 테이블 스페이스에 반환하지 않지만,
+
+-- TRUNCATE TABLE : 테이블 내의 모든 데이터가 삭제되며, 테이블을 생성했던 때의 최초 익스텐트 할당 상태로 줄어든다.
+-- ALTER TABLE DEALLOCATE UNUSED : HWM 을 넘어서는 사용하지 ㅇ낳는 익스텐트를 해제한다.
+-- ALTER TABLE SHRINK SPACE : 세그먼트 단편화를 해소하고 HM 을 낮추는 것으로 사용하지 않는 익스텐트를 해제함
+
+-- [3-12] 세그먼트의 HWM : 이후의 블록은 모두 포맷되지 않은 DBA 
+-- 세그먼트에 할당된 블록은 포맷된 블록과 비포맷 블록으로 나뉘고, 포맷된 블록에만 데이터가 저장된다.
+
+-- [3-13] TRUNCATE TABLE 문
+-- 테이블의 모든 데이터를 삭제하는 SQL문, 실행시 HWM 은 첫 번째 익스텐트의 시작 블록으로 이동하기 때문에 최초할당상태로 돌아간다
+
+-- [3-14] ALTER TABLE DEALLOCATE UNUSED 문
+-- HWM 을 넘어가는 포맷되지 않은 블록을 해제하는 SQL문
+-- 로컬관리 테이블 스페이스의 경우(?????), 테이블 스페이스의 설정에 따라 오라클의 익스텐트 크기를 자동 관리하기 때문에 HWM을 넘어가는 모든 블록이 해제되는 것은 아니다.
+-- HWM 을 넘어가는 익스텐트 중 모든 블록이 포맷되지 않은 익스텐트만 해제됨
+
+-- [3-15] ALTER TABLE SHRINK SPACE 문
+-- 세그먼트의 단편화를 해소하고 HWM 을 낮추며 HWM 이후의 사용되지 않은 익스텐트를 해제하는 SQL 문이다. 
+-- 1. 세그먼트의 단편화를 해소하는 처리
+-- 2. HWM 을 낮추고 사용되지 않은 익스텐트를 해제하는 처리
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
