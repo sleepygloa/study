@@ -545,21 +545,110 @@ SELECT segment_name, segment_type, tablespace_name, extent_id
 
 
 
+-- [4] SQL 처리 
+-- [4-1] SQL 처리 절차
+-- 1. 공유 풀 확인 -> SQL 검증 -> 실행 계획 생성 -> 분석된 SQL문을 공유 풀에 보관
+-- 2. SQL 처리의 실행
+-- 3. 데이터베이스 버퍼 캐시의 블록에서 로우를 가져옴
+
+-- 옵티마이저 통계수집을 수동, 자동, 임시수집 방법으로 한다.
+-- 테이블, 인덱스에서 통계를 내고 CBO, 예상비용을 산출한다.
+
+-- [4-2] 분석이 끝난 SQL 정보 저장
+-- 실행 가능한 SQL 과 실행 계획을 포함한 분석된 SQL 정보를 SGA 의 공유 풀 내부의 라이브러리 캐시에 저장
+-- 대소문자, 띄어쓰기를 주의해야 한다.
+
+-- [4-3] SQL실행 
+-- INSERT, UPDATE, DELETE 는 데이터베이스 버퍼 캐시 의 블록이 실제로 변경
+-- SELECT 는 로우를 마킹 처리만하고 로우 가져오기에서 수행함
+
+-- [4-4] 로우 검색
+-- SELECT 에서 마킹한 로우 데이터를 가져온다.
+-- 일괄로 가져오는게 아니라 로우를 분할하여 가져온다. ORDER BY 를 수행
+
+-- [4-5] 실행 계획 확인
+-- 실행 계획 확인하기 SQL*PLUS AUTOTRACE 기능을 이용함.
+-- SCOTT 세팅
+-- EXECUTE DBMS_STATS.GATHER_SCHEMA_STATS('SCOTT');
+-- 실행 계획 표시하기 : SET AUTOTRACE ON EXPLAIN;
+-- SELECT * FROM EMP0;
+
+-- [4-6] 분석된 SQL 정보의 보관과 공유하기
+-- SQL을 분석할 때 실행 계획인 만들어지고, 공유 풀에 저장된다. 확인해 보자
+-- 실행 계획 관리
+ALTER SYSTEM FLUSH SHARED_POOL; -- 공유풀 메모리 삭제
+-- 공유 풀 내의 분석된 SQL의 정보 확인
+SELECT sql_text FROM V$SQL WHERE sql_text = 'SELECT * FROM EMP0';
+
+-- SQL문을 실행하여 하드 파싱 발생하기
+-- 위에 EXECUTION PLAN 이 없는 것을 확인하고 다시 SQL 문을 실행해봅시다
+SELECT * FROM EMP0;
+
+-- [4-7] 데이터베이스 버퍼 캐시의 역할과 효과
+-- 실행계획을 실행해 로우로 읽으려면 데이터 파일에서 블록을 가져와야한다.
+-- SGA 의 데이터베이스 버퍼 캐시
+
+-- 1. 최초 실행시
+-- SELECT 실행 -> 블록 존재 유무 확인 -> 데이터 파일에서 블록을 가져와 블록을 데이터베이스 버퍼캐시에 저장
+-- -> 버퍼 캐시에서 해당 블록을 읽음 -> 블록에서 로우를 졸비해 클라이언트 어플리케이션으로 전송
+
+-- 2. 두번째 이후
+-- 같은 SELECT 문 실행 -> 데이터베이스 버퍼 캐시에 필요한 블록이 존재하는지 확인 -> 읽음 -> 클라이언트로 전송
+
+-- 여기서 두번째 이후로는 데이터베이스 파일에서 읽는 것보다 메모리에서 읽는 것이 빠르기 때문에,
+-- 메모리의 크기를 높이는 것으로 성능을 향상 시킬수 잇다. 
+-- 동일한 블록은 여러번 읽는건 한정되어있기 때문에 무작정 크기를 늘리는것은 방법이아니다
+-- 계산해보기
+--- 데이터전송속도 1.5Gb/S (약 190MB/s)
+--- 회전수 7,200 RPM
+--- 평균 탐색 시간 약 9ms
+-- 8KB 데이터를 읽어 오는 시간은 ? 
+--- 데이터 전송시간(8KB / 190MB/s = 43us) + 회전 대기 시간 (60초/ 7,200RPM / 2 = 4ms) + 평균 탐색시간
+--- = 약 13ms
+-- 일반적인 메모리의 8KB 전송 시간
+--- 8KB / 19.2GB = 약0.4us(0.0004ms) 
+-- 데이터 파일을 읽는 것과 메모리를 읽는 것은 약 30배 차이가 난다.
+
+-- 데이터가 많아진 SQL SELECT 문을 실행해 통계를 보자
+SELECT * FROM EMP1;
+-- 2번 실행해보면 physical reads 부분이 0으로 줄어든 것을 볼 수 있다.
 
 
+-- [4-8] 인덱스 효과
+SET AUTOTRACE ON;
+SELECT * FROM EMP1 WHERE EMPNO = '3';
+-- * 표시와 Predicate Information 항목이 추가되었다.
+-- B-TREE 인덱스가 적합하다.
+-- 4-7과 4-8 에서는 CONSISTENT GETS 을 비교해보면, 87과 2 로 블록을 읽어오는 수가 감소했다.
 
+-- [4-9] 정렬 수행과 PGA, 임시 테이블 스페이스
+-- 회신하기전에 ORDER BY 로 정렬해야 할 때가 있다.
 
+-- PGA와 임시 테이블 스페이스
+-- 서버 프로세스는 정렬 작업을 수행 하는 경우 SQL Work Areas 또는 임시 테이블 스페이스를 사용한다.
+-- SQL Work Areas 가 SQL 작업 수행에 필요한 크기보다 작을때 임시 테이블 스페이스가 사용된다.
+-- 하지만 매우느리다.
 
+-- SQL Work Areas 와 임시 테이블 스페이스와 차이점
+-- 1. 정렬이 발생하지 않는 쿼리 (ORDER BY 절 없음)
+SET AUTOTRACE TRACEONLY
+SET TIMING ON
+SELECT * FROM EMP1;
+-- 0 sorts (memory), 0 sorts (disk) 로 정렬이 되지 않았다.
 
+-- 2. 정렬 처리가 발생하는 쿼리 (메모리에서만 정렬)
+SET AUTOTRACE TRACEONLY
+SET TIMING ON
+SELECT * FROM EMP1 ORDER BY ENAME;
+-- 먼저 테이블 스캔 실행 후 정렬이 되었다(SORT ORDER BY)
+-- 1 sorts (memory) 인 것으로보아 메모리(PGA)에서 정렬이 되었다.
 
-
-
-
-
-
-
-
-
-
-
-
+-- 3. 정렬 처리가 발생하는 쿼리 (디스크에서 정렬)
+-- PGA 크기를 초과하는 데이터 정렬을 할 때 디스크를 사용합니다.
+-- PGA 는 오라클에서 자동으로 조정한다.
+ALTER SESSION SET WORKAREA_SIZE_POLICY = MANUAL;
+ALTER SESSION SET SORT_AREA_SIZE = 51200;
+SET AUTOTRACE TRACEONLY;
+SET TIMING ON;
+SELECT * FROM EMP1 ORDER BY ENAME;
+-- 실행계획에 SORT ORDER BY, 1 sorts (disk) 확인가능하다.
