@@ -652,3 +652,35 @@ SET AUTOTRACE TRACEONLY;
 SET TIMING ON;
 SELECT * FROM EMP1 ORDER BY ENAME;
 -- 실행계획에 SORT ORDER BY, 1 sorts (disk) 확인가능하다.
+
+-- [5-1] 변경 처리 원리
+-- SQL이 오라클 내부에서 어떤식으로 처리되는지 알아보자.
+
+-- [5-2] 오라클 변경 처리
+-- 블록 단위로 데이터가 분할 저장되지만 변경 처리마다 블록을 변경하지않는다.
+-- 체크 포인트 등의 데이터 파일에 기록해 두었다가 한꺼번에 처리하여 성능과 트랜젝션을 관리하게된다
+-- 서버 프로세스 단에서 REDO 로그 버퍼에 기록, 데이터베이스 버퍼캐시에 기록된 후 REDO 로그파일에 기록되고, 블록에 바로 적용되지 않는다.
+
+-- [5-3] 트랜젝션의 개념
+-- 여러 SQL을 모아 둔 작업 단위. 트랜젝션 실행 중 커밋으로 확정, 롤백으로 취소 할 수 있다.
+
+-- UPDATE 문 처리원리
+--- UPDATE 문 실행 -> UNDO 세그먼트에 할당 -> 블록 취득  -> REDO 로그 버퍼 -> 변경 전 데이터를 UNDO 세그먼트에 보관 -> 블록 변경
+--- 클라이언트 APP 에서 UPDATE 실행, 서버프로세스에서 트랜젝션 실행 -> 트랜젝션 변경 전 데이터를 저장 하기 위해 UNDO 세그먼트에 트랜젝션을 할당
+--- -> 변경대상 블록이 데이터버퍼캐시에 존재하지 않으면 적재 -> REDO 로그 버퍼 생성 -> UNDO 세그먼트에 저장
+--- -> 데이터 버퍼 캐시에 있는 블록이 변경
+--- -> 클라이언트 APP에서 커밋실행. -> 트랜젝션과 UNDO 세그먼트 할당이 해제됨 -> REDO 파일이 기록 -> 커밋처리 완료 통지
+
+-- [5-4] 체크포인트
+-- 체크포인트가 발생하면 CKPT(체크 포인트 프로세스) 에서 DBWn(데이터베이스 라이터 프로세스)에 
+-- 체크포인트가 발생한 것을 통지, 통지받은 DBWn 은 데이터베이스 버퍼 캐시에 변경된 블록을 데이터 파일에 기록
+
+-- [5-5] 트랜젝션에 관한 정보 확인
+SELECT xid, xidusn, status, start_time FROM V$TRANSACTION;
+-- 확인하기
+SET AUTOTRACE ON STATISTICS;
+UPDATE EMP1 SET ENAME = 'test' WHERE EMPNO = 1;
+SET AUTOTRACE OFF;
+SELECT xid, xidusn, status, start_time FROM V$TRANSACTION;
+
+-- SELECT 문은 REDO 가 생성되지 않는다.
