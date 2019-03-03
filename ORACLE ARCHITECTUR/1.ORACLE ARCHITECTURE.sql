@@ -716,3 +716,79 @@ SAVEPOINT <세이브포인트명>;
 -- 세이브 포인트까지 롤백
 ROLLBACK TO <세이브포인트명>;
 
+-- [7-1] 오라클의 트랜젝션과 고립성
+-- [7-2] 표준 SQL의 격리 수준과 오라클의 격리수준
+-- 표준 SQL에 정의돼어 있는 격리수준의 비교 1.낮은수준 ~ 4.높은수준
+-- 1. READ UNCOMMITED : 다른 트랜젝션에서 커밋하지 않은 변경 데이터를 읽어 올 수 있다.
+-- 커밋이 정상적으로 종료됐을 때 트랜젝션에서 변경한 것은 이상 없이 반영된다.
+-- 2. READ COMMITED : 다른 트랜젝션에서 커밋한 데이터만을 읽을 수 있다. 커밋돼 있지 않은 데이터는 읽을 수 없다.
+-- 3. REPEATABLE READ : 트랜젝션 내에서는 데이터를 반복적으로 조회해도 결과는 같은 데이터다.
+-- 커밋하지 않은 변경 데이터는 읽을 수 없다.
+-- 4. SERIALIZABLE : 읽어 오는 결과는 항상 같다. 커밋하지 않은 변경 데이터는 읽을 수 없다.
+
+-- READ UNCOMMITED
+--- 가장 낮은 격리 수준, 실용성이 낮기 때문에 오라클에는 없다.
+-- READ COMMITED
+--- 오라클에서는 기본적으로 이격리 수준으로 실행된다.
+--- 트랜젝션이 실행되지 않은 상태에서 다음 명령이 실행된다
+SET TRANSACTION ISOLATION LEVEL READ COMMITED
+--- 로우 레벨 LOCK 및 다중버전동시제어 메커니즘이 실행됨
+
+-- [7-3] 로우 레벨 LOCK
+-- UPDATE, INSERT, DELETE 대상은 자동으로 LOCK 이 걸렸다가 트랜젝션 종료시에 LOCK 을 해제 합니다.
+-- 다른 트랜젝션은 LOCK 이 해제될대까지 기다린다.
+
+-- [7-4] LOST UPDATE 현상
+-- 변경 처리 할 때, LOCK 이 없는 경우, LOST UPDATE 라는 간섭 현상이 발생한다.
+-- 트랜젝션이 성공 했음에도 불구하고 내용이 반영되지 않은 현상, 이고 나중에 실행된 내용에 덮어씌워지게된다.
+-- 트랜젝션이 많으면 LOCK에 의한 경합이 이루어지는데, 성능에 저하를 일으킬 수 있다.
+
+-- [7-5] 다중 버전 동시성 제어(MVCC, Multi-versino concurrency control)
+-- 트랜젝션이 동시에 실행된 경우, 각각의 트랜젝션에 일관성을 가진 적절한 버전에 데이터를 반환하는 구조
+-- READ COMMITED 격리 수준에서는 SQL 실행됬던 시점 버전의 데이터가 반환됨.
+-- SERIALIZABLE 격리 수준과 읽기 전용 트랜젝션에서는 트랜젝션 시작한 시점 버전의 데이터가 반환된다.
+
+-- [7-6] READ COMMITED 격리 수준과 문장 수준의 읽기 일관성
+-- [7-7] MVCC의 구조 
+-- SCN(System Change Number) 와 before image 로 구현되어있다.
+-- SCN : 트랜젝션이 커밋될 때마다 증가하는 데이터베이스의 버전 번호. 블록에 SCN 번호가 저장되어있다.
+-- before image : UNDO 테이블 스페이스의 UNDO 세그먼트에 포함된 UNDO데이터에서 생성되는 변경 전 블록
+
+-- [7-8] MVCC와 ORA-1555 에러
+-- before image 를 만드는데 필요한 UNDO 데이터는 오라클에서 자동으로 UNDO 테이블 스페이스에 저장된다.
+-- 그러나 테이블 스페이스는 데이터양에 한계가 있어 다른 UNDO 데이터가 덮어 쓸 수도 있다. ORA-1555
+-- 테이블스페이스의 데이터양을 늘리거나, UNDO_RETENTION 파라미터를 수정하는 것이 좋다.
+
+-- [7-9] Non- Repeatable Read 현상
+-- READ COMMITED 격리 수준의 SQL 실행은 '문장 수준의 읽기 일관성'을 가지므로 읽기 결과도 일관성을 가진다.
+-- 그러나, 여러번 SQL 문을 실행한 경우는 해당 결과가 달라지는 Non-Repeatable Read 가 발생할 수 있다.
+-- 격리 수준을 SERIALIZABLE 이나 읽기 전용 트랜젝션을 실행해야한다.
+
+-- [7-10] Repeatable Read 격리 수준
+-- 커밋된 데이터를 읽을 수 있으면서 동일한 트랜젝션 내의 쿼리에서 얻어지는 내용이 동일하게 유지되는 수준
+-- Phontom Read가 발생 : 동일한 조건의 쿼리를 실행하면, 다른 트랜젝션이 데이터를 입력 했기 대문에 전에는 존재하지 않은 데이터가 포함되 쿼리결과가 달라지는 현상
+
+-- [7-11] Serializable 격리 수준
+-- 읽기 가능한 데이터가 트랜젝션 시작 시점에 커밋된 데이터에 한정되어있고, 쿼리결과가 동일한 격리 수준
+-- 트랜젝션 수준의 읽기 일관성. LOST UPDATE, DRITY READ, Non-Repeatable Read, Phantom Read 발생하지않음
+-- SERIALIZABLE 격리 수준을 가진 트랜젝션 시작
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+
+-- [7-12] 직렬화 기능 개념
+-- 병렬로 실행된 트랜젝션의 처리 결과를 특정 순서대로 시리얼하게 수행한 처리결과와 같게 할수 있다.
+
+-- [7-13] SERIALIZABLE 격리 수준의 주의점
+-- ORA-1555 : SNAPSHOT TOO OLD
+-- ORA-8177 : CANT SERIALIZE ACCESS FOR THIS TRANSACTION
+
+-- [7-14] 읽기 전용 트랜젝션
+-- SERIALIZABLE 격리 수준과 같고, 읽기만 가능하다
+-- 읽기 전용 트랜젝션 시작
+SET TRANSACTION READ ONLY;
+-- 읽기전용에서 DML을 실행하면, ORA-1456이 발생
+
+-- [8-1] 오라클의 LOCK 기능
+
+
+
+
