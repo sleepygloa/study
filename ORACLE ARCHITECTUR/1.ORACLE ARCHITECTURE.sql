@@ -788,7 +788,40 @@ SET TRANSACTION READ ONLY;
 -- 읽기전용에서 DML을 실행하면, ORA-1456이 발생
 
 -- [8-1] 오라클의 LOCK 기능
+-- 여러 트랜젝션이 동시에 실행되지 않으면 필요없다
+
+-- [8-2] 자동 LOCK의 동작
+-- 대상 로우에 대해 exclusive lock 모드에서 로우레벨 lock
+-- 대상 테이블에 대해 shared lock 모드에서 테이블레벨 lock
+
+-- 배타적 lock 모드와 공유 lock 관계
+-- 어떤 대상이 공유 lock 모드에서 lock을 취득한경우, 다른 세션은 공유 lock 모드로 lock 을 취득할 수 는 있지만 배타적 lock 모드로는 lock을 취득불가
+-- 어떤 대상이 배타적 lock 모드에서 lock을 취득한경우, 다른 세션은 공유 lock 모드든 배타적 lock 모드든 lock 을 취득할 수 없다.
 
 
+-- [8-3] 자동 LOCK의 확인
+-- 2개의 각 다른 SQLPLUS로 TEST로 로그인해각각 UPDATE 를 쳐보자
+-- 하나씩하여 LOCK을 확인하고 하나씩 COMMIT 하여 상태변화를 확인하자
+-- LOCK 의 취득상황과 세션의 상태확인
+SELECT s.username, s.sid, s.serial#, l.type TYPE,
+       l.id1, l.id2, l.lmode HELD, l.request REQ
+FROM   V$LOCK l, V$SESSION s
+WHERE  l.sid = s.sid AND s.username = 'SCOTT'
+ORDER BY s.sid, l.type;
 
+-- lmode : lock 3, exclusive 6
+-- request : 0 은 요청하고있지않음.
 
+ -- [8-4] 수동 LOCK과 SELECT FOR UPDATE 문
+ -- 동시다발적으로 진행되는 SELECT와 UPDATE 때문에, UPDATE 처리결과가 제대로 반영안될때가있다
+ SELECT <칼럼명>
+ FROM   <테이블명>
+ WHERE  <검색조건> FOR UPDATE;
+ 
+-- [8-5] DEADLOCK
+-- 하나의 트랜젝션에서 여러 로우의 LOCK을 취득하는 경우에는 LOCK을 취득하는 순서에 따라 두개의 세션이 서로가 가진 LOCK의 해제를 기다리는 상황
+-- 하나의 쿼리를 중단시켜야한다. 그러나 ROLLBACK된다.
+
+-- [8-6] DEADLOCK 발생원인
+-- 애플리케이션에서 실행되는 SQL문의 순서가 적절하지않을때
+-- ID 값이 작은 로우부터 LOCK을 취득한다고 기준이있으면 DEADLOCK 이 발생하지않음
