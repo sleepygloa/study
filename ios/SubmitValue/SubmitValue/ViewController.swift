@@ -48,6 +48,22 @@ class ViewController: UIViewController {
         rvc.paramToggle = self.interval.value //갱신주기
     
         //화면이동
+        self.present(rvc, animated: true)
+    }
+    
+    @IBAction func onSubmit2(_ sender: Any) {
+        
+        //VC2 인스턴스생성
+        guard let rvc = self.storyboard?.instantiateViewController(withIdentifier: "RVC") as? ResultViewController else {
+            return
+        }
+        
+        //값 전달
+        rvc.paramEmail = self.email.text! //이메일
+        rvc.paramUpdate = self.isUpdate.isOn //자동갱신
+        rvc.paramToggle = self.interval.value //갱신주기
+    
+        //화면이동
         //self.present(rvc, animated: true)
         self.navigationController?.pushViewController(rvc, animated: true)
     }

@@ -110,9 +110,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBW-hq-CFg">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBW-hq-CFg">
                                 <rect key="frame" x="132" y="437" width="99" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Submit"/>
                                 <connections>
@@ -136,6 +135,11 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yIB-R0-HSK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HBW-hq-CFg" firstAttribute="leading" secondItem="yIB-R0-HSK" secondAttribute="leading" constant="132" id="RbF-Ti-Xbv"/>
+                            <constraint firstItem="yIB-R0-HSK" firstAttribute="bottom" secondItem="HBW-hq-CFg" secondAttribute="bottom" constant="340" id="Sgf-8Z-wNf"/>
+                            <constraint firstItem="yIB-R0-HSK" firstAttribute="trailing" secondItem="HBW-hq-CFg" secondAttribute="trailing" constant="183" id="nMT-uj-vt4"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="email" destination="8fv-q7-y54" id="rbL-1U-gJ1"/>
