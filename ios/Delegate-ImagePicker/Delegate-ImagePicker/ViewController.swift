@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
         //이미지 피커 컨트롤러 실행
         self.present(picker, animated:false)
     }
+}
+// MARK:- 이미지 피커 컨트롤러 델리게이터 메소드
+extension ViewController: UIImagePickerControllerDelegate{
     
     //이미지 피커에서 이미지를 선택하지 않고 취소 했을 때 호출 되는 메소드
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -49,6 +52,16 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate, UINaviga
             self.imgView.image = img
         }
     }
-    
 }
-
+// MARK:- 네비게이션 컨트롤러 델리게이트 메소드
+extension ViewController: UINavigationControllerDelegate{
+}
+// MARK:- 텍스트필드 델리게이트 메소드
+extension ViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+}
