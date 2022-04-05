@@ -66,6 +66,7 @@
                                     <outlet property="desc" destination="jj4-Gw-PXD" id="KLO-e0-UW9"/>
                                     <outlet property="opendate" destination="heS-bK-Hpw" id="KVD-Vj-CSr"/>
                                     <outlet property="rating" destination="p3l-r9-wGE" id="YG1-bE-wmC"/>
+                                    <outlet property="thumbnail" destination="eUW-cb-bqd" id="r7h-Ow-T9j"/>
                                     <outlet property="title" destination="a2n-Hv-nWB" id="Vfp-Wj-nA2"/>
                                 </connections>
                             </tableViewCell>

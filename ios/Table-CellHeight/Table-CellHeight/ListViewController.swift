@@ -57,11 +57,9 @@ class ListVieWContoller:UITableViewController{
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let row = self.list[indexPath.row]
-        
-        //높이를 조절해준다. 기본 높이 60 + 글의 길이가 30자를 넘어갈때마다 20만큼씩 높이를 늘려준다.
-        let height = CGFloat(60 + (row.count / 30) * 20)
-        return height
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.estimatedRowHeight = 50 //대충의 높이값
+        self.tableView.rowHeight = UITableView.automaticDimension
     }
+
 }
