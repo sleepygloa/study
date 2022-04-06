@@ -18,6 +18,17 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="z90-vt-DYT">
                             <rect key="frame" x="0.0" y="147" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHr-OQ-rPc">
+                                    <rect key="frame" x="177" y="7" width="61" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="더보기"/>
+                                    <connections>
+                                        <action selector="more:" destination="dOm-j2-PE0" eventType="touchUpInside" id="bqT-1z-RPz"/>
+                                    </connections>
+                                </button>
+                            </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <prototypes>
@@ -78,6 +89,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="영화정보" id="tix-Fz-K7q"/>
+                    <connections>
+                        <outlet property="moreBtn" destination="VHr-OQ-rPc" id="JDe-TN-xfZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xmF-5Z-NAf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,32 +9,39 @@ import UIKit
 
 class ListViewController : UITableViewController{
     
-    //튜플 아이템으로 구성된 데이터 세트
-//    var dataset = [
-//        ("다크 나이트", "영웅물에 철학에 음악까지 더해져 예술이 되다", "2008-09-04",8.95,"darknight.jpg"),
-//        ("호우시절", "때를 알고 내리는 좋은 비", "2009-10-08",7.31,"rain.jpg"),
-//        ("말할 수 없는 비밀", "여기서 너까지 다섯 걸음", "2015-05-07",9.19,"secret.jpg")
-//    ]
+    
+    @IBOutlet var moreBtn: UIButton!
+    var page = 1
     
     //테이블 뷰를 구성할 리스트 데이터
     lazy var list: [MovieVO] = {
         var datalist = [MovieVO]()
-//        for(title, description, opendate, rating, thumbnail) in self.dataset{
-//            let mvo = MovieVO()
-//            mvo.title = title
-//            mvo.description = description
-//            mvo.opendate = opendate
-//            mvo.rating = rating
-//            mvo.thumbnail = thumbnail
-//
-//            datalist.append(mvo)
-//        }
         return datalist
     }()
     
+    //더보기
+    @IBAction func more(_ sender: Any) {
+        //현재 페이지에 1을 추가한다
+        self.page += 1
+        //영화 차트 API 를 호출한다
+        self.callMovieAPI()
+        
+        //데이터를 다시 읽어오도록 테이블뷰를 갱신한다
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
+        
+        //영화 차트 API 를 호출한다
+        self.callMovieAPI()
+        
+    }
+    
+    //영화 차트 API를 호출해주는 메소드
+    func callMovieAPI(){
+        
         //1.호핀 API 호출을 위한 URI 생성
-        let url = "http://swiftapi.rubypaper.co.kr:2029/hoppin/movies?version=1&page=1&count=10&genreId=&order=releasedateasc"
+        let url = "http://swiftapi.rubypaper.co.kr:2029/hoppin/movies?version=1&page=\(self.page)&count=10&genreId=&order=releasedateasc"
         let apiURI: URL! = URL(string: url)
         
         do{
@@ -71,7 +78,14 @@ class ListViewController : UITableViewController{
                 //list 배열에추가
                 self.list.append(mvo)
                 NSLog("List add")
-
+            }
+            
+            //7.전체 데이터 카운트를 조회한다.
+            let totalCount = (hoppin["totalCount"] as? NSString)!.integerValue
+            
+            //8.totalCount 가 읽어온 데이터 크기가 같거나 클 경우 더보기 버튼을 막는다.
+            if(self.list.count >= totalCount){
+                self.moreBtn.isHidden = true
             }
         }catch {}
     }
@@ -85,21 +99,6 @@ class ListViewController : UITableViewController{
         let row = self.list[indexPath.row]
         //테이블 셀 객체를 직접 생성하는 대신 큐로부터 가져옴
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell") as! MovieCell
-        //cell.textLabel?.text = row.title
-        
-        //1.서브타이틀에 데이터 연결
-        //cell.detailTextLabel?.text = row.description
-        
-        //2.tab
-//        let title = cell.viewWithTag(101) as? UILabel
-//        let desc = cell.viewWithTag(102) as? UILabel
-//        let opendate = cell.viewWithTag(103) as? UILabel
-//        let rating = cell.viewWithTag(104) as? UILabel
-//
-//        title?.text = row.title
-//        desc?.text = row.description
-//        opendate?.text = row.opendate
-//        rating?.text = "\(row.rating!)"
         
         //3.Moviecell
         cell.title?.text = row.title
