@@ -79,6 +79,7 @@
                                     <outlet property="rating" destination="p3l-r9-wGE" id="YG1-bE-wmC"/>
                                     <outlet property="thumbnail" destination="eUW-cb-bqd" id="r7h-Ow-T9j"/>
                                     <outlet property="title" destination="a2n-Hv-nWB" id="Vfp-Wj-nA2"/>
+                                    <segue destination="EaF-VB-CDx" kind="show" identifier="segue_detail" id="KuI-lU-sqK"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -114,6 +115,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vvL-7O-l9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-504.34782608695656" y="117.85714285714285"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="Nfz-ZV-iJN">
+            <objects>
+                <viewController id="EaF-VB-CDx" customClass="DetailViewController" customModule="MyMovieChart" customModuleProvider="target" sceneMemberID="viewController">
+                    <wkWebView key="view" contentMode="scaleToFill" id="ZYm-PD-lvl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <wkWebViewConfiguration key="configuration">
+                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                            <wkPreferences key="preferences"/>
+                        </wkWebViewConfiguration>
+                    </wkWebView>
+                    <navigationItem key="navigationItem" title="Title" id="R4t-Pz-GvV"/>
+                    <connections>
+                        <outlet property="wv" destination="ZYm-PD-lvl" id="KN3-Iw-WbH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dc7-VU-4pD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1177" y="118"/>
         </scene>
     </scenes>
     <resources>
