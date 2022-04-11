@@ -75,9 +75,14 @@ class ListViewController : UITableViewController{
                 mvo.detail = r["linkUrl"] as? String
                 mvo.rating = ((r["ratingAverage"] as! NSString).doubleValue)
                 
+                //웹상에 있는 이미지를 읽어와 UIImage 객체로 생성
+                let url:URL! = URL(string: mvo.thumbnail!)
+                let imageData = try! Data(contentsOf: url)
+                mvo.thumbnailImage = UIImage(data: imageData)
+                
                 //list 배열에추가
                 self.list.append(mvo)
-                NSLog("List add")
+                //NSLog("List add")
             }
             
             //7.전체 데이터 카운트를 조회한다.
@@ -97,6 +102,8 @@ class ListViewController : UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //주어진 행에 맞는 데이터 소스를 읽어온다
         let row = self.list[indexPath.row]
+        NSLog("호출된 행번호 : \(indexPath.row), 제목:\(row.title!)")
+        
         //테이블 셀 객체를 직접 생성하는 대신 큐로부터 가져옴
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell") as! MovieCell
         
@@ -104,13 +111,34 @@ class ListViewController : UITableViewController{
         cell.title?.text = row.title
         cell.desc?.text = row.description
         cell.opendate?.text = row.opendate
-        cell.thumbnail.image = UIImage(data: try! Data(contentsOf: URL(string:row.thumbnail!)!))
+//        cell.thumbnail.image = UIImage(data: try! Data(contentsOf: URL(string:row.thumbnail!)!))
+        cell.thumbnail.image = row.thumbnailImage
         cell.rating?.text = "\(row.rating!)"
+        
+        //비동기 방식으로 썸네일 이미지를 읽어옴
+        DispatchQueue.main.async(execute: {
+            cell.thumbnail.image = self.getThumbnailImage(indexPath.row)
+        })
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("선택된 행은 \(indexPath.row) 번째 행입니다.")
+    }
+    
+    func getThumbnailImage(_ index: Int) -> UIImage{
+        //인자값으로 받은 인덱스를 기반으로 해당하는 배열 데이터를 읽어옴
+        let mvo = self.list[index]
+        
+        //메모이제이션 : 저장된 이미지가 있으면 그것을 반환하고, 없을 경우 내려받아 저장 한 후 반환
+        if let savedImage = mvo.thumbnailImage{
+            return savedImage
+        }else{
+            let url: URL! = URL(string: mvo.thumbnail!)
+            let imageData = try! Data(contentsOf:  url)
+            mvo.thumbnailImage = UIImage(data:imageData) //UIImage MovieVO 객체에 우선저장
+            return mvo.thumbnailImage! //저장된 이미지를 반환
+        }
     }
 }
