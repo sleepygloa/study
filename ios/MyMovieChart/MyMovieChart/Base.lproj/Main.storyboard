@@ -161,6 +161,7 @@
                                     <outlet property="addr" destination="YAt-0I-hyH" id="OUi-qH-wUC"/>
                                     <outlet property="name" destination="BMC-ny-vA6" id="ndo-LC-7sM"/>
                                     <outlet property="tel" destination="oa5-c1-0YP" id="Jff-1v-uui"/>
+                                    <segue destination="rh6-pJ-cgh" kind="show" identifier="segue_map" id="hWM-bA-fMt"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -174,6 +175,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1w-8U-c0e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1313.0434782608697" y="845.75892857142856"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="73I-cW-SgX">
+            <objects>
+                <viewController id="rh6-pJ-cgh" customClass="TheaterViewController" customModule="MyMovieChart" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jIQ-Ue-LRd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="79I-zc-qvL">
+                                <rect key="frame" x="20" y="88" width="374" height="774"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="I3d-pk-fqY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="McD-ue-BNv"/>
+                    <connections>
+                        <outlet property="map" destination="79I-zc-qvL" id="oC8-ek-9WP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nWr-xh-X19" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2086.9565217391305" y="845.75892857142856"/>
         </scene>
         <!--영화관-->
         <scene sceneID="QII-vA-Fm5">
@@ -192,7 +218,7 @@
             </objects>
             <point key="canvasLocation" x="406" y="846"/>
         </scene>
-        <!--Title-->
+        <!--영화상세정보-->
         <scene sceneID="Nfz-ZV-iJN">
             <objects>
                 <viewController id="EaF-VB-CDx" customClass="DetailViewController" customModule="MyMovieChart" customModuleProvider="target" sceneMemberID="viewController">
@@ -217,7 +243,7 @@
                         <viewLayoutGuide key="safeArea" id="NlQ-FB-4Aq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="R4t-Pz-GvV"/>
+                    <navigationItem key="navigationItem" title="영화상세정보" id="R4t-Pz-GvV"/>
                     <connections>
                         <outlet property="spinner" destination="a6P-N9-v10" id="bFW-zy-bTa"/>
                         <outlet property="wv" destination="Ka0-LM-gMX" id="fyz-H9-hmv"/>
@@ -233,6 +259,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="7Uh-L9-Jct" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h56-wj-7sP">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

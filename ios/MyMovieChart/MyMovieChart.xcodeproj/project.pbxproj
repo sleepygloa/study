@@ -16,6 +16,8 @@
 		403D728F27F7AA1B001B38AA /* MovieVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403D728E27F7AA1B001B38AA /* MovieVO.swift */; };
 		4056D3332805E0D900C2D282 /* TheaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056D3322805E0D900C2D282 /* TheaterCell.swift */; };
 		4056D3352805E12100C2D282 /* TheaterListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056D3342805E12100C2D282 /* TheaterListController.swift */; };
+		4056D339280EECF200C2D282 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4056D337280EECB300C2D282 /* MapKit.framework */; };
+		4056D33D280EEDEC00C2D282 /* TheaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056D33C280EEDEC00C2D282 /* TheaterViewController.swift */; };
 		4072155B27FAE27B00A5BFBB /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4072155A27FAE27B00A5BFBB /* MovieCell.swift */; };
 		40C609432804833D005510D2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C609422804833D005510D2 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +34,8 @@
 		403D728E27F7AA1B001B38AA /* MovieVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVO.swift; sourceTree = "<group>"; };
 		4056D3322805E0D900C2D282 /* TheaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCell.swift; sourceTree = "<group>"; };
 		4056D3342805E12100C2D282 /* TheaterListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterListController.swift; sourceTree = "<group>"; };
+		4056D337280EECB300C2D282 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4056D33C280EEDEC00C2D282 /* TheaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterViewController.swift; sourceTree = "<group>"; };
 		4072155A27FAE27B00A5BFBB /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		40C609422804833D005510D2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4056D339280EECF200C2D282 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +58,7 @@
 				4072155C27FAE9BE00A5BFBB /* Resources */,
 				403D727727F75A74001B38AA /* MyMovieChart */,
 				403D727627F75A74001B38AA /* Products */,
+				4056D336280EECB300C2D282 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +79,7 @@
 				403D727A27F75A74001B38AA /* SceneDelegate.swift */,
 				40C609422804833D005510D2 /* DetailViewController.swift */,
 				403D727E27F75A74001B38AA /* Main.storyboard */,
+				4056D33C280EEDEC00C2D282 /* TheaterViewController.swift */,
 				4056D3342805E12100C2D282 /* TheaterListController.swift */,
 				403D728E27F7AA1B001B38AA /* MovieVO.swift */,
 				403D728C27F7A2D3001B38AA /* LIstViewController.swift */,
@@ -81,6 +88,14 @@
 				403D728627F75A76001B38AA /* Info.plist */,
 			);
 			path = MyMovieChart;
+			sourceTree = "<group>";
+		};
+		4056D336280EECB300C2D282 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4056D337280EECB300C2D282 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		4072155C27FAE9BE00A5BFBB /* Resources */ = {
@@ -161,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4056D33D280EEDEC00C2D282 /* TheaterViewController.swift in Sources */,
 				403D727927F75A74001B38AA /* AppDelegate.swift in Sources */,
 				4056D3332805E0D900C2D282 /* TheaterCell.swift in Sources */,
 				403D728D27F7A2D3001B38AA /* LIstViewController.swift in Sources */,

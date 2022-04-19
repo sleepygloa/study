@@ -82,5 +82,16 @@ class TheaterListController: UITableViewController{
         
         return cell
      }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "segue_map"){ //실행된 세그웨이의 식별자가 segue_map이면
+            //선택된 셀의 행 정보
+            let path = self.tableView.indexPath(for: sender as! UITableViewCell)
+            //선택된 셀에 사용된 데이터
+            let data = self.list[path!.row]
+            //세그웨이가 이동할 목적지 뷰 컨트롤러 객체를 구하고, 선언된 param 변수에 데이터를 연결해준다.
+            (segue.destination as? TheaterViewController)?.param = data
+        }
+    }
 }
 
