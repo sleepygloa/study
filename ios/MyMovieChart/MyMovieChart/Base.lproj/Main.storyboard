@@ -20,9 +20,8 @@
                             <rect key="frame" x="0.0" y="147" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHr-OQ-rPc">
-                                    <rect key="frame" x="177" y="7" width="61" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHr-OQ-rPc">
+                                    <rect key="frame" x="177" y="0.0" width="60.5" height="31"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" title="더보기"/>
                                     <connections>
@@ -31,6 +30,10 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="VHr-OQ-rPc" firstAttribute="centerX" secondItem="z90-vt-DYT" secondAttribute="centerX" id="RCF-nd-jZa"/>
+                                <constraint firstAttribute="bottom" secondItem="VHr-OQ-rPc" secondAttribute="bottom" constant="13" id="ryF-yd-8Vs"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ListCell" rowHeight="80" id="Pll-rk-IBa" customClass="MovieCell" customModule="MyMovieChart" customModuleProvider="target">
@@ -40,9 +43,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="385.5" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="영화 제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2n-Hv-nWB">
-                                            <rect key="frame" x="75" y="5" width="177" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화 제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2n-Hv-nWB">
+                                            <rect key="frame" x="81" y="17" width="212.5" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="4oV-dV-e3x"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -54,26 +59,43 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="평점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3l-r9-wGE">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3l-r9-wGE">
                                             <rect key="frame" x="294" y="39.5" width="82" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="영화에 대한 내용 설명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj4-Gw-PXD">
-                                            <rect key="frame" x="75" y="40" width="185" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="0Zc-7X-I3q"/>
+                                                <constraint firstAttribute="width" constant="82" id="BVD-LH-pxr"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eUW-cb-bqd">
-                                            <rect key="frame" x="16" y="6" width="55" height="68"/>
+                                            <rect key="frame" x="16" y="6" width="57" height="68"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영화에 대한 내용 설명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jj4-Gw-PXD">
+                                            <rect key="frame" x="81" y="39" width="195" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="MxU-Jd-sDX"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="jj4-Gw-PXD" secondAttribute="bottom" constant="9" id="4DP-G5-KDl"/>
+                                        <constraint firstItem="a2n-Hv-nWB" firstAttribute="leading" secondItem="fo0-61-VKe" secondAttribute="leadingMargin" constant="61" id="E4q-ax-6AW"/>
+                                        <constraint firstItem="p3l-r9-wGE" firstAttribute="leading" secondItem="jj4-Gw-PXD" secondAttribute="trailing" constant="18" id="F0C-Ja-fBm"/>
+                                        <constraint firstItem="a2n-Hv-nWB" firstAttribute="top" secondItem="fo0-61-VKe" secondAttribute="topMargin" constant="6" id="KAv-Fe-qRZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="p3l-r9-wGE" secondAttribute="bottom" constant="19.5" id="KPd-YN-W55"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="a2n-Hv-nWB" secondAttribute="trailing" constant="84" id="MHr-eo-xDE"/>
+                                        <constraint firstItem="jj4-Gw-PXD" firstAttribute="leading" secondItem="fo0-61-VKe" secondAttribute="leadingMargin" constant="61" id="ssP-im-dIj"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="p3l-r9-wGE" secondAttribute="trailing" constant="38" id="Vws-kJ-qfW"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="desc" destination="jj4-Gw-PXD" id="KLO-e0-UW9"/>
                                     <outlet property="opendate" destination="heS-bK-Hpw" id="KVD-Vj-CSr"/>
@@ -97,7 +119,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xmF-5Z-NAf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1315.9420289855072" y="117.85714285714285"/>
+            <point key="canvasLocation" x="1314.4927536231885" y="117.85714285714285"/>
         </scene>
         <!--영화차트-->
         <scene sceneID="7j9-W0-HBW">
@@ -141,9 +163,12 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="연락처" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oa5-c1-0YP">
-                                            <rect key="frame" x="285" y="11" width="94" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="연락처" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oa5-c1-0YP">
+                                            <rect key="frame" x="282" y="15" width="97" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="h64-Oo-ofn"/>
+                                                <constraint firstAttribute="width" constant="97" id="qZ8-Ze-Dme"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -156,7 +181,14 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="oa5-c1-0YP" secondAttribute="trailing" id="VrN-eQ-eO1"/>
+                                        <constraint firstItem="oa5-c1-0YP" firstAttribute="top" secondItem="Pve-fc-wC2" secondAttribute="top" constant="15" id="jQC-PC-bji"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="oa5-c1-0YP" secondAttribute="trailing" constant="35" id="Mpt-kH-WbW"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="addr" destination="YAt-0I-hyH" id="OUi-qH-wUC"/>
                                     <outlet property="name" destination="BMC-ny-vA6" id="ndo-LC-7sM"/>
@@ -184,13 +216,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="79I-zc-qvL">
-                                <rect key="frame" x="20" y="88" width="374" height="774"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="79I-zc-qvL">
+                                <rect key="frame" x="20" y="88" width="374" height="725"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="I3d-pk-fqY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="79I-zc-qvL" firstAttribute="bottom" secondItem="I3d-pk-fqY" secondAttribute="bottom" id="7et-aY-IcH"/>
+                            <constraint firstItem="79I-zc-qvL" firstAttribute="top" secondItem="I3d-pk-fqY" secondAttribute="top" id="IF1-8F-Rdb"/>
+                            <constraint firstItem="I3d-pk-fqY" firstAttribute="trailing" secondItem="79I-zc-qvL" secondAttribute="trailing" constant="20" id="lJC-1V-7J1"/>
+                            <constraint firstItem="79I-zc-qvL" firstAttribute="leading" secondItem="I3d-pk-fqY" secondAttribute="leading" constant="20" id="xAr-z0-wRa"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="McD-ue-BNv"/>
                     <connections>
@@ -226,9 +263,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ka0-LM-gMX">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ka0-LM-gMX">
                                 <rect key="frame" x="20" y="88" width="374" height="774"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -242,6 +278,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NlQ-FB-4Aq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NlQ-FB-4Aq" firstAttribute="trailing" secondItem="Ka0-LM-gMX" secondAttribute="trailing" constant="20" id="7Rx-uu-xtv"/>
+                            <constraint firstItem="Ka0-LM-gMX" firstAttribute="leading" secondItem="NlQ-FB-4Aq" secondAttribute="leading" constant="20" id="dtb-d0-kkH"/>
+                            <constraint firstItem="Ka0-LM-gMX" firstAttribute="bottom" secondItem="NlQ-FB-4Aq" secondAttribute="bottom" constant="49" id="paI-co-eVp"/>
+                            <constraint firstItem="Ka0-LM-gMX" firstAttribute="top" secondItem="NlQ-FB-4Aq" secondAttribute="top" id="tzw-nI-vdo"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="영화상세정보" id="R4t-Pz-GvV"/>
                     <connections>
