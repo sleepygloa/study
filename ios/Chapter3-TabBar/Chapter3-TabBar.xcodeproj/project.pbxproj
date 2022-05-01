@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40DF482F281ADCD300EAD917 /* NewSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DF482E281ADCD300EAD917 /* NewSceneDelegate.swift */; };
 		40F1885F28183F8F0015C44F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F1885E28183F8F0015C44F /* AppDelegate.swift */; };
 		40F1886128183F8F0015C44F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F1886028183F8F0015C44F /* SceneDelegate.swift */; };
 		40F1886328183F8F0015C44F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F1886228183F8F0015C44F /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40DF482E281ADCD300EAD917 /* NewSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSceneDelegate.swift; sourceTree = "<group>"; };
 		40F1885B28183F8F0015C44F /* Chapter3-TabBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chapter3-TabBar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F1885E28183F8F0015C44F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40F1886028183F8F0015C44F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			children = (
 				40F1885E28183F8F0015C44F /* AppDelegate.swift */,
 				40F1886028183F8F0015C44F /* SceneDelegate.swift */,
+				40DF482E281ADCD300EAD917 /* NewSceneDelegate.swift */,
 				40F1886228183F8F0015C44F /* ViewController.swift */,
 				40F1886428183F8F0015C44F /* Main.storyboard */,
 				40F1887428198D3F0015C44F /* ThridViewController.swift */,
@@ -182,6 +185,7 @@
 				40F1886328183F8F0015C44F /* ViewController.swift in Sources */,
 				40F1887528198D3F0015C44F /* ThridViewController.swift in Sources */,
 				40F1885F28183F8F0015C44F /* AppDelegate.swift in Sources */,
+				40DF482F281ADCD300EAD917 /* NewSceneDelegate.swift in Sources */,
 				40F1886128183F8F0015C44F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
