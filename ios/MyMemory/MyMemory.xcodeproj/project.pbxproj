@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		404BE73A282D01F500993CE2 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404BE739282D01F500993CE2 /* UserInfoManager.swift */; };
 		40AAB23228295513003574C3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AAB23128295513003574C3 /* SWRevealViewController.m */; };
 		40AAB23928295624003574C3 /* icon04.png in Resources */ = {isa = PBXBuildFile; fileRef = 40AAB23328295623003574C3 /* icon04.png */; };
 		40AAB23A28295624003574C3 /* icon06.png in Resources */ = {isa = PBXBuildFile; fileRef = 40AAB23428295623003574C3 /* icon06.png */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		404BE739282D01F500993CE2 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		40AAB22F28295512003574C3 /* MyMemory-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMemory-Bridging-Header.h"; sourceTree = "<group>"; };
 		40AAB23028295513003574C3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "../../../../SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
 		40AAB23128295513003574C3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "../../../../SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				40AAB24428295931003574C3 /* SideBarVC.swift */,
 				40AAB24628295F6F003574C3 /* ProfileVC.swift */,
+				404BE739282D01F500993CE2 /* UserInfoManager.swift */,
 				40B954872811A7BE00C6BDA1 /* AppDelegate.swift */,
 				40AAB23028295513003574C3 /* SWRevealViewController.h */,
 				40AAB23128295513003574C3 /* SWRevealViewController.m */,
@@ -223,6 +226,7 @@
 			files = (
 				40DF48ED2821835500EAD917 /* CSLogButton.swift in Sources */,
 				40B9549C2815081900C6BDA1 /* MemoListVC.swift in Sources */,
+				404BE73A282D01F500993CE2 /* UserInfoManager.swift in Sources */,
 				40B954882811A7BE00C6BDA1 /* AppDelegate.swift in Sources */,
 				40B9549E2815083400C6BDA1 /* MemoReadVC.swift in Sources */,
 				40B954A42815091B00C6BDA1 /* MemoData.swift in Sources */,
