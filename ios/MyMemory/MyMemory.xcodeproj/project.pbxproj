@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		404BE73A282D01F500993CE2 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404BE739282D01F500993CE2 /* UserInfoManager.swift */; };
+		404BE73E283291C600993CE2 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 404BE73D283291C600993CE2 /* Tutorial.storyboard */; };
+		404BE740283296F400993CE2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404BE73F283296F400993CE2 /* Utils.swift */; };
+		404BE7422832980E00993CE2 /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404BE7412832980E00993CE2 /* TutorialContentsVC.swift */; };
+		404BE7442832993C00993CE2 /* TutorialMasterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404BE7432832993C00993CE2 /* TutorialMasterVC.swift */; };
 		40AAB23228295513003574C3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AAB23128295513003574C3 /* SWRevealViewController.m */; };
 		40AAB23928295624003574C3 /* icon04.png in Resources */ = {isa = PBXBuildFile; fileRef = 40AAB23328295623003574C3 /* icon04.png */; };
 		40AAB23A28295624003574C3 /* icon06.png in Resources */ = {isa = PBXBuildFile; fileRef = 40AAB23428295623003574C3 /* icon06.png */; };
@@ -37,6 +41,10 @@
 
 /* Begin PBXFileReference section */
 		404BE739282D01F500993CE2 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
+		404BE73D283291C600993CE2 /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		404BE73F283296F400993CE2 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		404BE7412832980E00993CE2 /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
+		404BE7432832993C00993CE2 /* TutorialMasterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialMasterVC.swift; sourceTree = "<group>"; };
 		40AAB22F28295512003574C3 /* MyMemory-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMemory-Bridging-Header.h"; sourceTree = "<group>"; };
 		40AAB23028295513003574C3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "../../../../SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
 		40AAB23128295513003574C3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "../../../../SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
@@ -101,6 +109,10 @@
 			isa = PBXGroup;
 			children = (
 				40AAB24428295931003574C3 /* SideBarVC.swift */,
+				404BE73D283291C600993CE2 /* Tutorial.storyboard */,
+				404BE73F283296F400993CE2 /* Utils.swift */,
+				404BE7412832980E00993CE2 /* TutorialContentsVC.swift */,
+				404BE7432832993C00993CE2 /* TutorialMasterVC.swift */,
 				40AAB24628295F6F003574C3 /* ProfileVC.swift */,
 				404BE739282D01F500993CE2 /* UserInfoManager.swift */,
 				40B954872811A7BE00C6BDA1 /* AppDelegate.swift */,
@@ -210,6 +222,7 @@
 				40AAB23A28295624003574C3 /* icon06.png in Resources */,
 				40DF48F02823FF7600EAD917 /* memo-background@2x.png in Resources */,
 				40AAB24128295632003574C3 /* sidemenu.png in Resources */,
+				404BE73E283291C600993CE2 /* Tutorial.storyboard in Resources */,
 				40AAB23E28295624003574C3 /* icon03.png in Resources */,
 				40DF48F42823FF9900EAD917 /* warning-icon-60@2x.png in Resources */,
 				40AAB24228295632003574C3 /* account@2x.jpg in Resources */,
@@ -229,11 +242,14 @@
 				404BE73A282D01F500993CE2 /* UserInfoManager.swift in Sources */,
 				40B954882811A7BE00C6BDA1 /* AppDelegate.swift in Sources */,
 				40B9549E2815083400C6BDA1 /* MemoReadVC.swift in Sources */,
+				404BE740283296F400993CE2 /* Utils.swift in Sources */,
 				40B954A42815091B00C6BDA1 /* MemoData.swift in Sources */,
 				40AAB24528295931003574C3 /* SideBarVC.swift in Sources */,
+				404BE7422832980E00993CE2 /* TutorialContentsVC.swift in Sources */,
 				40AAB23228295513003574C3 /* SWRevealViewController.m in Sources */,
 				40B954A02815084600C6BDA1 /* MemoFormVC.swift in Sources */,
 				40B9548A2811A7BE00C6BDA1 /* SceneDelegate.swift in Sources */,
+				404BE7442832993C00993CE2 /* TutorialMasterVC.swift in Sources */,
 				40AAB24728295F6F003574C3 /* ProfileVC.swift in Sources */,
 				40B954A2281508ED00C6BDA1 /* MemoCell.swift in Sources */,
 			);
