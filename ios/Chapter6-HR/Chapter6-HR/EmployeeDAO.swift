@@ -42,11 +42,11 @@ class EmployeeDAO {
         
         //2. 샌드박스 내 문서 디렉터리에서 데이터베이스 파일 경로를 확인
         let docPath = fileMgr.urls(for: .documentDirectory, in: .userDomainMask).first
-        let dbPath = docPath!.appendingPathComponent("hr.sqlite").path
+        let dbPath = docPath!.appendingPathComponent("hr.db").path
         
         //3. 샌드박스 경로에 파일이 없다면 메인 번들에 만들어 둔 hr.sqlite를 가져와 복사
         if fileMgr.fileExists(atPath: dbPath) == false{
-            let dbSource = Bundle.main.path(forResource: "hr", ofType: "sqlite")
+            let dbSource = Bundle.main.path(forResource: "hr", ofType: "db")
             try! fileMgr.copyItem(atPath: dbSource!, toPath: dbPath)
         }
         

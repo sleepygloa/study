@@ -12,7 +12,7 @@ class EmployeeListVC : UITableViewController{
     var empList : [EmployeeVO]!
     //SQLite 처리를 담당할 DAO 클래스
     var empDAO = EmployeeDAO()
-    //새로고침 컨트롤에 등러갈 이미지 뷰
+    //새로고침 컨트롤에 들어갈 이미지 뷰
     var loadingImg : UIImageView!
     //임계점에 도달했을 때, 나타날 배경 뷰, 노랑 원 형태
     var bgCircle: UIView!
@@ -53,10 +53,12 @@ class EmployeeListVC : UITableViewController{
         self.refreshControl?.bringSubviewToFront(self.loadingImg)
     }
     
+    //row 개수
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.empList.count
     }
     
+    //row style
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let rowData = self.empList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "EMP_CELL")
@@ -71,7 +73,7 @@ class EmployeeListVC : UITableViewController{
         return cell!
     }
     
-    //사원 등록 함수
+    //+ button
     @IBAction func add(_ sender: Any) {
         let alert = UIAlertController(title: "샤원 등록", message: "등록할 사원 정보를 입력해 주세요", preferredStyle: .alert )
         
@@ -114,6 +116,7 @@ class EmployeeListVC : UITableViewController{
         self.present(alert, animated: false)
     }
     
+    //Edit button
     @IBAction func Editing(_ sender: Any) {
         if self.isEditing == false { //현재 편집 모드가 아닐 때
             self.setEditing(true, animated: true)

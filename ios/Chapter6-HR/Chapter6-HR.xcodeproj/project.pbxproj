@@ -50,7 +50,7 @@
 		404BE7CC28368BAA00993CE2 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = "../../../../../Downloads/fmdb-master/src/fmdb/FMDatabaseAdditions.m"; sourceTree = "<group>"; };
 		407CD80C2836946500A24601 /* DepartmentListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentListVC.swift; sourceTree = "<group>"; };
 		407CD80E2836948100A24601 /* EmployeeListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListVC.swift; sourceTree = "<group>"; };
-		407CD810283696C000A24601 /* hr.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hr.db; sourceTree = SOURCE_ROOT; };
+		407CD810283696C000A24601 /* hr.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = hr.db; path = "Chapter6-HR/hr.db"; sourceTree = SOURCE_ROOT; };
 		407CD812283696EC00A24601 /* DepartmentDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentDAO.swift; sourceTree = "<group>"; };
 		407CD8142837397F00A24601 /* EmployeeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDAO.swift; sourceTree = "<group>"; };
 		407CD8162837F05100A24601 /* DepartPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartPickerVC.swift; sourceTree = "<group>"; };

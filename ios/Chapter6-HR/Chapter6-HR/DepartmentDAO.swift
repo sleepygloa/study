@@ -19,11 +19,12 @@ class DepartmentDAO{
         
         //2. 샌드박스 내 문서 디렉터리에서 데이터베이스 파일 경로를 확인
         let docPath = fileMgr.urls(for: .documentDirectory, in: .userDomainMask).first
-        let dbPath = docPath!.appendingPathComponent("hr.sqlite").path
+        let dbPath = docPath!.appendingPathComponent("hr.db").path
+        NSLog(dbPath)
         
         //3. 샌드박스 경로에 파일이 없다면 메인 번들에 만들어 둔 hr.sqlite를 가져와 복사
         if fileMgr.fileExists(atPath: dbPath) == false{
-            let dbSource = Bundle.main.path(forResource: "hr", ofType: "sqlite")
+            let dbSource = Bundle.main.path(forResource: "hr", ofType: "db")
             try! fileMgr.copyItem(atPath: dbSource!, toPath: dbPath)
         }
         
@@ -48,7 +49,7 @@ class DepartmentDAO{
             //1. 부서 정보 목록을 가져올 SQL 작성 및 쿼리 실행
             let sql = """
                 SELECT depart_cd, depart_title, depart_addr
-                  FROM depart
+                  FROM department
               ORDER BY depart_cd ASC
             """
             
@@ -106,7 +107,7 @@ class DepartmentDAO{
                 ?, ?
                 )
 """
-            
+            NSLog("title: \(title!) / addr : \(addr!)")
             try self.fmdb.executeUpdate(sql, values: [title!, addr!])
             
             return true

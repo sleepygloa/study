@@ -44,6 +44,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="JIZ-ar-gme" kind="show" id="EMb-Hl-15c"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -59,13 +62,10 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="PeK-QE-c7e">
                             <connections>
-                                <action selector="add:" destination="Xqp-yy-eWK" id="gb2-Nz-DF7"/>
+                                <action selector="add:" destination="Mt6-pV-OsJ" id="ZNC-gI-cNT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="JIZ-ar-gme" kind="show" id="PqK-aS-PJe"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQB-10-bBg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Xqp-yy-eWK" userLabel="Exit" sceneMemberID="exit"/>
@@ -156,7 +156,7 @@
             </objects>
             <point key="canvasLocation" x="103" y="119"/>
         </scene>
-        <!--Root View Controller-->
+        <!--사원 목록-->
         <scene sceneID="buO-yD-Ox7">
             <objects>
                 <tableViewController id="vdr-vy-8bL" customClass="EmployeeListVC" customModule="Chapter6_HR" customModuleProvider="target" sceneMemberID="viewController">
@@ -200,7 +200,18 @@
                             <outlet property="delegate" destination="vdr-vy-8bL" id="dt8-Fl-OU6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="ZCR-OA-uZg"/>
+                    <navigationItem key="navigationItem" title="사원 목록" id="ZCR-OA-uZg">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="R1Z-tE-Gny">
+                            <connections>
+                                <action selector="Editing:" destination="vdr-vy-8bL" id="gzd-ZD-CLz"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="L1C-z5-3zx">
+                            <connections>
+                                <action selector="add:" destination="vdr-vy-8bL" id="49x-nH-VfS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Fr-jc-Y7i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

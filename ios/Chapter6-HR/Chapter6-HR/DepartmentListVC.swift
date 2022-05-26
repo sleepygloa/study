@@ -33,10 +33,12 @@ class DepartmentListVC : UITableViewController{
         self.initUI()
     }
     
+    //테이블뷰 row 갯수
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.departList.count
     }
     
+    //row 스타일
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //indexPath 매개변수가 가리키는 행에 대한 데이터를 읽어온다
         let rowData = self.departList[indexPath.row]
@@ -53,6 +55,25 @@ class DepartmentListVC : UITableViewController{
         return cell!
     }
     
+    //row 수정상태시
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle.delete
+    }
+    
+    //row 삭제시
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        //1. 삭제할 행의 departCd 를 구한다
+        let departCd = self.departList[indexPath.row].departCd
+        
+        //2. DB 에서, 데이터 소스에서, 그리고 테이블 뷰에서 차례대로 삭제한다.
+        if departDAO.remove(departCd: departCd) {
+            self.departList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    
+    //+ 버튼 클릭
     @IBAction func add(_ sender: Any) {
         let alert = UIAlertController(title: "신규 부서 목록", message: "신규 부서를 등록해 주세요", preferredStyle: .alert)
         
@@ -61,7 +82,7 @@ class DepartmentListVC : UITableViewController{
         alert.addTextField() { (tf) in tf.placeholder = "주소" }
         
         alert.addAction(UIAlertAction(title: "취소", style: .cancel)) //취소
-        alert.addAction(UIAlertAction(title: "확인", style: .cancel) { (_) in
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { (_) in
             let title = alert.textFields?[0].text //부서명
             let addr = alert.textFields?[1].text //부서 주소
             
@@ -77,20 +98,5 @@ class DepartmentListVC : UITableViewController{
         })
         
         self.present(alert, animated: false)
-    }
-    
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return UITableViewCell.EditingStyle.delete
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        //1. 삭제할 행의 departCd 를 구한다
-        let departCd = self.departList[indexPath.row].departCd
-        
-        //2. DB 에서, 데이터 소스에서, 그리고 테이블 뷰에서 차례대로 삭제한다.
-        if departDAO.remove(departCd: departCd) {
-            self.departList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
     }
 }
