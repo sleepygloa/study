@@ -8,9 +8,13 @@
 import UIKit
 
 class ProfileVC : UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    //API 호출 상태값을 관리 할 변수
+    var isCalling = false
+    
     let uinfo = UserInfoManager() //개인정보 관리매니저
     let profileImage = UIImageView() //프로필 사진 이미지
     let tv = UITableView() //프로필 목록
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         self.navigationItem.title = "프로필"
@@ -65,6 +69,9 @@ class ProfileVC : UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         //네비게이션 바 숨김처리
         //self.navigationController?.navigationBar.isHidden = true
+        
+        //인디게이터 뷰를 화면 맨 앞으로
+        self.view.bringSubviewToFront(self.indicatorView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,6 +115,13 @@ class ProfileVC : UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @objc func doLogin(_ sender: Any){
         let loginAlert = UIAlertController(title: "LOGIN", message: nil, preferredStyle: .alert)
         
+        if self.isCalling == true {
+            self.alert("응답을 기다리는 중입니다. \n잠시만 기다려주세요")
+            return
+        }else{
+            self.isCalling = true
+        }
+        
         loginAlert.addTextField() { (tf) in
             tf.placeholder = "Your Account"
         }
@@ -117,22 +131,43 @@ class ProfileVC : UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
         
         //알림창 버튼 추가
-        loginAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        loginAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel){ (_) in
+            self.isCalling = false
+        })
         loginAlert.addAction(UIAlertAction(title: "Login", style: .destructive) { (_) in
+            //인디게이터 실행
+            self.indicatorView.startAnimating()
+            self.isCalling = false
             let account = loginAlert.textFields?[0].text ?? ""
             let passwd = loginAlert.textFields?[1].text ?? ""
             
-            if self.uinfo.login(account: account, passwd: passwd){
-                //TODO : 로그인 성공시 처리
+//            if self.uinfo.login(account: account, passwd: passwd){
+//                //TODO : 로그인 성공시 처리
+//                self.tv.reloadData()
+//                self.profileImage.image = self.uinfo.profile
+//                self.drawBtn()
+//            }else{
+//                let msg = "로그인에 실패하였습니다"
+//                let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+//                self.present(alert, animated:false)
+//            }
+            
+            //비동기 방식으로 변경되는 부분
+            self.uinfo.login(account: account, passwd: passwd, success: {
+                //인디게이터 종료
+                self.indicatorView.stopAnimating()
+                self.isCalling = false
                 self.tv.reloadData()
                 self.profileImage.image = self.uinfo.profile
                 self.drawBtn()
-            }else{
-                let msg = "로그인에 실패하였습니다"
-                let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-                self.present(alert, animated:false)
-            }
+            }, fail: {
+                msg in
+                //인디게이터 종료
+                self.indicatorView.stopAnimating()
+                self.alert(msg)
+            })
+            
         })
         self.present(loginAlert, animated: false)
     }

@@ -17,9 +17,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Emy-BL-XyX">
-                                <rect key="frame" x="157" y="812" width="100" height="30"/>
+                                <rect key="frame" x="157" y="851" width="100" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="6km-wk-EZE"/>
                                     <constraint firstAttribute="width" constant="100" id="MU5-oz-h9I"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
@@ -32,8 +31,8 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Emy-BL-XyX" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="20" id="4hu-zH-bYP"/>
                             <constraint firstItem="Emy-BL-XyX" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="AKp-KS-OEt"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Emy-BL-XyX" secondAttribute="bottom" constant="20" id="IV9-LR-PBh"/>
                         </constraints>
                     </view>
                 </viewController>
