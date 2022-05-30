@@ -238,4 +238,8 @@ class ProfileVC : UIViewController, UITableViewDelegate, UITableViewDataSource, 
         //이 구문을 누락하면 이미지 피커 컨트롤이 닫히지 않는다
         picker.dismiss(animated: true)
     }
+    
+    @IBAction func backProfileVC(_ segue: UIStoryboardSegue){
+        
+    }
 }
