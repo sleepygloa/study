@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import LocalAuthentication
 extension ProfileVC {
+    
     func tokenValidate() { //토큰 인증 메소드
         //0. 응답 캐시를 사용하지 않도록
         URLCache.shared.removeAllCachedResponses()
@@ -44,6 +45,7 @@ extension ProfileVC {
             }
         }
     }
+    
     func touchID() { //터치 아이디 인증 메소드
         //1. LAContext 인스턴스 생성
         let context = LAContext()
@@ -100,6 +102,7 @@ extension ProfileVC {
                 
         }
     }
+    
     func refresh() { //토큰 갱신 메소드
         self.indicatorView.startAnimating()
         
@@ -137,6 +140,7 @@ extension ProfileVC {
             }
         }
     }
+    
     func commonLogout(_ isLogin: Bool = false){
         //1. 저장된 기존 개인 정보 & 키 체인 데이터를 삭제하여 로그아웃 상태로 전환
         let userInfo = UserInfoManager()

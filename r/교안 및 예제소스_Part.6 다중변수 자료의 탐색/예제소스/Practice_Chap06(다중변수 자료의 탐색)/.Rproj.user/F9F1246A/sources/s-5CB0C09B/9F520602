@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1571050268236.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9F520602",
+    "lastKnownWriteTime" : 1571051442,
+    "last_content_update" : 1571051442592,
+    "path" : "D:/R작업/Practice_Chap06(다중변수 자료의 탐색)/ex02.R",
+    "project_path" : "ex02.R",
+    "properties" : {
+        "cursorPosition" : "6,11",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

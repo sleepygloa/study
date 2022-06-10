@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570073940864.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "722E73B",
+    "lastKnownWriteTime" : 1570074012,
+    "last_content_update" : 1570074012505,
+    "path" : "D:/R작업/Practice_Chap02(변수와 벡터)/ex02.R",
+    "project_path" : "ex02.R",
+    "properties" : {
+        "cursorPosition" : "4,28",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

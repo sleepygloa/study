@@ -1,0 +1,26 @@
+{
+    "id": "0F68E4B0",
+    "path": "C:/Users/shkim/Downloads/빅데이터 활용을 위한 R프로그래밍 끝내기_초급/교안 및 예제소스_Part.1 환경설정 및 테스트/예제소스/Practice_Chap01(R설치 및 환경설정테스트)/test.R",
+    "project_path": "test.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1612140021115.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "8,6",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1612140040,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1612140040520,
+    "read_only": false,
+    "read_only_alternatives": []
+}

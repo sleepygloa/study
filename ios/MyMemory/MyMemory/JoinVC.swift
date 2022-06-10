@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class JoinVC : UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate{
+class JoinVC : UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     //API 호출 상태값을 관리할 변수
     var isCalling = false
     
@@ -44,6 +44,7 @@ class JoinVC : UIViewController, UITableViewDelegate, UITableViewDataSource, UIP
         }else{
             self.isCalling = true
         }
+        self.indicatorView.startAnimating()
         
         //1. 전달할 값 준비
         //1-1. 이미지를 Base64 인코딩 처리
@@ -58,7 +59,7 @@ class JoinVC : UIViewController, UITableViewDelegate, UITableViewDataSource, UIP
         ]
         
         //2.API 호출
-        let url = "http://swiftapi.robypaper.co.kr:2029/userAccount/join"
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/join"
         let call = AF.request(url, method: HTTPMethod.post, parameters: param, encoding: JSONEncoding.default)
         
         //3. 서버 응답값 처리
@@ -66,11 +67,13 @@ class JoinVC : UIViewController, UITableViewDelegate, UITableViewDataSource, UIP
             //인디케이터 뷰 애니메이션 종료
             self.indicatorView.stopAnimating()
             
-           //3-1. JSON 형식으로 값이 제대로 전달 되었는지 확인
-            guard let jsonObject = try! res.result.get() as? [String:Any] else {
-                self.isCalling = false
-               self.alert("서버 호출 과정에서 오류가 발생했습니다.")
-               return
+
+            //3-1. JSON 형식으로 값이 제대로 전달 되었는지 확인
+             guard let jsonObject = try? res.result.get() as? [String:Any] else {
+                 self.isCalling = false
+                self.alert("서버 호출 과정에서 오류가 발생했습니다.")
+                return
+
            }
                            
            //3-2. 응답 코드 확인, 0 이면 성공
@@ -151,6 +154,7 @@ class JoinVC : UIViewController, UITableViewDelegate, UITableViewDataSource, UIP
         func selectLibrary(src: UIImagePickerController.SourceType){
             if UIImagePickerController.isSourceTypeAvailable(src){
                 let picker = UIImagePickerController()
+                picker.delegate = self
                 picker.allowsEditing = true
                 
                 self.present(picker, animated: false)

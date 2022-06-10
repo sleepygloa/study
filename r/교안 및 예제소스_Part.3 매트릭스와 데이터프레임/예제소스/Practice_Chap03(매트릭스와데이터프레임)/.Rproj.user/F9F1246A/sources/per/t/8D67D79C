@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570263012641.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2042206401",
+    "id" : "8D67D79C",
+    "lastKnownWriteTime" : 1570264830,
+    "last_content_update" : 1570264830062,
+    "path" : "D:/R작업/Practice_Chap03(매트릭스와데이터프레임)/ex03.R",
+    "project_path" : "ex03.R",
+    "properties" : {
+        "cursorPosition" : "91,11",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

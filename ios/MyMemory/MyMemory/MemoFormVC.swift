@@ -66,6 +66,7 @@ class MemoFormVC : UIViewController, UIImagePickerControllerDelegate, UINavigati
         //4. 작성폼 화면을 종료하고, 이전 화면으로 되돌아간다
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
     //카메라 버튼을 클릭 했을 때 호출되는 메소드
     @IBAction func pick(_ sender: Any) {
         //이미지 피커 인스턴스를 생성한다

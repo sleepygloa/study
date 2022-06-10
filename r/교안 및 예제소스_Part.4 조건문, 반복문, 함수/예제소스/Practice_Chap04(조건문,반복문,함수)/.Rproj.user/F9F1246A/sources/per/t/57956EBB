@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570596404737.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "939713899",
+    "id" : "57956EBB",
+    "lastKnownWriteTime" : 1570598175,
+    "last_content_update" : 1570598175029,
+    "path" : "D:/R작업/Practice_Chap04(조건문,반복문,함수)/ex04.R",
+    "project_path" : "ex04.R",
+    "properties" : {
+        "cursorPosition" : "43,17",
+        "scrollLine" : "37",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570855798742.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3084756457",
+    "id" : "4C3CD450",
+    "lastKnownWriteTime" : 1570860863,
+    "last_content_update" : 1570860863370,
+    "path" : "D:/R작업/Practice_Chap05(단일변수 자료의 탐색)/ex02.R",
+    "project_path" : "ex02.R",
+    "properties" : {
+        "cursorPosition" : "52,14",
+        "scrollLine" : "47",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
