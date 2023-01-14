@@ -1,0 +1,15 @@
+/Users/seonhokim/study/study/game/CSharp/CSharp/bin/Debug/net7.0/CSharp
+/Users/seonhokim/study/study/game/CSharp/CSharp/bin/Debug/net7.0/CSharp.deps.json
+/Users/seonhokim/study/study/game/CSharp/CSharp/bin/Debug/net7.0/CSharp.runtimeconfig.json
+/Users/seonhokim/study/study/game/CSharp/CSharp/bin/Debug/net7.0/CSharp.dll
+/Users/seonhokim/study/study/game/CSharp/CSharp/bin/Debug/net7.0/CSharp.pdb
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/CSharp.csproj.AssemblyReference.cache
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/CSharp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/CSharp.AssemblyInfoInputs.cache
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/CSharp.AssemblyInfo.cs
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/CSharp.csproj.CoreCompileInputs.cache
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/CSharp.dll
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/refint/CSharp.dll
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/CSharp.pdb
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/CSharp.genruntimeconfig.cache
+/Users/seonhokim/study/study/game/CSharp/CSharp/obj/Debug/net7.0/ref/CSharp.dll
