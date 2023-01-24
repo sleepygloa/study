@@ -1,23 +1,28 @@
 ﻿<Properties StartupConfiguration="{83C0064E-F270-43B5-8265-0CB558BE823C}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CSharp/Program.cs">
+  <MonoDevelop.Ide.ItemProperties.CSharp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="CSharp/Program3.cs">
     <Files>
-      <File FileName="CSharp/Program.cs" Line="5" Column="6" />
+      <File FileName="CSharp/Program2.cs" Line="80" Column="1" />
+      <File FileName="CSharp/Program.cs" Line="217" Column="1" />
+      <File FileName="CSharp/Program3.cs" Line="16" Column="11" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="CSharp" expanded="True" selected="True">
-            <Node name="CSharp" expanded="True" />
+          <Node name="CSharp" expanded="True">
+            <Node name="CSharp" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Program3.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.CSharp FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
